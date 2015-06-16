@@ -63,50 +63,6 @@
                         </tr>
                       <% end %>
                     </tbody>
-                    <%- if false %>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>DBA</th>
-                        <th>Contact Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Commission</th>
-                        <th>Agreement Sent</th>
-                        <th>Agreement Complete</th>
-                        <th>Pac Risk Fee Schedule</th>
-                        <th>Target Premium</th>
-                        <th>Address</th>
-                        <th>Notes</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Contact Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                      <% @brokers.each do |broker| %>
-                        <tr>
-                            <td><%= broker.code %></td>
-                            <td><%= broker.name %></td>
-                            <td><%= broker.contact_name %></td>
-                            <td><%= broker.email %></td>
-                            <td><%= broker.phone %></td>
-                            <td>
-                              <%= broker.street %>
-                              <br />
-                              <%= broker.city + ", " + broker.state + ". " + broker.zip %>
-                            </td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                    <% end %>
                   </table>
                 </div>
               </div>
@@ -118,7 +74,7 @@
 
 <!-- Javascripts -->
 <%= content_for :js_includes do %>
-  <%= javascript_include_tag 'moment/moment.js', 'data-turbolinks-track' => true %>
+  <%#= javascript_include_tag 'moment/moment.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'pages/table-data.js', 'data-turbolinks-track' => true %>
 <% end %>
