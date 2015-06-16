@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :policies do
+    collection do
+      get 'find'
+    end
   end
 
   resources :brokers, only: [ :index ]

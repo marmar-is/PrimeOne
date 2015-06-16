@@ -25,6 +25,6 @@ class CreateBuildings < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_reference :buildings, :locations, index: true, foreign_key: true
+    add_reference :buildings, :location, index: true, foreign_key: true
   end
 end

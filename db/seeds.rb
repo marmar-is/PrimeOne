@@ -6,10 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'actionview'
+require 'action_view'
 require 'csv'
 
 CSV.foreach('private/data/brokers.csv') do |r|
+  include ActionView::Helpers::NumberHelper
   Broker.create!(code:r[0], name:r[1], street:r[2], city:r[3], state:r[4],
   zip:r[5], email:r[6], contact_name:r[7], phone:number_to_phone(r[8])
   )

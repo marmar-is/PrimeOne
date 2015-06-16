@@ -1,16 +1,58 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+<%= content_for :head do %>
+  <style>
+    .error-alert {
+      border-radius: 5px;
+      opacity: 0.75;
+    }
+    .page-inner,
+    .page-content {
+      height: 100%;
+    }
+    .close {
+      padding-right:5px;
+    }
+  </style>
 <% end %>
+<main class="page-content">
+  <div class="page-inner">
+    <div id="main-wrapper">
+      <div class="row">
+        <div class="col-md-3 center">
+          <div class="login-box">
+            <a class="logo-name text-lg text-center">
+              <%= image_tag "prime_logo_color_small_bg.png", width:'200px' %>
+            </a>
 
-<%= render "devise/shared/links" %>
+            <p class="text-center m-t-md">Forgot your password?</p>
+
+            <%= render partial: 'devise/shared/alerts' %>
+
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, class:'m-t-md') do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+                placeholder:'Email', class:'form-control', required: true %>
+              </div>
+
+              <%= f.submit "Send me password reset instructions", class:"btn btn-prime-blue btn-block m-t-xs" %>
+            <% end %>
+
+            <p class="text-center m-t-xs text-sm">Already have an account?</p>
+            <%= link_to "Login", new_session_path(resource_name),
+            class:'btn btn-default btn-block m-t-xs' %>
+
+            <p class="text-center m-t-xs text-sm">Do not have an account?</p>
+            <%= link_to "Sign Up", new_registration_path(resource_name),
+            class:"btn btn-default btn-block m-t-xs" %>
+
+            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name),
+            class:'display-block text-center m-t-md text-sm' %>
+
+            <p class="text-center m-t-xs text-sm">2015 &copy; by Marmaris & Matthew Vasseur</p>
+          </div>
+        </div>
+      </div><!-- Row -->
+    </div><!-- Main Wrapper -->
+  </div><!-- Page Inner -->
+</main><!-- Page Content -->

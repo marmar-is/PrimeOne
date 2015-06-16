@@ -1,0 +1,1138 @@
+<table id="policy" class="table table-bordered table-striped" style="clear: both">
+  <tbody>
+    <tr>
+      <td style="width: 35%;">POLICY NUMBER</td>
+      <td style="width: 65%;">
+        <%= link_to @policy.policy_number, "#", id:'policy_number',
+        class: "editable editable-click", style: "display: inline;",
+          data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+          title: "Enter Policy Number", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>CLIENT CODE</td>
+      <td>
+        <%= link_to @policy.client_code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>STATUS</td>
+      <td>
+        <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickable",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Select Status", type: "select", value: @policy.status } %>
+      </td>
+    </tr>
+    <tr>
+      <td>BROKER</td>
+      <td>
+        <%= link_to (@broker.try(:name) || "Empty"), "#", id:'broker_id', class: "editable editable-clickable editable-empty",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title:  "Select Broker", type:"select2", value: @broker.try(:id) } %>
+      </td>
+    </tr>
+    <tr>
+      <td>EFFECTIVE DATE</td>
+      <td>
+        <%= link_to @policy.B.strftime("%_m/%d/%Y"), "#", id:'B',
+        class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+        pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
+        value: "#{@policy.B}" } %></td>
+    </tr>
+    <tr>
+      <td>EXPIRATION DATE</td>
+      <td>
+        <%= link_to @policy.C.strftime("%_m/%d/%Y"), "#", id:'C',
+        class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+        pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
+        value: "#{@policy.C}" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>NAMED INSURED</td>
+      <td>
+        <%= link_to @policy.F, "#", id:"F", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED DBA</td>
+      <td>
+        <%= link_to @policy.G, "#", id:"G", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED BUSINESS TYPE</td>
+      <td>
+        <%= link_to @policy.I, "#", id:"I", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED STREET</td>
+      <td>
+        <%= link_to @policy.H, "#", id:"H", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED CITY</td>
+      <td>
+        <%= link_to @policy.J, "#", id:"J", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED ZIP</td>
+      <td>
+        <%= link_to @policy.L, "#", id:"L", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter INSURED ZIP", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 STREET</td>
+      <td>
+        <%= link_to @policy.M, "#", id:"M", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 STREET", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 TYPE</td>
+      <td>
+        <%= link_to @policy.N, "#", id:"N", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CITY</td>
+      <td>
+        <%= link_to @policy.O, "#", id:"O", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CITY", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 STATE</td>
+      <td>
+        <%= link_to @policy.P, "#", id:"P", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 STATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 ZIP</td>
+      <td>
+        <%= link_to @policy.Q, "#", id:"Q", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 ZIP", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 COVERAGE TYPE</td>
+      <td>
+        <%= link_to @policy.R, "#", id:"R", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 COVERAGE TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PROTECTION CLASS</td>
+      <td>
+        <%= link_to @policy.S, "#", id:"S", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PROTECTION CLASS", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 YEAR BUILT</td>
+      <td>
+        <%= link_to @policy.T, "#", id:"T", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 YEAR BUILT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 FLOORS</td>
+      <td>
+        <%= link_to @policy.U, "#", id:"U", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 FLOORS", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 FABRICATION</td>
+      <td>
+        <%= link_to @policy.V, "#", id:"V", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 FABRICATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 UPDATES</td>
+      <td>
+        <%= link_to @policy.W, "#", id:"W", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 UPDATES", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SQUARE FOOTAGE</td>
+      <td>
+        <%= link_to @policy.X, "#", id:"X", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SQUARE FOOTAGE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PARKING LOT SQUARE FOOTAGE</td>
+      <td>
+        <%= link_to @policy.Y, "#", id:"Y", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PARKING LOT SQUARE FOOTAGE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 COINS FACTOR</td>
+      <td>
+        <%= link_to @policy.Z, "#", id:"Z", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 COINS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 DEDUCTIBLE</td>
+      <td>
+        <%= link_to @policy.AA, "#", id:"AA", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 DEDUCTIBLE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 DEDUCTIBLE FACTOR</td>
+      <td>
+        <%= link_to @policy.AB, "#", id:"AB", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 DEDUCTIBLE FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 COINSURANCE FACTOR</td>
+      <td>
+        <%= link_to @policy.AC, "#", id:"AC", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 COINSURANCE FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 FOOD SPOILAGE LIMIT</td>
+      <td>
+        <%= link_to @policy.AE, "#", id:"AE", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 FOOD SPOILAGE LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 FOOD SPOILAGE RATE</td>
+      <td>
+        <%= link_to @policy.AF, "#", id:"AF", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 FOOD SPOILAGE RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 FOOD SPOILAGE PREMIUM</td>
+      <td>
+        <%= link_to @policy.AG, "#", id:"AG", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 FOOD SPOILAGE PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 THEFT INCLUSION</td>
+      <td>
+        <%= link_to @policy.AH, "#", id:"AH", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 THEFT INCLUSION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 THEFT LIMIT</td>
+      <td>
+        <%= link_to @policy.AI, "#", id:"AI", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 THEFT LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 THEFT RATE</td>
+      <td>
+        <%= link_to @policy.AJ, "#", id:"AJ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 THEFT RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 THEFT PREMIUM</td>
+      <td>
+        <%= link_to @policy.AK, "#", id:"AK", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 THEFT PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 ENHANCEMENT TYPE</td>
+      <td>
+        <%= link_to @policy.AL, "#", id:"AL", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 ENHANCEMENT TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 ENHANCEMENT LIMIT</td>
+      <td>
+        <%= link_to @policy.AM, "#", id:"AM", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 ENHANCEMENT LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 ENHANCEMENT RATE</td>
+      <td>
+        <%= link_to @policy.AN, "#", id:"AN", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 ENHANCEMENT RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 ENHANCEMENT PREMIUM</td>
+      <td>
+        <%= link_to @policy.AO, "#", id:"AO", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 ENHANCEMENT PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LCOATION 1 MECHANICAL INCLUSION</td>
+      <td>
+        <%= link_to @policy.AP, "#", id:"AP", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LCOATION 1 MECHANICAL INCLUSION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 MECHANICAL LIMIT</td>
+      <td>
+        <%= link_to @policy.AQ, "#", id:"AQ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 MECHANICAL LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 MECHANICAL RATE</td>
+      <td>
+        <%= link_to @policy.AR, "#", id:"AR", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 MECHANICAL RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 MECHANICAL PREMIUM</td>
+      <td>
+        <%= link_to @policy.AS, "#", id:"AS", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 MECHANICAL PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING VALUATION</td>
+      <td>
+        <%= link_to @policy.AT, "#", id:"AT", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING VALUATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING LIMIT</td>
+      <td>
+        <%= link_to @policy.AU, "#", id:"AU", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING RATE</td>
+      <td>
+        <%= link_to @policy.AV, "#", id:"AV", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING DEDUCTIBLE FACTOR</td>
+      <td>
+        <%= link_to @policy.AW, "#", id:"AW", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING DEDUCTIBLE FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING COINS FACTOR</td>
+      <td>
+        <%= link_to @policy.AX, "#", id:"AX", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING COINS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BUILDING PREMIUM</td>
+      <td>
+        <%= link_to @policy.AY, "#", id:"AY", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BUILDING PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BPP VALUATION</td>
+      <td>
+        <%= link_to @policy.AZ, "#", id:"AZ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BPP VALUATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BPP LIMIT</td>
+      <td>
+        <%= link_to @policy.BA, "#", id:"BA", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BPP LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BPP RATE</td>
+      <td>
+        <%= link_to @policy.BB, "#", id:"BB", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BPP RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BPP DEDUCTIBLE FACTOR</td>
+      <td>
+        <%= link_to @policy.BC, "#", id:"BC", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BPP DEDUCTIBLE FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LCOATION 1 BPP COINS FACTOR</td>
+      <td>
+        <%= link_to @policy.BD, "#", id:"BD", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LCOATION 1 BPP COINS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 BPP PREMIUM</td>
+      <td>
+        <%= link_to @policy.BE, "#", id:"BE", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 BPP PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS INEMDNITY LIMIT</td>
+      <td>
+        <%= link_to @policy.BF, "#", id:"BF", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS INEMDNITY LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS LIMIT</td>
+      <td>
+        <%= link_to @policy.BG, "#", id:"BG", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS RATE</td>
+      <td>
+        <%= link_to @policy.BH, "#", id:"BH", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS DEDUCTIBLE FACTOR </td>
+      <td>
+        <%= link_to @policy.BI, "#", id:"BI", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS DEDUCTIBLE FACTOR ", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS CO INS FACTOR</td>
+      <td>
+        <%= link_to @policy.BJ, "#", id:"BJ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS CO INS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 EARNINGS PREMIUM</td>
+      <td>
+        <%= link_to @policy.BK, "#", id:"BK", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 EARNINGS PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN VALUATION</td>
+      <td>
+        <%= link_to @policy.BL, "#", id:"BL", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN VALUATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN LIMIT</td>
+      <td>
+        <%= link_to @policy.BM, "#", id:"BM", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN RATE</td>
+      <td>
+        <%= link_to @policy.BN, "#", id:"BN", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN DED FACTOR</td>
+      <td>
+        <%= link_to @policy.BO, "#", id:"BO", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN DED FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN CO INS FACTOR</td>
+      <td>
+        <%= link_to @policy.BP, "#", id:"BP", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN CO INS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 SIGN PREMIUM</td>
+      <td>
+        <%= link_to @policy.BQ, "#", id:"BQ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 SIGN PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMPS VALUATION</td>
+      <td>
+        <%= link_to @policy.BR, "#", id:"BR", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMPS VALUATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMP LIMIT</td>
+      <td>
+        <%= link_to @policy.BS, "#", id:"BS", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMP LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMP RATE</td>
+      <td>
+        <%= link_to @policy.BT, "#", id:"BT", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMP RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMP DED FACTOR</td>
+      <td>
+        <%= link_to @policy.BU, "#", id:"BU", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMP DED FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMP CO INS FACTOR</td>
+      <td>
+        <%= link_to @policy.BV, "#", id:"BV", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMP CO INS FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 PUMP PREMIUM</td>
+      <td>
+        <%= link_to @policy.BW, "#", id:"BW", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 PUMP PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES VALUATION</td>
+      <td>
+        <%= link_to @policy.BX, "#", id:"BX", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES VALUATION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES LIMIT</td>
+      <td>
+        <%= link_to @policy.BY, "#", id:"BY", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES RATE</td>
+      <td>
+        <%= link_to @policy.BZ, "#", id:"BZ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES DED FACTOR</td>
+      <td>
+        <%= link_to @policy.CA, "#", id:"CA", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES DED FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES CO INSURANCE FACTOR</td>
+      <td>
+        <%= link_to @policy.CB, "#", id:"CB", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES CO INSURANCE FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>LOCATION 1 CANOPIES PREMIUM</td>
+      <td>
+        <%= link_to @policy.CC, "#", id:"CC", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter LOCATION 1 CANOPIES PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL CRIME PREMIUM</td>
+      <td>
+        <%= link_to @policy.CD, "#", id:"CD", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter TOTAL CRIME PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL TERRITORY</td>
+      <td>
+        <%= link_to @policy.CE, "#", id:"CE", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL TERRITORY", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GEN AGG LIMIT</td>
+      <td>
+        <%= link_to @policy.CF, "#", id:"CF", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GEN AGG LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>PRODUCTS LIMIT</td>
+      <td>
+        <%= link_to @policy.CG, "#", id:"CG", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter PRODUCTS LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INJURY LIMIT</td>
+      <td>
+        <%= link_to @policy.CH, "#", id:"CH", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter INJURY LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>OCCURRENCE LIMIT</td>
+      <td>
+        <%= link_to @policy.CI, "#", id:"CI", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter OCCURRENCE LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>FIRE LIMIT</td>
+      <td>
+        <%= link_to @policy.CJ, "#", id:"CJ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter FIRE LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>MEDICAL LIMIT</td>
+      <td>
+        <%= link_to @policy.CK, "#", id:"CK", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter MEDICAL LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>ADDITIONAL INSUREDS INCLUSION</td>
+      <td>
+        <%= link_to @policy.CL, "#", id:"CL", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter ADDITIONAL INSUREDS INCLUSION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>FIRE ADDITIONAL PREMIUM</td>
+      <td>
+        <%= link_to @policy.CM, "#", id:"CM", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter FIRE ADDITIONAL PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>MEDICAL ADDITIONAL PREMIUM</td>
+      <td>
+        <%= link_to @policy.CN, "#", id:"CN", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter MEDICAL ADDITIONAL PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC</td>
+      <td>
+        <%= link_to @policy.CO, "#", id:"CO", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GenAgg</td>
+      <td>
+        <%= link_to @policy.CP, "#", id:"CP", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GenAgg", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC DESCRIPTION</td>
+      <td>
+        <%= link_to @policy.CQ, "#", id:"CQ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC DESCRIPTION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC CODE</td>
+      <td>
+        <%= link_to @policy.CR, "#", id:"CR", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC CODE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td> 1GL LOC BASIS </td>
+      <td>
+        <%= link_to @policy.CS, "#", id:"CS", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter  1GL LOC BASIS ", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC TYPE</td>
+      <td>
+        <%= link_to @policy.CT, "#", id:"CT", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC BASE</td>
+      <td>
+        <%= link_to @policy.CU, "#", id:"CU", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC BASE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC  ILF</td>
+      <td>
+        <%= link_to @policy.CV, "#", id:"CV", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC  ILF", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>1GL LOC PREMIUM</td>
+      <td>
+        <%= link_to @policy.CW, "#", id:"CW", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 1GL LOC PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC</td>
+      <td>
+        <%= link_to @policy.CX, "#", id:"CX", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>ProdOps</td>
+      <td>
+        <%= link_to @policy.CY, "#", id:"CY", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter ProdOps", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC DESCRIPTION</td>
+      <td>
+        <%= link_to @policy.CZ, "#", id:"CZ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC DESCRIPTION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC CODE</td>
+      <td>
+        <%= link_to @policy.DA, "#", id:"DA", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC CODE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC</td>
+      <td>
+        <%= link_to @policy.DB, "#", id:"DB", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC TYPE</td>
+      <td>
+        <%= link_to @policy.DC, "#", id:"DC", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC BASE</td>
+      <td>
+        <%= link_to @policy.DD, "#", id:"DD", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC BASE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC ILF</td>
+      <td>
+        <%= link_to @policy.DE, "#", id:"DE", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC ILF", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>2GL LOC PREMIUM</td>
+      <td>
+        <%= link_to @policy.DF, "#", id:"DF", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 2GL LOC PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC</td>
+      <td>
+        <%= link_to @policy.DG, "#", id:"DG", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GenAgg</td>
+      <td>
+        <%= link_to @policy.DH, "#", id:"DH", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GenAgg", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC DESCRIPTION</td>
+      <td>
+        <%= link_to @policy.DI, "#", id:"DI", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC DESCRIPTION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC CODE</td>
+      <td>
+        <%= link_to @policy.DJ, "#", id:"DJ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC CODE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC</td>
+      <td>
+        <%= link_to @policy.DK, "#", id:"DK", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC TYPE</td>
+      <td>
+        <%= link_to @policy.DL, "#", id:"DL", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC BASE</td>
+      <td>
+        <%= link_to @policy.DM, "#", id:"DM", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC BASE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC ILF</td>
+      <td>
+        <%= link_to @policy.DN, "#", id:"DN", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC ILF", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>3GL LOC PREMIUM</td>
+      <td>
+        <%= link_to @policy.DO, "#", id:"DO", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 3GL LOC PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC</td>
+      <td>
+        <%= link_to @policy.DP, "#", id:"DP", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>ProdOps</td>
+      <td>
+        <%= link_to @policy.DQ, "#", id:"DQ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter ProdOps", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC DESCRIPTION</td>
+      <td>
+        <%= link_to @policy.DR, "#", id:"DR", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC DESCRIPTION", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC CODE</td>
+      <td>
+        <%= link_to @policy.DS, "#", id:"DS", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC CODE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC</td>
+      <td>
+        <%= link_to @policy.DT, "#", id:"DT", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC TYPE</td>
+      <td>
+        <%= link_to @policy.DU, "#", id:"DU", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC TYPE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC BASE</td>
+      <td>
+        <%= link_to @policy.DV, "#", id:"DV", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC BASE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC ILF</td>
+      <td>
+        <%= link_to @policy.DW, "#", id:"DW", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC ILF", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>4GL LOC PREMIUM</td>
+      <td>
+        <%= link_to @policy.DX, "#", id:"DX", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter 4GL LOC PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL ADDITIONAL INSUREDS NUMBER</td>
+      <td>
+        <%= link_to @policy.DY, "#", id:"DY", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL ADDITIONAL INSUREDS NUMBER", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>ADDITIONAL INSUREDS PREMIUM</td>
+      <td>
+        <%= link_to @policy.DZ, "#", id:"DZ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter ADDITIONAL INSUREDS PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>WATER IN THE GAS TANK</td>
+      <td>
+        <%= link_to @policy.EA, "#", id:"EA", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter WATER IN THE GAS TANK", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL GAS RATE</td>
+      <td>
+        <%= link_to @policy.EB, "#", id:"EB", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL GAS RATE", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL GAS SUBPREMIUM </td>
+      <td>
+        <%= link_to @policy.EC, "#", id:"EC", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL GAS SUBPREMIUM ", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL GAS PREMIUM</td>
+      <td>
+        <%= link_to @policy.ED, "#", id:"ED", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL GAS PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL SUBTOTAL PREMIUM</td>
+      <td>
+        <%= link_to @policy.EE, "#", id:"EE", class:"editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter GL SUBTOTAL PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL MULTI LOC FACTOR</td>
+      <td>
+        <%= link_to @policy.EF, "#", id:"EF", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL MULTI LOC FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>GL RATING FACTOR</td>
+      <td>
+        <%= link_to @policy.EG, "#", id:"EG", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter GL RATING FACTOR", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>COMMERCIAL AUTO LIMIT</td>
+      <td>
+        <%= link_to @policy.EJ, "#", id:"EJ", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter COMMERCIAL AUTO LIMIT", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>COMMERCIAL AUTO LOCATIONS</td>
+      <td>
+        <%= link_to @policy.EK, "#", id:"EK", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter COMMERCIAL AUTO LOCATIONS", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>NON-OWNED AUTO</td>
+      <td>
+        <%= link_to @policy.EL, "#", id:"EL", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter NON-OWNED AUTO", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>NON-OWNED AUTO PREMIUM</td>
+      <td>
+        <%= link_to @policy.EM, "#", id:"EM", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter NON-OWNED AUTO PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL AUTO PREMIUM</td>
+      <td>
+        <%= link_to @policy.EN, "#", id:"EN", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter TOTAL AUTO PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL PACKAGE PREMIUM</td>
+      <td>
+        <%= link_to @policy.EO, "#", id:"EO", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter TOTAL PACKAGE PREMIUM", type: "text" } %>
+      </td>
+    </tr>
+  </tbody>
+</table>

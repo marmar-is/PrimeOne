@@ -18,7 +18,7 @@ class CreatePolicies < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :policies, :policy_number, unique: true
+    add_index :policies, :number, unique: true
     add_reference :policies, :broker, index: true, foreign_key: true
   end
 end

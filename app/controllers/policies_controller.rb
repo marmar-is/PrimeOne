@@ -10,6 +10,9 @@ class PoliciesController < ApplicationController
   # GET /policies/1
   # GET /policies/1.json
   def show
+    @title = @policy.policy_number
+    #@countersign = (@policy.B+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+
   end
 
   # GET /policies/new
@@ -61,14 +64,28 @@ class PoliciesController < ApplicationController
     end
   end
 
+  def find
+    @policy = Policy.find_by_policy_number(params[:policy_number])
+
+    if @policy != nil
+      redirect_to policy_path(@policy)
+    else
+      redirect_to policies_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_policy
       @policy = Policy.find(params[:id])
+      @broker = @policy.broker
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def policy_params
-      params.require(:policy).permit(:number, :status, :code, :name, :effective)
+      params.require(:policy).permit(:number, :status, :code, :name, :effective,
+      :broker_id, :forms, :property_forms, :gl_forms, :crime_forms, :auto_forms,
+      :expiry, :org, :dba, :biztype, :street, :city, :state, :zip, :total_premium
+      )
     end
 end

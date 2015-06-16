@@ -1,7 +1,80 @@
-<h2>Sign up</h2>
+<%= content_for :head do %>
+  <style>
+    .error-alert {
+      border-radius: 5px;
+      opacity: 0.75;
+    }
+    .page-inner,
+    .page-content {
+      height: 100%;
+    }
+    .close {
+      padding-right:5px;
+    }
+  </style>
+<% end %>
+<main class="page-content">
+  <div class="page-inner">
+    <div id="main-wrapper">
+      <div class="row">
+        <div class="col-md-3 center">
+          <div class="login-box">
+            <a class="logo-name text-lg text-center">
+              <%= image_tag "prime_logo_color_small_bg.png", width:'200px' %>
+            </a>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <p class="text-center m-t-md">Create a Prime One account!</p>
+
+            <%= render partial: 'devise/shared/alerts' %>
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class:'m-t-md') do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, class:'form-control',
+                placeholder:'Email', required: true %>
+              </div>
+
+              <div class="form-group">
+                <% @minimum_password_length ? ph = "(#{@minimum_password_length} characters minimum)" : "" %>
+                <%= f.password_field :password, autocomplete: "off", class:'form-control',
+                placeholder:"Password #{ph}", required: true %>
+              </div>
+
+              <div class="form-group">
+                <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control',
+                placeholder: "Password Confirmation", required: true %>
+              </div>
+
+              <label>
+                <input type="checkbox" required>Agree to the terms and policy</input>
+              </label>
+
+              <%= f.submit "Submit", class:"btn btn-prime-blue btn-block m-t-xs" %>
+
+              <p class="text-center m-t-xs text-sm">Already have an account?</p>
+              <%= link_to "Login", new_session_path(resource_name),
+              class:'btn btn-default btn-block m-t-xs' %>
+
+              <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name),
+              class:'display-block text-center m-t-md text-sm' %>
+            <% end %>
+
+            <p class="text-center m-t-xs text-sm">2015 &copy; by Marmaris & Matthew Vasseur</p>
+          </div>
+        </div>
+      </div><!-- Row -->
+    </div><!-- Main Wrapper -->
+  </div><!-- Page Inner -->
+</main><!-- Page Content -->
+
+<% if false %>
+<h2>Sign up</h2>
+<form class="m-t-md" action="login.html">
   <%= devise_error_messages! %>
+
+  <input type="text" class="form-control" placeholder="Name" required>
+  <input type="email" class="form-control" placeholder="Email" required>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -21,9 +94,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <button type="submit" class="btn btn-success btn-block m-t-xs">Submit</button>
+  <a href="login.html" class="btn btn-default btn-block m-t-xs">Login</a>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+
+  <% end %>

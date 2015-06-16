@@ -1,26 +1,64 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+<%= content_for :head do %>
+  <style>
+    .error-alert {
+      border-radius: 5px;
+      opacity: 0.75;
+    }
+    .page-inner,
+    .page-content {
+      height: 100%;
+    }
+    .close {
+      padding-right:5px;
+    }
+  </style>
 <% end %>
+<main class="page-content">
+  <div class="page-inner">
+    <div id="main-wrapper">
+      <div class="row">
+        <div class="col-md-3 center">
+          <div class="login-box">
+            <a class="logo-name text-lg text-center">
+              <%= image_tag "prime_logo_color_small_bg.png", width:'200px' %>
+            </a>
 
-<%= render "devise/shared/links" %>
+            <p class="text-center m-t-md">Please login into your account.</p>
+
+            <%= render partial: 'devise/shared/alerts' %>
+
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:'m-t-md') do |f| %>
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, class:'form-control',
+                placeholder:'Email', required: true %>
+              </div>
+
+              <div class="form-group">
+                <%= f.password_field :password, autocomplete: "off", class:'form-control',
+                placeholder:'Password', required: true %>
+              </div>
+
+              <% if devise_mapping.rememberable? -%>
+                <div class="form-group">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+
+              <%= f.submit "Login", class:"btn btn-prime-blue btn-block" %>
+
+              <p class="text-center m-t-xs text-sm">Do not have an account?</p>
+              <%= link_to "Sign Up", new_registration_path(resource_name),
+              class:"btn btn-default btn-block m-t-xs" %>
+
+              <%= link_to "Forgot Password?", new_password_path(resource_name),
+              class:'display-block text-center m-t-md text-sm' %>
+
+            <% end %>
+            <p class="text-center m-t-xs text-sm">2015 &copy; by Marmaris & Matthew Vasseur</p>
+          </div>
+        </div>
+      </div><!-- Row -->
+    </div><!-- Main Wrapper -->
+  </div><!-- Page Inner -->
+</main><!-- Page Content -->
