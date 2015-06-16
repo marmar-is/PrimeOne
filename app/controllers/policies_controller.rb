@@ -82,6 +82,40 @@ class PoliciesController < ApplicationController
     end
   end
 
+  # Determine which forms should be downloaded
+  # GET /policies/1/generate
+  def generate
+    html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
+    pdf = WickedPdf.new.pdf_from_string(html)
+
+    File.open("private/temp_pdf/dec_temp.pdf", 'wb') do |f|
+      f << pdf
+    end
+
+    @pdfForms = CombinePDF.new
+    @pdfForms << CombinePDF.load("private/temp_pdf/dec_temp.pdf")
+
+    form_groups = [:forms, :property_forms, :gl_forms, :crime_forms, :auto_forms]
+
+    form_groups.each do |fg|
+      if !@policy[fg].empty?
+        @policy[fg].split(" ").each do |f|
+          f = f.gsub("/", "-")
+          begin
+            open('private/temp_pdf/temp.pdf', 'wb') do |file|
+              #file << open("http://storage.googleapis.com/endorsements/#{f}.pdf").read
+              file << open("private/forms/#{f}.pdf").read
+            end
+            @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
+          rescue
+          end
+        end
+      end
+    end
+
+    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.policy_number}.pdf", disposition: 'inline', format: 'pdf'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_policy

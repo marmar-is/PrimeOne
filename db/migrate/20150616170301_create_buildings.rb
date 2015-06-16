@@ -2,7 +2,7 @@ class CreateBuildings < ActiveRecord::Migration
   def change
     create_table :buildings do |t|
       t.integer :number, default: 0
-      t.string :class, default: ""
+      t.string :class_type, default: ""
       t.string :code, default: ""
       t.decimal :basis, default: 0
       t.string :basis_type, default: ""

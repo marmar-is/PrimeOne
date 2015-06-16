@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   resources :policies do
     member do
       get 'pdf'
+      get 'generate'
     end
-    
+
     collection do
       get 'find'
     end
