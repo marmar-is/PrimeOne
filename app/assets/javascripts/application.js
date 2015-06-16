@@ -15,7 +15,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 
-//= require 3d-bold-navigation/js/modernizr.js
+//= require modernizr.js
 
 //= require turbolinks
 
