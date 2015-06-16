@@ -3,7 +3,7 @@
     <tr>
       <td style="width: 35%;">POLICY NUMBER</td>
       <td style="width: 65%;">
-        <%= link_to @policy.policy_number, "#", id:'policy_number',
+        <%= link_to @policy.number, "#", id:'policy_number',
         class: "editable editable-click", style: "display: inline;",
           data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
           title: "Enter Policy Number", type: "text" } %>
@@ -12,7 +12,7 @@
     <tr>
       <td>CLIENT CODE</td>
       <td>
-        <%= link_to @policy.client_code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
+        <%= link_to @policy.code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
       </td>
     </tr>
     <tr>
@@ -34,7 +34,7 @@
     <tr>
       <td>EFFECTIVE DATE</td>
       <td>
-        <%= link_to @policy.B.strftime("%_m/%d/%Y"), "#", id:'B',
+        <%= link_to @policy.effective.strftime("%_m/%d/%Y"), "#", id:'effective',
         class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
         value: "#{@policy.B}" } %></td>
@@ -42,7 +42,7 @@
     <tr>
       <td>EXPIRATION DATE</td>
       <td>
-        <%= link_to @policy.C.strftime("%_m/%d/%Y"), "#", id:'C',
+        <%= link_to @policy.expiry.strftime("%_m/%d/%Y"), "#", id:'expiry',
         class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
         value: "#{@policy.C}" } %>
@@ -51,7 +51,7 @@
     <tr>
       <td>NAMED INSURED</td>
       <td>
-        <%= link_to @policy.F, "#", id:"F", class:"editable editable-click",
+        <%= link_to @policy.name, "#", id:"name", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter Field", type: "text" } %>
       </td>
@@ -59,7 +59,7 @@
     <tr>
       <td>INSURED DBA</td>
       <td>
-        <%= link_to @policy.G, "#", id:"G", class:"editable editable-click",
+        <%= link_to @policy.dba, "#", id:"dba", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter Field", type: "text" } %>
       </td>
@@ -67,7 +67,7 @@
     <tr>
       <td>INSURED BUSINESS TYPE</td>
       <td>
-        <%= link_to @policy.I, "#", id:"I", class:"editable editable-click",
+        <%= link_to @policy.biztype, "#", id:"biztype", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter Field", type: "text" } %>
       </td>
@@ -75,7 +75,7 @@
     <tr>
       <td>INSURED STREET</td>
       <td>
-        <%= link_to @policy.H, "#", id:"H", class:"editable editable-click",
+        <%= link_to @policy.street, "#", id:"street", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter Field", type: "text" } %>
       </td>
@@ -83,7 +83,15 @@
     <tr>
       <td>INSURED CITY</td>
       <td>
-        <%= link_to @policy.J, "#", id:"J", class:"editable editable-click",
+        <%= link_to @policy.city, "#", id:"city", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
+    <tr>
+      <td>INSURED STATE</td>
+      <td>
+        <%= link_to @policy.state, "#", id:"state", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter Field", type: "text" } %>
       </td>
@@ -91,7 +99,7 @@
     <tr>
       <td>INSURED ZIP</td>
       <td>
-        <%= link_to @policy.L, "#", id:"L", class:"editable editable-click",
+        <%= link_to @policy.zip, "#", id:"zip", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
         title: "Enter INSURED ZIP", type: "text" } %>
       </td>

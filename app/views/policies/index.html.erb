@@ -51,10 +51,10 @@
                 <tbody>
                   <% @policies.each do |policy| %>
                   <tr>
-                    <td><%= link_to policy.policy_number, policy_path(policy) %></td>
-                    <td><%= policy.client_code %></td>
+                    <td><%= link_to policy.number, policy_path(policy) %></td>
+                    <td><%= policy.code %></td>
                     <td><%= policy.name %></td>
-                    <td><%= policy.B %></td>
+                    <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
                     <td><%= policy.broker.try(:name) || "None" %></td>
                     <td><%= policy.status %></td>
                   </tr>

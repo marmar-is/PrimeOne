@@ -10,7 +10,7 @@ class PoliciesController < ApplicationController
   # GET /policies/1
   # GET /policies/1.json
   def show
-    @title = @policy.policy_number
+    @title = @policy.number
 
   end
 
@@ -64,7 +64,7 @@ class PoliciesController < ApplicationController
   end
 
   def find
-    @policy = Policy.find_by_policy_number(params[:policy_number])
+    @policy = Policy.find_by_number(params[:number])
 
     if @policy != nil
       redirect_to policy_path(@policy)
@@ -113,7 +113,24 @@ class PoliciesController < ApplicationController
       end
     end
 
-    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.policy_number}.pdf", disposition: 'inline', format: 'pdf'
+    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}.pdf", disposition: 'inline', format: 'pdf'
+  end
+
+  def update_forms
+    @policy = Policy.find(params[:id])
+
+    if (@policy[params[:group]].include?(params[:forms]))
+      @policy[params[:group]].slice!(params[:forms])
+    else
+      @policy[params[:group]] += params[:forms]
+    end
+
+    respond_to do |format|
+      @policy.save
+
+      format.html { render :show }
+      format.js { render :show }
+    end
   end
 
   private

@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150616170301) do
 
   create_table "buildings", force: :cascade do |t|
     t.integer  "number",         default: 0
-    t.string   "class",          default: ""
+    t.string   "class_type",     default: ""
     t.string   "code",           default: ""
     t.decimal  "basis",          default: 0.0
     t.string   "basis_type",     default: ""
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20150616170301) do
 
   create_table "policies", force: :cascade do |t|
     t.string   "number",         default: ""
-    t.string   "status",         default: ""
+    t.string   "status",         default: "GENERATED"
     t.string   "code",           default: ""
     t.string   "name",           default: ""
     t.date     "effective",      default: '1995-11-08'
