@@ -1,0 +1,473 @@
+$(function(){
+  //defaults
+  $.fn.editable.defaults.url = '/policy';
+  $.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
+
+  //editables
+
+  $('#policy_number').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    success: function(response, newValue) {
+      $('.policy_number_display').text(newValue);
+    }
+  });
+
+  $('#client_code').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    success: function(response, newValue) {
+      $('.client_code_display').text(newValue);
+    }
+  });
+
+  $('#status').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    source: [
+      {value: 'GENERATED', text: 'GENERATED'},
+      {value: 'REVIEWED 1', text: 'REVIEWED 1'},
+      {value: 'REVIEWED 2', text: 'REVIEWED 2'},
+      {value: 'ISSUED', text: 'ISSUED'},
+      {value: 'URGENT', text: 'URGENT'}
+    ],
+  });
+
+  $('#C').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    viewformat: 'MM/DD/YYYY',
+    template: 'MMM / D / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
+
+  $('#B').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    viewformat: 'MM/DD/YYYY',
+    template: 'MMM / D / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
+
+  $('#address').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['street'] = params.value.street;
+      data['policy']['city'] = params.value.city;
+      data['policy']['state'] = params.value.state;
+      data['policy']['zip'] = params.value.zip;
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    validate: function(value) {
+      if(value.city == '') return 'City is required!';
+      if(value.state == '') return 'State is required!';
+      if(value.zip == '') return 'Zip Code is required!';
+      if(value.street == '') return 'Street is required!';
+    }
+  });
+
+  var brokers = [];
+
+  /*
+  [{:id=>1, :text=>"Action Group, Inc."}, {:id=>2, :text=>"Al Bourdeau Insurance Services, Inc."},
+  {:id=>3, :text=>"Ali T. Beydoun Insurance Agency, Inc."}, {:id=>4, :text=>"Anchor Insurance Group"},
+  {:id=>5, :text=>"Ann Arbor Insurance"}, {:id=>6, :text=>"Bencivenga Insurance"},
+  {:id=>7, :text=>"Cantor Insurance"}, {:id=>8, :text=>"Charles Walker & Associates"},
+  {:id=>9, :text=>"Community First Agency Inc."}, {:id=>10, :text=>"Creative Insurance Solutions, LLC"},
+  {:id=>11, :text=>"Custom Insurance Agency"}, {:id=>12, :text=>"DDI Insurance"},
+  {:id=>13, :text=>"Fawaz Insurance Agency, Inc."}, {:id=>14, :text=>"Great Lakes Bay Agency"}, {:id=>15, :text=>"Great Lakes Insurance Agency Associates"}, {:id=>16, :text=>"Haddad Insurance Corp."}, {:id=>17, :text=>"Hallmark Agency Inc."}, {:id=>18, :text=>"Harbor Country Insurance"}, {:id=>19, :text=>"Independent Insurance Services Agency"}, {:id=>20, :text=>"Insurance Advisors Inc."}, {:id=>21, :text=>"Insurance Providers of Michigan"}, {:id=>22, :text=>"JPS Insurance Agency"}, {:id=>23, :text=>"Kaplani Insurance"}, {:id=>24, :text=>"Kapnick Insurance Group"}, {:id=>25, :text=>"Kejbou Insurance Agency Inc."}, {:id=>26, :text=>"Lakepointe Insurance"}, {:id=>27, :text=>"Lind & Lind Insurance"}, {:id=>28, :text=>"Macomb-Gerlach Agency"}, {:id=>29, :text=>"Marvin F Jacobs Agency, Inc"}, {:id=>30, :text=>"Metro Financial Services LLC"}, {:id=>31, :text=>"MI Insurance Brokers"}, {:id=>32, :text=>"Michael W. Denys Agency"}, {:id=>33, :text=>"Michigan Community Insurance Agency, Inc."}, {:id=>34, :text=>"Michigan Insurance Group "}, {:id=>35, :text=>"Midwest Underwriters"}, {:id=>36, :text=>"Millennium Insurance & Investment Group"}, {:id=>37, :text=>"Morris Insurance Group"}, {:id=>38, :text=>"Mourer Foster"}, {:id=>39, :text=>"Najjar Insurance Agency"}, {:id=>40, :text=>"North Coast Insurance Services"}, {:id=>41, :text=>"NuStar Insurance Agencies, Inc"}, {:id=>42, :text=>"Peterson McGregor & Associates"}, {:id=>43, :text=>"Phil Klein Insurance Group"}, {:id=>44, :text=>"Potter & Roose Ins. Flint"}, {:id=>45, :text=>"Primary Insurance Agency Group, LLC"}, {:id=>46, :text=>"Regency Insurance Group"}, {:id=>47, :text=>"Rye Agency"}, {:id=>48, :text=>"Shears II"}, {:id=>49, :text=>"Shoemaker Group, Inc."}, {:id=>50, :text=>"Signature Insurance"}, {:id=>51, :text=>"Stu Garthe Agency, LLC"}, {:id=>52, :text=>"Summer Consulting Co."}, {:id=>53, :text=>"T.A. Conrad Agency Inc."}, {:id=>54, :text=>"Tabak Insurance Agency, PLLC"}, {:id=>55, :text=>"Tait Insurance Agency, Inc."}, {:id=>56, :text=>"TDA Insurance and Financial LLC"}, {:id=>57, :text=>"Transportation Risk Management"}, {:id=>58, :text=>"United Underwriters"}, {:id=>59, :text=>"Upper Peninsula Insurance Agency, Inc."}, {:id=>60, :text=>"Viking Insurance Agency"}, {:id=>61, :text=>"Stanbury Insurance"}, {:id=>62, :text=>"Brown-Pixley Insurance Agency"}]
+  */
+  
+  "<% Broker.select([:id, :name]).each do |b| %>"
+  brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
+  "<% end %>"
+
+
+  $('#broker_id').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['broker_id'] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    source: brokers,
+    select2: {
+      width: 350,
+      placeholder: 'Select a Broker',
+      allowClear: true
+    }
+  });
+
+  $('#forms').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['forms'] = params.value.join(" ");
+      data['id'] = params.pk;
+
+      return data;
+    },
+    source: [
+      //{ value: "IL0003(9/08)", text: "IL0003(9/08)" },
+      //{ value: "IL0017(11/98)", text: "IL0017(11/98)" },
+      //{ value: "IL0286(9/08)", text: "IL0286(9/08)" },
+      //{ value: "IL0030(1/06)", text: "IL0030(1/06)" },
+      //{ value: "IL0031(1/06)", text: "IL0031(1/06)" }
+      { value: "IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06)", text: "MANDATORY PACKAGE" }
+    ]
+
+  });
+
+  $('#property_forms').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['property_forms'] = params.value.join(" ");
+      data['id'] = params.pk;
+
+      return data;
+    },
+    source: [
+      { value: "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96)", text: "MANDATORY PROPERTY" },
+      { value: "CP0020(6/07)", text: "CP0020(6/07)   BUILDERS RISK COVERAGE " },
+      { value: "CP0030(6/07)", text: "CP0030(6/07)   BUSINESS INCOME & EXTRA EXPENSE" },
+      { value: "CP0032(6/07)", text: "CP0032(6/07)   BUSINESS INCOME W/O EXTRA EXPENSE" },
+      { value: "CP0050(6/07)", text: "CP0050(6/07)   EXTRA EXPENSE COVERAGE " },
+      { value: "CP0320(10/92)", text: "CP0320(10/92)   MULTIPLE DEDUCTIBLE  (FIXED DOLLAR)" },
+      { value: "CP0321(6/07)", text: "CP0321(6/07)   WINDSTORM OR HAIL PERCENTAGE DEDUCTIBLE" },
+      { value: "CP0438(6/07)", text: "CP0438(6/07)   FUNCTIONAL BUILDING VALUATION" },
+      { value: "CP0439(10/90)", text: "CP0439(10/90)   FUNCTIONAL PERSONAL PROP. VALUATION" },
+      { value: "CP0440(6/95)", text: "CP0440(6/95)   SPOILAGE COVERAGE " },
+      { value: "CP0450(7/88)", text: "CP0450(7/88)   VACANT PERMIT" },
+      { value: "CP1010(6/07)", text: "CP1010(6/07)   BASIC  - CAUSE OF LOSS" },
+      { value: "CP1020(6/07)", text: "CP1020(6/07)   BROAD  - CAUSE OF LOSS" },
+      { value: "CP1030(6/07)", text: "CP1030(6/07)   SPECIAL  - CAUSE OF LOSS" },
+      { value: "CP1033(6/95)", text: "CP1033(6/95)   THEFT EXCLUSION" },
+      { value: "CP1054(6/07)", text: "CP1054(6/07)   WINDSTORM OR HAIL EXCLUSION" },
+      { value: "CP1055(6/07)", text: "CP1055(6/07)   VANDALISM EXCLUSION" },
+      { value: "CP1056(6/07)", text: "CP1056(6/07)   SPRINKLER LEAKAGE EXCLUSION" },
+      { value: "CP1120(6/07)", text: "CP1120(6/07)   BUILDERS RISK - COLLAPSE DURING CONSTRUCTION" },
+      { value: "CP1121(6/95)", text: "CP1121(6/95)   BUILDERS RISK -THEFT OF BLDG. MATERIALS, ETC" },
+      { value: "CP1199(6/07)", text: "CP1199(6/07)   BUILDERS RISK CHANGES-STANDARD PROP POLICY" },
+      { value: "CP1211(10/00)", text: "CP1211(10/00)   BURGLARY & ROBBERY PROTECTIVE SAFEGUARDS" },
+      { value: "CP1218(6/95)", text: "CP1218(6/95)   LOSS PAYABLE PROVISIONS" },
+      { value: "CP1430(10/00)", text: "CP1430(10/00)   OUTDOOR TREES, SHRUBS AND PLANTS" },
+      { value: "CP1440(6/07)", text: "CP1440(6/07)   OUTDOOR SIGN" },
+      { value: "IL0415(04/98)", text: "IL0415(04/98)   PROTECTIVE SAFEGUARDS" },
+      { value: "PO-PRP-1(2/10)", text: "PO-PRP-1(2/10)   EXTENDED POLICY ENDORSEMENT (2YR POLICIES ONLY)" },
+      { value: "PO-PRP-2(12/13)", text: "PO-PRP-2(12/13)   SELECT PROPERTY ENHANCEMENT" },
+      { value: "PO-PRP-3(12/13)", text: "PO-PRP-3(12/13)   ELITE PROPERTY ENHANCEMENT" },
+      { value: "EB0020(8/08)", text: "EB0020(8/08)   EQUIPMENT BREAKDOWN PROTECTION COVERAGE" }
+    ]
+  });
+
+  $('#gl_forms').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['gl_forms'] = params.value.join(" ");
+      data['id'] = params.pk;
+
+      return data;
+    },
+    source: [
+      { value: "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12)", text: "MANDATORY GENERAL LIABILITY" },
+      { value: "CG0300(1/96)", text: "CG0300(1/96)   DEDUCTIBLE LIABILITY" },
+      { value: "CG2002(11/85)", text: "CG2002(11/85)   ADD'L INSURED - CLUB MEMBERS" },
+      { value: "CG2011(1/96)", text: "CG2011(1/96)   ADD'L INSURED MANAGERS/LESSORS" },
+      { value: "CG2018(11/85)", text: "CG2018(11/85)   ADD'L INSURED MORTGAGEE, ETC." },
+      { value: "CG2026(7/04)", text: "CG2026(7/04)   ADD'L INSURED DESIGNATED PERSON" },
+      { value: "CG2027(11/85)", text: "CG2027(11/85)   ADD'L INSURED CO-OWNER" },
+      { value: "CG2028(7/04)", text: "CG2028(7/04)   ADD'L INSURED LESSOR OF LEASED EQUIPMENT" },
+      { value: "CG2104(11/85)", text: "CG2104(11/85)   EXCLUSION PRODUCTS-COMPLETED OPERATION" },
+      { value: "CG2116(7/98)", text: "CG2116(7/98)   EXCLUSION DESIGNATED PROFESSIONAL SER." },
+      { value: "CG2135(10/01)", text: "CG2135(10/01)   EXCLUSION MEDICAL PAYMENTS" },
+      { value: "CG2138(11/85)", text: "CG2138(11/85)   EXCLUSION PERSONAL INJURY" },
+      { value: "CG2145(7/98)", text: "CG2145(7/98)   EXCLUSION DAMAGE TO PREMISES RENTED" },
+      { value: "CG2166(12/04)", text: "CG2166(12/04)   EXCLUSION VOLUNTEER WORKERS" },
+      { value: "CG2408(10/93)", text: "CG2408(10/93)   LIQUOR LIABILITYLIQUOR LIABILITY" },
+      { value: "PO-GL-2(1/10)", text: "PO-GL-2(1/10)   EXTENDED POLICY ENDORSEMENT" },
+      { value: "PO-GL-3", text: "PO-GL-3   USE OF PHYSICAL FORCE ENDORSEMENT" },
+      { value: "PO-GL-4(11/09)", text: "PO-GL-4(11/09)   REPLACEMENT COVERAGE ENDORSEMENT" },
+      { value: "PO-GL-7(5/12)", text: "PO-GL-7(5/12)   EXCLUSON - ASSAULT & BATTERY" },
+      { value: "PO-GL-9(03/14)", text: "PO-GL-9(03/14)   MULTI-UNIT HABITATIONAL CONVERSION EXCLUSION" },
+      { value: "PO-GL-10(03/14)", text: "PO-GL-10(03/14)   EXCLUSON - VERMIN" },
+      { value: "PO_GL_WIG(12/13)", text: "PO_GL_WIG(12/13)   WATER IN THE GAS TANK" }
+    ]
+  });
+
+  $('#auto_forms').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['auto_forms'] = params.value.join(" ");
+      data['id'] = params.pk;
+
+      return data;
+    },
+    source: [
+      { value: "CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12)", text: "MANDATORY AUTO" }
+    ]
+  });
+
+  $('#crime_forms').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['crime_forms'] = params.value.join(" ");
+      data['id'] = params.pk;
+
+      return data;
+    },
+    source: [
+      { value: "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08)", text: "MANDATORY CRIME"},
+      { value: "CR0029(5/06)", text: "CR0029(5/06)   EMPLOYEE THEFT AND FORGERY POLICY" },
+      { value: "CR0405(8/07)", text: "CR0405(8/07)   INSIDE THE PREMISES-THEFT OF OTHER PROPERTY" },
+      { value: "CR0407(8/07)", text: "CR0407(8/07)   INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES" },
+      { value: "CR3510(8/07)", text: "CR3510(8/07)   FORCIBLE ENTRY INTO PREMISES REQUIREMENT" },
+      { value: "CR3531(8/07)", text: "CR3531(8/07)   PROVIDE SUBLIMITS FOR MONEY, SECURITES OR CHECKS" },
+      { value: "CR3532(8/07)", text: "CR3532(8/07)   LIMIT COVERAGE FOR MONEY AND SECURITIES OUTSIDE THE PREMISES TO ROBBERY ONLY" },
+      { value: "CR0407(8/07)", text: "CR0407(8/07)   INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES" },
+      { value: "PO-CR-1(10/10)", text: "PO-CR-1(10/10)   BURGLARY" }
+    ]
+
+  });
+
+  $('.prop.locs.editable.address').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['property_attributes'] = { id: params.name.split(" ")[0] }
+      data['policy']['property_attributes']['locations_attributes'] = [
+        {
+          id: params.name.split(" ")[1],
+          street: params.value.street,
+          city: params.value.city,
+          state: params.value.state,
+          zip: params.value.zip
+        }
+      ];
+
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    validate: function(value) {
+      if(value.city == '') return 'City is required!';
+      if(value.state == '') return 'State is required!';
+      if(value.zip == '') return 'Zip Code is required!';
+      if(value.street == '') return 'Street is required!';
+    }
+  });
+
+  $('#prop.locs.year_built.editable').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      return data;
+    },
+
+    viewformat: 'MM/DD/YYYY',
+    template: 'D / MMMM / YYYY',
+    combodate: {
+      minYear: 1950,
+      maxYear: 2050,
+      minuteStep: 1
+    }
+  });
+
+  $('.prop.locs.editable').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['property_attributes'] = { id: params.name.split(" ")[0] }
+      data['policy']['property_attributes']['locations_attributes'] = [];
+
+      loc = { id: params.name.split(" ")[1] };
+      loc[params.name.split(" ")[2]] = params.value;
+
+      data['policy']['property_attributes']['locations_attributes'].push(loc);
+
+      data['id'] = params.pk;
+
+      return data;
+    }
+  });
+
+  $('.prop.editable').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy']['property_attributes'] = { id: params.name.split(" ")[0] }
+      data['policy']['property_attributes'][params.name.split(" ")[1]] = params.value;
+
+      data['id'] = params.pk;
+
+      return data;
+    }
+  });
+
+  $('.doc.editable').editable({
+    params: function(params) {
+
+      var data = {};
+      data['policy'] = {};
+      data['policy']['docs_attributes'] = [
+        {
+          id: params.name,
+          active: true,
+          var_1: params.value.var_1,
+          var_2: params.value.var_2,
+          var_3: params.value.var_3,
+          var_4: params.value.var_4,
+          var_5: params.value.var_5,
+          var_6: params.value.var_6
+        }
+      ];
+      data['id'] = params.pk;
+
+      return data;
+    }
+  });
+
+
+  $('.editable').editable({
+    params: function(params) {
+      var data = {};
+      data['policy'] = {};
+      data['policy'][params.name] = params.value
+      data['id'] = params.pk;
+
+      console.log(data);
+
+      return data;
+    },
+    success: function(response, newValue) {
+      $('.policy_'+$(this)[0].id+'_display').text(newValue);
+    }
+  });
+
+
+
+  $('#event').editable({
+    placement: 'right',
+    combodate: {
+      firstItem: 'name'
+    }
+  });
+
+  $('#meeting_start').editable({
+    format: 'yyyy-mm-dd hh:ii',
+    viewformat: 'dd/mm/yyyy hh:ii',
+    validate: function(v) {
+      if(v && v.getDate() == 10) return 'Day cant be 10!';
+    },
+    datetimepicker: {
+      todayBtn: 'linked',
+      weekStart: 1
+    }
+  });
+
+  $('#comments').editable({
+    showbuttons: 'bottom'
+  });
+
+  $('#note').editable();
+  $('#pencil').click(function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $('#note').editable('toggle');
+  });
+
+  $('#state').editable({
+    source: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+  });
+
+  $('#state2').editable({
+    value: 'California',
+    typeahead: {
+      name: 'state',
+      local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+    }
+  });
+
+
+  $('#tags').editable({
+    inputclass: 'input-large',
+    select2: {
+      tags: ['html', 'javascript', 'css', 'ajax'],
+      tokenSeparators: [",", " "]
+    }
+  });
+
+
+
+
+  $('#policy .editable').on('hidden', function(e, reason){
+    if(reason === 'save' || reason === 'nochange') {
+      var $next = $(this).closest('tr').next().find('.editable');
+      if($('#autoopen').is(':checked')) {
+        setTimeout(function() {
+          $next.editable('show');
+        }, 300);
+      } else {
+        $next.focus();
+      }
+    }
+  });
+});

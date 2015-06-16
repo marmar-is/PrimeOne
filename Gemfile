@@ -11,7 +11,7 @@ gem 'pg'
 gem 'sass-rails', '~> 5.0'
 
 # Bootstrap styles
-gem 'bootstrap-sass', '~> 3.3.5'
+#gem 'bootstrap-sass', '~> 3.3.5'
 
 # Font Awesome
 gem 'font-awesome-rails', '~> 4.3.0'
