@@ -13,11 +13,11 @@
         %section.section-large.descript
           .box
             %span.tag BUSINESS DESCRIPTION:
-            %span.item= @policy.biztype == "" ? "" : @policy.biztype
+            %span.item= @policy.biztype
           .box
             %p.tag
               INSURED IS:
-            %span.item.text-center= @policy.org
+              %span.item.text-center= @policy.org
           .box
             %p.strong THIS POLICY CONSISTS OF THE FOLLOWING COVERAGE PARTS FOR WHICH A |
               PREMIUM IS INDICATED, THIS PREMIUM MAY BE SUBJECT TO AN AUDIT. |
@@ -338,7 +338,7 @@
                 .col-xs-2
                   %p.item= @policy.locations.first.buildings.first.code
                 .col-xs-2
-                  %p.item.text-right= @policy.locations.first.buildings.first.basis
+                  %p.item.text-right= number_to_currency(@policy.locations.first.buildings.first.basis, precision:0)
                 .col-xs-1
                   %p.item.text-right= @policy.locations.first.buildings.first.basis_type
                 .col-xs-2.col-xs-offset-1
