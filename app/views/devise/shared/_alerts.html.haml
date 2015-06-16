@@ -1,0 +1,5 @@
+-flash.each do |k, v|
+  .alert{class:"alert-#{k}"}
+    %p.text-center.m-t-md.bg-danger.error-alert
+      = link_to "x", "#", data:{dismiss:'alert'}, class:'close'
+      = v

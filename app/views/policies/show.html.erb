@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @policy.number %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @policy.status %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @policy.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @policy.name %>
+</p>
+
+<p>
+  <strong>Effective:</strong>
+  <%= @policy.effective %>
+</p>
+
+<%= link_to 'Edit', edit_policy_path(@policy) %> |
+<%= link_to 'Back', policies_path %>
