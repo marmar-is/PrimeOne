@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PrimeOne</title>
+  <!-- Title -->
+  <title><%= title(@title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= yield :head %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta charset="UTF-8">
+  <meta name="description" content="Prime One Insurance Dashboard" />
+  <meta name="keywords" content="prime,one,primeone,insurance,dashboard" />
+  <meta name="author" content="Matthew Vasseur" />
+
+  <!-- Styles -->
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700', 'data-turbolinks-track' => true %>
+
+  <!-- Template used is Modern by Steelcoders -->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="page-header-fixed compact-menu page-horizontal-bar page-sidebar-fixed">
+
+  <% if devise_controller? %>
+    <%= yield %>
+  <% else %>
+    <%= render partial: 'layouts/header' %>
+
+    <%= yield %>
+
+    <%= render partial: 'layouts/footer' %>
+  <% end %>
+
+  <%= javascript_include_tag 'jquery-ui/jquery-ui.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'pace-master/pace.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'jquery-blockui/jquery.blockui.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap/js/bootstrap.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'jquery-slimscroll/jquery.slimscroll.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'switchery/switchery.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'uniform/jquery.uniform.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'classie/classie.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'waves/waves.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag '3d-bold-navigation/js/main.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'modern.min.js', 'data-turbolinks-track' => true %>
+
+  <%= yield :js_includes %>
 
 </body>
+
+
+<div>
+  <%= debug(params) if Rails.env.development? %>
+</div>
+
 </html>

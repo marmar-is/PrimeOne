@@ -1,0 +1,81 @@
+<div class="overlay"></div>
+
+<form class="search-form" action="/policies/find" method="POST">
+  <div class="input-group">
+    <input type="text" name="policy_number" class="form-control search-input" placeholder="Search for a Policy Number...">
+    <span class="input-group-btn">
+      <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
+    </span>
+  </div><!-- Input Group -->
+</form>
+<!-- Search Form </form>-->
+
+
+<main class="page-content content-wrap">
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <div class="logo-box">
+        <%= link_to root_path, class: 'logo-text' do %>
+          <!--<span>Prime One Insurance Console</span>-->
+          <%= image_tag "prime_logo_color_small.png", width:"150px", height:"33px", alt:"Prime One Insurance" %>
+        <% end %>
+      </div><!-- Logo Box -->
+      <div class="search-button">
+        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
+      </div>
+
+      <div class="topmenu-outer">
+        <div class="top-menu">
+          <ul class="nav navbar-nav navbar-left">
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <!--<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>-->
+            </li>
+            <li>
+              <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom"
+              data-title="search" class="waves-effect waves-button waves-classic show-search">
+                <i class="fa fa-search"></i>
+                </a>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete,
+              data:{toggle:"tooltip",placement:"bottom", title:"Logout"},
+              class:"waves-effect waves-button waves-classic" do %>
+                <i class="fa fa-times-circle-o"></i>
+              <% end %>
+            </li>
+          </ul><!-- Nav -->
+        </div><!-- Top Menu -->
+
+      </div>
+    </div>
+  </div><!-- Navbar -->
+
+  <div class="page-sidebar sidebar horizontal-bar">
+    <div class="page-sidebar-inner">
+      <ul class="menu accordion-menu">
+        <!-- <li class="nav-heading"><span>Navigation</span></li> -->
+        <li class="<%= 'active' if controller_name == 'policies'%>">
+          <%= link_to policies_path do %>
+            <span class="menu-icon fa fa-archive"></span>
+            <p>Policies</p>
+          <% end %>
+        </li>
+        <li class="<%= 'active' if controller_name == 'quotes'%>">
+          <%= link_to "#" do %>
+            <span class="menu-icon fa fa-briefcase"></span>
+            <p>Quotes</p>
+          <% end %>
+        </li>
+        <li class="<%= 'active' if controller_name == 'brokers'%>">
+          <%= link_to brokers_path do %>
+            <span class="menu-icon fa fa-users"></span>
+            <p>Brokers</p><span class="arrow"></span>
+          <% end %>
+        </li>
+        <!-- <li class="nav-heading"><span>Features</span></li> -->
+      </ul>
+    </div><!-- Page Sidebar Inner -->
+  </div><!-- Page Sidebar -->

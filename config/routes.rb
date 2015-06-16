@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :policies
   devise_for :users
 
   devise_scope :user do
@@ -11,6 +10,11 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  resources :policies do
+  end
+
+  resources :brokers, only: [ :index ]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

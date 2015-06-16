@@ -10,6 +10,25 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require pace-master/themes/blue/pace-theme-flash.css
+ *= require uniform/css/uniform.default.css.scss
+ * require bootstrap/css/bootstrap.min.css
+ * require font-awesome
+ *= require waves/waves.min.css
+ *= require switchery/switchery.min.css
+ *= require 3d-bold-navigation/css/style.css
+ *= require slidepushmenus/css/component.css
+ *= require weather-icons-master/css/weather-icons.min.css
+ *= require metrojs/MetroJs.css.scss
+ *= require toastr/toastr.min.css
+ *= require modern.min
+
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ @import "font-awesome-sprockets";
+ @import "font-awesome";

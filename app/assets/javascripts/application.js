@@ -11,6 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
+//= require jquery.turbolinks
 //= require jquery_ujs
+
+//= require 3d-bold-navigation/js/modernizr.js
+
 //= require turbolinks
+
+
 //= require_tree .
