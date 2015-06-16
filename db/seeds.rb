@@ -35,3 +35,8 @@ CSV.foreach('private/data/policy.csv') do |r|
   zip:r[12], total_premium:r[13]
   )
 end
+
+# Load Auto Information into Policy
+CSV.foreach('private/data/auto.csv') do |r|
+  #Policy.update()
+end

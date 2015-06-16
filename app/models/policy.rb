@@ -1,6 +1,6 @@
 class Policy < ActiveRecord::Base
   # Validations
-  validates :policy_number, presence: true, uniqueness: true
+  validates :number, presence: true, uniqueness: true
   validates :code, presence: true, uniqueness: true
 
   # Associations
