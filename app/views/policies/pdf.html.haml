@@ -17,7 +17,7 @@
           .box
             %p.tag
               INSURED IS:
-            %span.item.text-center= @policy.organization
+            %span.item.text-center= @policy.org
           .box
             %p.strong THIS POLICY CONSISTS OF THE FOLLOWING COVERAGE PARTS FOR WHICH A |
               PREMIUM IS INDICATED, THIS PREMIUM MAY BE SUBJECT TO AN AUDIT. |
@@ -65,7 +65,7 @@
               .col-xs-1.col-xs-offset-1
                 %p.item $
               .col-xs-1.col-xs-offset-1
-                %p.item.text-right= displayPremium(@policy.EN)
+                %p.item.text-right= displayPremium(@policy.auto.total)
           .box
             .row
               .col-xs-6.col-xs-offset-2.text-right
@@ -102,7 +102,7 @@
               %tr
                 %td @policy.locations.first.number
                 %td @policy.locations.first.buildings.first.number
-                %td= @policy.locations.first.street + " " + @policy.locations.first.city + " " + @policy.locations.first.state + @policy.locations.first.zip + " occupied as " + @policy.locations.first.buildings.first.class
+                %td= @policy.locations.first.street + " " + @policy.locations.first.city + " " + @policy.locations.first.state + @policy.locations.first.zip + " occupied as " + @policy.locations.first.buildings.first.class_type
               -#
                 - @policy.property.locations.each_with_index do |loc, i|
                   %tr
@@ -341,7 +341,7 @@
                   %p.item.text-right= @policy.locations.first.buildings.first.basis_type
                 .col-xs-2.col-xs-offset-1
                   %p.item Included
-              - if checkValid(@policy.DI)
+              - if false#checkValid(@policy.DI)
                 .row
                   .col-xs-1
                     %p.item.text-center 1
