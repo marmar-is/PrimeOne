@@ -288,7 +288,7 @@
                 .col-xs-7
                   %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
                 .col-xs-1.text-right
-                  %p.item= number_to_currency(@policy.CJ, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_fire, precision: 0)
               .row
                 .col-xs-7
                   %p.item Medical Expense Limit
