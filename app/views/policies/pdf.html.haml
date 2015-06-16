@@ -86,6 +86,7 @@
             together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
             if any, issued to form a part thereof, complete the above numbered policy. |
         = render partial: 'pdf_footer.html', locals: {page: 1, name:"SUM"}
+
     -# COMMERCIAL PROPERTY DECLARATIONS
     -if checkValid(@policy.property.total)
       .property-page
@@ -100,8 +101,8 @@
                 %th BLDG
                 %th Occupancy and Location
               %tr
-                %td @policy.locations.first.number
-                %td @policy.locations.first.buildings.first.number
+                %td= @policy.locations.first.number
+                %td= @policy.locations.first.buildings.first.number
                 %td= @policy.locations.first.street + " " + @policy.locations.first.city + " " + @policy.locations.first.state + @policy.locations.first.zip + " occupied as " + @policy.locations.first.buildings.first.class_type
               -#
                 - @policy.property.locations.each_with_index do |loc, i|
@@ -253,6 +254,7 @@
               together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
               if any, issued to form a part thereof, complete the above numbered policy. |
           = render partial: 'pdf_footer.html', locals: {page: 2, name: "CP"}
+
     -# GENERAL LIABILITY DECLARATIONS
     -if checkValid(@policy.gl.total)
       .gl-page
@@ -266,32 +268,32 @@
                 .col-xs-7
                   %p.item General Aggregate Limit
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_genagg#number_to_currency(@policy.gl.limit_genagg, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_genagg, precision: 0)
               .row
                 .col-xs-7
                   %p.item Products/Completed Operations Aggregate Limit
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_products#number_to_currency(@policy.gl.limit_products, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_products, precision: 0)
               .row
                 .col-xs-7
                   %p.item Each Occurrence Limit
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_occurence#number_to_currency(@policy.gl.limit_occurence, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_occurence, precision: 0)
               .row
                 .col-xs-7
                   %p.item Personal & Advertising Injury Limit
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_injury#number_to_currency(@policy.gl.limit_injury, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_injury, precision: 0)
               .row
                 .col-xs-7
                   %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_fire#number_to_currency(@policy.CJ, precision: 0)
+                  %p.item= number_to_currency(@policy.CJ, precision: 0)
               .row
                 .col-xs-7
                   %p.item Medical Expense Limit
                 .col-xs-1.text-right
-                  %p.item= @policy.gl.limit_medical#number_to_currency(@policy.gl.limit_medical, precision: 0)
+                  %p.item= number_to_currency(@policy.gl.limit_medical, precision: 0)
           %section.section-small
             .limits-top
               %p.tag.text-center ALL PREMISES YOU OWN, RENT OR OCCUPY
@@ -304,7 +306,7 @@
             .limits-base
               .row
                 .col-xs-1
-                  %p.item.text-center 1
+                  %p.item.text-center= @policy.locations.first.number
                 .col-xs-6
                   %p.item= "#{@policy.locations.first.street}, #{@policy.locations.first.city}, MI. #{@policy.locations.first.zip}"
               -#
@@ -330,7 +332,7 @@
             .exposures-base
               .row
                 .col-xs-1
-                  %p.item.text-center @policy.locations.first.number
+                  %p.item.text-center= @policy.locations.first.number
                 .col-xs-3
                   %p.item= @policy.locations.first.buildings.first.class_type
                 .col-xs-2
