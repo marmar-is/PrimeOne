@@ -387,13 +387,13 @@
                   %p.tag Premium
             .limits-base
               .row
-                -if checkValid(@policy.ER)
+                -if checkValid(@policy.crime.limit_theft)
                   .col-xs-5
                     %p.item Employee Theft
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_theft
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -412,7 +412,7 @@
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_forgery
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -431,7 +431,7 @@
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_money
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -450,7 +450,7 @@
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_outside_robbery
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -469,7 +469,7 @@
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_safe_burglary
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -488,7 +488,7 @@
                   .col-xs-2.text-center
                     %p.item= @policy.crime.limit_premises_burglary
                   .col-xs-2.text-center
-                    %p.item @policy.crime.ded
+                    %p.item= @policy.crime.ded
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
