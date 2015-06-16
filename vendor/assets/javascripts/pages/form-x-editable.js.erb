@@ -32,7 +32,7 @@ $(function(){
     },
 
     success: function(response, newValue) {
-      $('.code_display').text(newValue);
+      $('.client_code_display').text(newValue);
     }
   });
 
@@ -125,7 +125,7 @@ $(function(){
   {:id=>11, :text=>"Custom Insurance Agency"}, {:id=>12, :text=>"DDI Insurance"},
   {:id=>13, :text=>"Fawaz Insurance Agency, Inc."}, {:id=>14, :text=>"Great Lakes Bay Agency"}, {:id=>15, :text=>"Great Lakes Insurance Agency Associates"}, {:id=>16, :text=>"Haddad Insurance Corp."}, {:id=>17, :text=>"Hallmark Agency Inc."}, {:id=>18, :text=>"Harbor Country Insurance"}, {:id=>19, :text=>"Independent Insurance Services Agency"}, {:id=>20, :text=>"Insurance Advisors Inc."}, {:id=>21, :text=>"Insurance Providers of Michigan"}, {:id=>22, :text=>"JPS Insurance Agency"}, {:id=>23, :text=>"Kaplani Insurance"}, {:id=>24, :text=>"Kapnick Insurance Group"}, {:id=>25, :text=>"Kejbou Insurance Agency Inc."}, {:id=>26, :text=>"Lakepointe Insurance"}, {:id=>27, :text=>"Lind & Lind Insurance"}, {:id=>28, :text=>"Macomb-Gerlach Agency"}, {:id=>29, :text=>"Marvin F Jacobs Agency, Inc"}, {:id=>30, :text=>"Metro Financial Services LLC"}, {:id=>31, :text=>"MI Insurance Brokers"}, {:id=>32, :text=>"Michael W. Denys Agency"}, {:id=>33, :text=>"Michigan Community Insurance Agency, Inc."}, {:id=>34, :text=>"Michigan Insurance Group "}, {:id=>35, :text=>"Midwest Underwriters"}, {:id=>36, :text=>"Millennium Insurance & Investment Group"}, {:id=>37, :text=>"Morris Insurance Group"}, {:id=>38, :text=>"Mourer Foster"}, {:id=>39, :text=>"Najjar Insurance Agency"}, {:id=>40, :text=>"North Coast Insurance Services"}, {:id=>41, :text=>"NuStar Insurance Agencies, Inc"}, {:id=>42, :text=>"Peterson McGregor & Associates"}, {:id=>43, :text=>"Phil Klein Insurance Group"}, {:id=>44, :text=>"Potter & Roose Ins. Flint"}, {:id=>45, :text=>"Primary Insurance Agency Group, LLC"}, {:id=>46, :text=>"Regency Insurance Group"}, {:id=>47, :text=>"Rye Agency"}, {:id=>48, :text=>"Shears II"}, {:id=>49, :text=>"Shoemaker Group, Inc."}, {:id=>50, :text=>"Signature Insurance"}, {:id=>51, :text=>"Stu Garthe Agency, LLC"}, {:id=>52, :text=>"Summer Consulting Co."}, {:id=>53, :text=>"T.A. Conrad Agency Inc."}, {:id=>54, :text=>"Tabak Insurance Agency, PLLC"}, {:id=>55, :text=>"Tait Insurance Agency, Inc."}, {:id=>56, :text=>"TDA Insurance and Financial LLC"}, {:id=>57, :text=>"Transportation Risk Management"}, {:id=>58, :text=>"United Underwriters"}, {:id=>59, :text=>"Upper Peninsula Insurance Agency, Inc."}, {:id=>60, :text=>"Viking Insurance Agency"}, {:id=>61, :text=>"Stanbury Insurance"}, {:id=>62, :text=>"Brown-Pixley Insurance Agency"}]
   */
-
+  
   "<% Broker.select([:id, :name]).each do |b| %>"
   brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
   "<% end %>"

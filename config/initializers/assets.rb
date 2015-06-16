@@ -29,6 +29,7 @@ modern.js
 Rails.application.config.assets.precompile += %w(
 datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
+
 datatables/js/jquery.datatables.min.js
 pages/table-data.js )
 
@@ -49,3 +50,6 @@ select2/js/select2.full.min.js
 dropzone/dropzone.min.js
 pages/form-x-editable.js
 )
+
+#bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css
+#bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
