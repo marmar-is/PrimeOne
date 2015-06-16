@@ -1,0 +1,33 @@
+%section.section-small
+  .container-fluid
+    .row.sig-container
+      .col-xs-3.signature
+        %p.strong COUNTERSIGNED:
+      .col-xs-3.signature
+        %p= @countersign
+      .col-xs-1.signature
+        %p.strong BY:
+      .col-xs-5.signature
+        -if action_name == 'generate'
+          = wicked_pdf_image_tag "signature.jpg", width:"200", height:"100"
+        -else
+          = image_tag "signature.jpg", width:"200", height:"100"
+
+    .row
+      .col-xs-3.col-xs-offset-3
+        %p DATE
+      .col-xs-5.col-xs-offset-1
+        %p AUTHORIZED REPRESENTATIVE
+
+%section.footer
+  .container
+    .pull-left
+      %p= "PO-#{name}-DEC (06/12)"
+    - if request.format == 'pdf'
+      .pull-right
+        %p= "Page #{page}"
+    -else
+      .col-xs-offset-9
+        %p= "Page #{page}"
+  %p.text-center.strong.contact 26602 Haggerty Rd, Farmington Hills, MI 48331 Phone |
+      877.714.6726 Fax 248.536.1860 primeoneinsurance.com |

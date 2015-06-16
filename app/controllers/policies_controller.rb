@@ -11,7 +11,6 @@ class PoliciesController < ApplicationController
   # GET /policies/1.json
   def show
     @title = @policy.policy_number
-    #@countersign = (@policy.B+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
 
   end
 
@@ -71,6 +70,15 @@ class PoliciesController < ApplicationController
       redirect_to policy_path(@policy)
     else
       redirect_to policies_path
+    end
+  end
+
+  def pdf
+    if user_signed_in? || params[:tok] == "WICKED_PDF"
+      @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+      render :pdf, layout: 'pdf.html.erb'
+    else
+      redirect_to new_user_session_path
     end
   end
 

@@ -1,3 +1,195 @@
 // Place all the styles related to the Policies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// variables
+$border: 2px solid #000;
+$sig-height: 105px;
+
+// styles
+body #pdf .page p,
+body #pdf .page span,
+body #pdf .page table tr td {
+  font-family: Arial, 'Arial', Helvetica, sans-serif;
+  font-size: 12px;
+  line-height:1.1;
+
+  margin-bottom:0;
+  padding-bottom:2px;
+  padding-top:2px;
+}
+
+#pdf .tag,
+#pdf .title {
+  font-weight: bold;
+}
+
+#pdf .item {
+  font-weight: normal;
+}
+
+#pdf h4.title {
+  font-size: 14px;
+  margin-bottom:20px;
+}
+
+#pdf .page .box {
+  border: $border;
+  border-bottom: none;
+}
+
+#pdf .page .col-xs-5.box.names {
+  width:48%;
+
+  padding: 1px 3px;
+  border-bottom: $border;
+
+  height: 90px;
+}
+
+#pdf .page .col-xs-5.box.names p {
+  line-height: 0.9;
+}
+
+#pdf .page .col-xs-5.box.names .name-div {
+  min-height: 30px;
+}
+
+#pdf .page .box.forms {
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 45px;
+}
+
+#pdf .page .descript > .box {
+  padding-left:2px;
+}
+
+#pdf .page section.footer p.contact {
+  font-size: 11px;
+  margin-top:15px;
+  margin-bottom: 40px;
+}
+
+#pdf .sig-container {
+  min-height: $sig-height;
+  border-bottom: $border
+}
+
+#pdf .signature {
+  min-height: $sig-height;
+  line-height: 100px;
+}
+
+#pdf .signature p,
+#pdf .signature img,
+#pdf .crime-page .limits-top p,
+#pdf .crime-page .limits-base .row p,
+#pdf .auto-page .limits-top p,
+#pdf .auto-page .limits-base .row p{
+  vertical-align:bottom;
+  display: inline-block;
+}
+
+#pdf .property-page table {
+  width:100%;
+  font-size:12px;
+}
+
+#pdf .property-page table,
+#pdf .property-page table tr th {
+  border: $border;
+}
+
+#pdf .property-page table#locations tr th,
+#pdf .property-page table#locations tr td {
+  padding-left: 10px;
+}
+
+#pdf .property-page table#locations tr td {
+  height:30px;
+  border-right: $border
+}
+
+#pdf .property-page table#exposures th {
+  text-align:center;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+#pdf .property-page table#exposures td {
+  padding-left:10px;
+  padding-right:7px;
+}
+
+#pdf .page .limits-top,
+#pdf .gl-page .exposures-top {
+  border-bottom: $border;
+  padding-left:10px;
+}
+
+#pdf .gl-page .limits-base {
+  padding-left:10px;
+  min-height:80px;
+}
+
+#pdf .gl-page .exposures-base {
+  padding-left: 10px;
+  min-height:69px;
+}
+
+#pdf .crime-page .limits-top,
+#pdf .crime-page .limits-base .row,
+#pdf .auto-page .limits-top,
+#pdf .auto-page .limits-base .row {
+  height:30px;
+  line-height:30px;
+}
+
+#pdf .ca-page .limits-base,
+#pdf .ca-page .limits-base-2,
+#pdf .auto-page .limits-top-2 {
+  padding-left:10px;
+}
+
+#pdf .auto-page .limits-top-2 {
+  border-bottom: $border;
+}
+
+#pdf.pdf section.footer {
+  page-break-after: always;
+  display:block;
+  clear:both;
+}
+
+@media screen {
+  /*
+  body #pdf {
+    width:75%;
+    margin:15px auto;
+    padding:15px 10px;
+    background-color:#fff;
+  }
+
+  body {
+    background-color:#ddd;
+  }
+  */
+}
+
+@media print {
+  #pdf section.footer {
+    page-break-after: always;
+  }
+
+  #pdf.screen .pdf-link {
+    display:none;
+  }
+
+  #pdf {
+    padding: 0;
+  }
+}
+
+@page {
+  margin: 15px 25px;
+}

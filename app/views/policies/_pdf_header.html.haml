@@ -1,0 +1,36 @@
+.text-center
+  -if action_name == 'generate'
+    = wicked_pdf_image_tag "prime_logo_color_small.png", width: 200, height: 40
+  -else
+    = image_tag "prime_logo_color_small.png", width: 200, height: 40
+  %h4.title= title
+
+.page
+  %section.section-small
+    %p
+      %span.tag Policy #:
+      %span.tag= @policy.number + "-" + Date.current.strftime("%y")
+    .row.container-fluid
+      .col-xs-5.box.names
+        %p.tag NAMED INSURED AND MAILING ADDRESS:
+        .name-div
+          %p.item= @policy.name
+          %p.item= (@policy.dba != @policy.name && checkValid(@policy.dba)) ? @policy.dba : ''
+        %p.item= @policy.street
+        %p.item= @policy.city + ", " + @policy.state + " " + @policy.zip
+
+      .col-xs-5.box.names.pull-right
+        %p.tag PRODUCER:
+        .name-div
+          %p.item= @broker.name
+          %p.item= #blank
+        %p.item= @broker.street
+        %p.item= @broker.city + ", " + @broker.state + " " + @broker.zip
+
+  %section.section-small
+    %p.text-center
+      The policy period is from
+      %u= @policy.effective.strftime("%m/%d/%Y")
+      to
+      %u= @policy.expiry.strftime("%m/%d/%Y")
+      12:01 A.M. Standard Time at the mailing address shown.

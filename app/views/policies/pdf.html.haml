@@ -1,0 +1,1092 @@
+- if @broker == nil
+  %h1.bg-danger.text-danger.text-center
+    Broker Not Selected
+    %br
+    Please Go Back and Select One.
+    %br
+-else
+  #pdf.pdf
+    -# SUMMARY OF DELCARATIONS
+    .summary-page
+      = render partial: 'pdf_header.html', locals: {title: "SUMMARY OF DECLARATIONS"}
+      .page
+        %section.section-large.descript
+          .box
+            %span.tag BUSINESS DESCRIPTION:
+            %span.item= @policy.biztype == "0" ? "" : @policy.biztype
+          .box
+            %p.tag
+              INSURED IS:
+                %span.item.text-center= @policy.locations.first.cityrganization
+          .box
+            %p.strong THIS POLICY CONSISTS OF THE FOLLOWING COVERAGE PARTS FOR WHICH A |
+              PREMIUM IS INDICATED, THIS PREMIUM MAY BE SUBJECT TO AN AUDIT. |
+          .box
+        %section.section-small
+          .box
+            .row
+              .col-xs-7.text-center
+                %p.tag COVERAGE PARTS
+              .col-xs-3.col-xs-offset-2.text-left
+                %p.tag PREMIUM
+          .box
+            .row
+              .col-xs-6.col-xs-offset-1.text-left
+                %p.item COMMERCIAL GENERAL LIABILITY
+              .col-xs-1.col-xs-offset-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.item.text-right= displayPremium(@policy.gl.total)
+            .row
+              .col-xs-6.col-xs-offset-1.text-left
+                %p.item COMMERCIAL PROPERTY
+              .col-xs-1.col-xs-offset-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.item.text-right= displayPremium(@policy.property.total)
+            .row
+              .col-xs-6.col-xs-offset-1.text-left
+                %p.item COMMERCIAL CRIME
+              .col-xs-1.col-xs-offset-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.item.text-right= displayPremium(@policy.crime.total)
+            .row
+              .col-xs-6.col-xs-offset-1.text-left
+                %p.item COMMERCIAL INLAND MARINE
+              .col-xs-1.col-xs-offset-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.item.text-right Excluded
+                -# commercial inland marine is always excluded
+            .row
+              .col-xs-6.col-xs-offset-1.text-left
+                %p.item COMMERCIAL AUTO
+              .col-xs-1.col-xs-offset-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.item.text-right= displayPremium(@policy.EN)
+          .box
+            .row
+              .col-xs-6.col-xs-offset-2.text-right
+                %p.tag TOTAL POLICY PREMIUM
+              .col-xs-1
+                %p.item $
+              .col-xs-1.col-xs-offset-1
+                %p.tag.text-right= displayPremium(@policy.total_premium)
+          .box
+          %p Commercial Filing Exemption- This policy is exempt from the filing |
+          requirements of Section 2236 of the Insurance Code of 1956, 1956 PA 218, MCL 500.2236. |
+        %section
+          %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+          .box.forms
+            %p.item= @policy.forms
+          .box
+          %p These Declarations and the Common Policy Declarations, if applicable, |
+            together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+            if any, issued to form a part thereof, complete the above numbered policy. |
+        = render partial: 'pdf_footer.html', locals: {page: 1, name:"SUM"}
+    -# COMMERCIAL PROPERTY DECLARATIONS
+    -if checkValid(@policy.property.total)
+      .property-page
+
+        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL PROPERTY DECLARATIONS"}
+
+        .page
+
+          %section.section-small
+
+            %p These declarations must be completed by the attachment of additional |
+
+              declarations or supplements and policy provisions for each applicable coverage. |
+
+            %table#locations.table-striped
+
+              %tr
+
+                %th LOC
+
+                %th BLDG
+
+                %th Occupancy and Location
+
+              %tr
+
+                %td @policy.locations.first.number
+
+                %td @policy.locations.first.buildings.first.number
+
+                %td= @policy.locations.first.street + " " + @policy.locations.first.city + " " + @policy.locations.first.state + @policy.locations.first.zip + " occupied as " + @policy.locations.first.buildings.first.class
+
+              -#
+
+                - @policy.property.locations.each_with_index do |loc, i|
+
+                  %tr
+
+                    %td= i+1
+
+                    %td= i+1
+
+                    %td= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip} occupied as #{loc.business_type}"
+
+          %section.section-small
+
+            %table#exposures.table-striped
+
+              %tr
+
+                %th COVERAGE
+
+                %th LIMIT OF INSURANCE
+
+                %th VALUATION
+
+                %th CO-INS
+
+                %th COVERED CAUSE OF LOSS
+
+                %th THEFT
+
+                %th DEDUCTIBLE
+
+                %th PREMIUM
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limt_bldg)
+
+                  %td.text-left Building
+
+                  %td.text-right= @policy.locations.first.buildings.first.limt_bldg
+
+                  %td.text-center= @policy.locations.first.buildings.first.valuation
+
+                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins. to_d*100), precision: 0)
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right= @policy.locations.first.buildings.first.ded
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limt_bldg)
+
+                  %td.text-left BPP
+
+                  %td.text-right= @policy.locations.first.buildings.first.limt_bldg
+
+                  %td.text-center= @policy.locations.first.buildings.first.valuation
+
+                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right= @policy.locations.first.buildings.first.ded
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limit_earnings)
+
+                  %td.text-left Earning
+
+                  %td.text-right= @policy.locations.first.buildings.first.limit_earnings
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right -
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limit_sign)
+
+                  %td.text-left Sign
+
+                  %td.text-right= @policy.locations.first.buildings.first.limit_sign
+
+                  %td.text-center= @policy.locations.first.buildings.first.valuation
+
+                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right= @policy.locations.first.buildings.first.ded
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limit_pumps)
+
+                  %td.text-left Pumps
+
+                  %td.text-right= @policy.locations.first.buildings.first.limit_pumps
+
+                  %td.text-center= @policy.locations.first.buildings.first.valuation
+
+                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right= @policy.locations.first.buildings.first.ded
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+              %tr
+
+                - if checkValid(@policy.locations.first.buildings.first.limit_canopies)
+
+                  %td.text-left Canopies
+
+                  %td.text-right= @policy.locations.first.buildings.first.limit_canopies
+
+                  %td.text-center= @policy.locations.first.buildings.first.valuation
+
+                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+
+                  %td.text-center= @policy.locations.first.buildings.first.loss_coverage
+
+                  %td.text-left= @policy.locations.first.buildings.first.theft
+
+                  %td.text-right= @policy.locations.first.buildings.first.ded
+
+                  %td.text-center Included
+
+                -else
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-center -
+
+                  %td.text-left -
+
+                  %td.text-right -
+
+                  %td.text-center -
+
+
+
+
+            .container
+
+              %p.pull-left MONTHLY LIMIT OF INDEMNITY
+
+              %p.pull-left.col-xs-offset-1 @policy.locations.first.buildings.first.indemnity
+
+              %p.pull-right *Applies to Business Income Only * Ext. Period of Indemnity
+
+
+
+
+          %section.section-small.descript
+
+            .box
+
+              %p.tag MORTGAGE HOLDER(S) AND MAILING ADDRESS
+
+            .box.forms
+
+              %p.item=# @policy.locations.first.streetortgagee
+
+            .box
+
+
+
+
+          %section
+
+            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+
+            .box.forms
+
+              %p.item= @policy.property_forms
+
+            .box
+
+            %p These Declarations and the Common Policy Declarations, if applicable, |
+
+              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+
+              if any, issued to form a part thereof, complete the above numbered policy. |
+
+
+
+
+          = render partial: 'pdf_footer.html', locals: {page: 2, name: "CP"}
+
+
+
+
+    -# GENERAL LIABILITY DECLARATIONS
+
+    -if checkValid(@policy.gl.total)
+
+      .gl-page
+
+        = render partial: 'pdf_header.html', locals: {title: "GENERAL LIABILITY DECLARATIONS"}
+
+        .page
+
+          %section
+
+            .limits-top
+
+              %p.tag.text-center LIMITS OF INSURANCE
+
+            .limits-base
+
+              .row
+
+                .col-xs-7
+
+                  %p.item General Aggregate Limit
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_genagg#number_to_currency(@policy.gl.limit_genagg, precision: 0)
+
+              .row
+
+                .col-xs-7
+
+                  %p.item Products/Completed Operations Aggregate Limit
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_products#number_to_currency(@policy.gl.limit_products, precision: 0)
+
+              .row
+
+                .col-xs-7
+
+                  %p.item Each Occurrence Limit
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_occurence#number_to_currency(@policy.gl.limit_occurence, precision: 0)
+
+              .row
+
+                .col-xs-7
+
+                  %p.item Personal & Advertising Injury Limit
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_injury#number_to_currency(@policy.gl.limit_injury, precision: 0)
+
+              .row
+
+                .col-xs-7
+
+                  %p.item Fire Damage Limit (Damage To Premises Rented To You Limit)
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_fire#number_to_currency(@policy.CJ, precision: 0)
+
+              .row
+
+                .col-xs-7
+
+                  %p.item Medical Expense Limit
+
+                .col-xs-1.text-right
+
+                  %p.item= @policy.gl.limit_medical#number_to_currency(@policy.gl.limit_medical, precision: 0)
+
+
+
+
+          %section.section-small
+
+            .limits-top
+
+              %p.tag.text-center ALL PREMISES YOU OWN, RENT OR OCCUPY
+
+            .limits-top
+
+              .row
+
+                .col-xs-1
+
+                  %p.tag Location
+
+                .col-xs-6
+
+                  %p.tag Address of all Premises you Own, Rent, or Occupy
+
+            .limits-base
+
+              .row
+
+                .col-xs-1
+
+                  %p.item.text-center 1
+
+                .col-xs-6
+
+                  %p.item= "#{@policy.locations.first.street}, #{@policy.locations.first.city}, MI. #{@policy.locations.first.zip}"
+
+              -#
+
+                - @policy.property.locations.each_with_index do |loc, i|
+
+                  .row
+
+                    .col-xs-1
+
+                      %p.item.text-center= i+1
+
+                    .col-xs-6
+
+                      %p.item= "#{loc.street}, #{loc.city}, #{loc.state}. #{loc.zip}"
+
+
+
+
+          %section
+
+            .exposures-top
+
+              .row
+
+                .col-xs-1
+
+                  %p.tag Location
+
+                .col-xs-3
+
+                  %p.tag Classification
+
+                .col-xs-2
+
+                  %p.tag Code No.
+
+                .col-xs-3.text-right
+
+                  %p.tag Premium Basis
+
+                .col-xs-2.col-xs-offset-1
+
+                  %p.tag Premium
+
+            .exposures-base
+
+              .row
+
+                .col-xs-1
+
+                  %p.item.text-center @policy.locations.first.number
+
+                .col-xs-3
+
+                  %p.item= @policy.locations.first.buildings.first.class
+
+                .col-xs-2
+
+                  %p.item= @policy.locations.first.buildings.first.code
+
+                .col-xs-2
+
+                  %p.item.text-right= @policy.locations.first.buildings.first.basis
+
+                .col-xs-1
+
+                  %p.item.text-right= @policy.locations.first.buildings.first.basis_type
+
+                .col-xs-2.col-xs-offset-1
+
+                  %p.item Included
+
+              - if checkValid(@policy.DI)
+
+                .row
+
+                  .col-xs-1
+
+                    %p.item.text-center 1
+
+                  .col-xs-3
+
+                    %p.item= @policy.DI
+
+                  .col-xs-2
+
+                    %p.item= @policy.DJ
+
+                  .col-xs-2
+
+                    %p.item.text-right= number_to_currency(@policy.DK, precision:0)
+
+                  .col-xs-1
+
+                    %p.item.text-right= @policy.DL
+
+                  .col-xs-2.col-xs-offset-1
+
+                    %p.item Included
+
+          %section.section-small
+
+            %p.item Audit Period (if applicable) -- Annually
+
+            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+
+            .box.forms
+
+              %p.item= @policy.gl_forms
+
+            .box
+
+            %p These Declarations and the Common Policy Declarations, if applicable, |
+
+              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+
+              if any, issued to form a part thereof, complete the above numbered policy. |
+
+
+
+
+          = render partial: 'pdf_footer.html', locals: {page: 3, name: "GL"}
+
+
+
+
+    -# COMMERCIAL CRIME DECLARATIONS
+
+    -if checkValid(@policy.crime.total)
+
+      .crime-page.ca-page
+
+        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL CRIME DECLARATIONS"}
+
+        .page
+
+          %section.section-large
+
+            .limits-top
+
+              .row
+
+                .col-xs-5
+
+                  %p.tag Coverage
+
+                .col-xs-2.text-center
+
+                  %p.tag Limit Per Occurrence
+
+                .col-xs-2.text-center
+
+                  %p.tag Deductible
+
+                .col-xs-2.col-xs-offset-1.text-center
+
+                  %p.tag Premium
+
+            .limits-base
+
+              .row
+
+                -if checkValid(@policy.ER)
+
+                  .col-xs-5
+
+                    %p.item Employee Theft
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_theft
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Employee Theft
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+              .row
+
+                -if checkValid(@policy.crime.limit_forgery)
+
+                  .col-xs-5
+
+                    %p.item Forgery or Alteration
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_forgery
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Forgery or Alteration
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+              .row
+
+                -if checkValid(@policy.crime.limit_money)
+
+                  .col-xs-5
+
+                    %p.item Inside the Premises - Theft of Money and Securities
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_money
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Inside the Premises - Theft of Money and Securities
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+              .row
+
+                -if checkValid(@policy.crime.limit_money)
+
+                  .col-xs-5
+
+                    %p.item Outside the Premises - Robbery
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_outside_robbery
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Outside the Premises - Robbery
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+              .row
+
+                -if checkValid(@policy.crime.limit_safe_burglary)
+
+                  .col-xs-5
+
+                    %p.item Inside the Premises - Safe Burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_safe_burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Inside the Premises - Safe Burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+              .row
+
+                -if checkValid(@policy.crime.limit_premises_burglary)
+
+                  .col-xs-5
+
+                    %p.item Premises Burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item= @policy.crime.limit_premises_burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item @policy.crime.ded
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item Included
+
+                -else
+
+                  .col-xs-5
+
+                    %p.item Premises Burglary
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.text-center
+
+                    %p.item -
+
+                  .col-xs-2.col-xs-offset-1.text-center
+
+                    %p.item -
+
+
+
+
+          %section.section-small
+
+            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+
+            .box.forms
+
+              %p.item= @policy.crime_forms
+
+            .box
+
+            %p These Declarations and the Common Policy Declarations, if applicable, |
+
+              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+
+              if any, issued to form a part thereof, complete the above numbered policy. |
+
+
+
+
+          = render partial: 'pdf_footer.html', locals: {page: 4, name: "CR"}
+
+
+
+
+    -# COMMERCIAL AUTO DECLARATIONS
+
+    -if checkValid(@policy.auto.total)
+
+      .auto-page.ca-page
+
+        = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL AUTO DECLARATIONS"}
+
+        .page
+
+          %section
+
+            .limits-top
+
+              .row
+
+                .col-xs-4
+
+                  %p.tag Coverage
+
+                .col-xs-1.text-center
+
+                  %p.tag Covered Autos
+
+                .col-xs-5.text-center
+
+                  %p.tag Limit (The most we will pay for any on Accident of Loss)
+
+                .col-xs-2.text-center
+
+                  %p.tag Premium
+
+            .limits-base
+
+              .row
+
+                .col-xs-4
+
+                  %p.item Liability
+
+                .col-xs-1.text-center
+
+                  %p.item 8, 9
+
+                .col-xs-5.text-center
+
+                  %p.item= @policy.gl.limit_occurence
+
+                .col-xs-2.text-center
+
+                  %p.item= Included
+
+              - a = [["Personal Injury Protection (PIP) (or equivalent No-Fault Coverage)", "Separately Stated in each PIP Endorsement(s) minus $"],
+
+                ["Added PIP (or equivalent No-Fault Coverage)", "Separately in each added PIP Endorsement(s)"],
+
+                ["Property Protection Insurance (PPI) (Michigan Only)", "Separately Stated in each PPI Endorsement minus Deductible for each Accident"],
+
+                ["Auto Medical Payments", ""], ["Uninsured Motorists (UM)", ""],
+
+                ["Uninsured Motorists (when not included in UM Coverage", ""] ]
+
+              - a.each do |cov|
+
+                .row
+
+                  .col-xs-4
+
+                    %p.item= cov[0]
+
+                  .col-xs-1.text-center
+
+                    %p.item Excluded
+
+                  .col-xs-5.text-center
+
+                    %p.item= cov[1]
+
+                  .col-xs-2.text-center
+
+                    %p.item N/A
+
+
+
+
+          %section.section-small
+
+            .limits-top-2
+
+              %p.tag Physical Damage
+
+            .limits-base-2
+
+              - a = ["Comprehensive Coverage", "Special Causes of Loss Coverage",
+
+                "Collision Coverage", "Towing and Labor"]
+
+              - a.each do |dmg|
+
+                .row
+
+                  .col-xs-4
+
+                    %p.item= dmg
+
+                  .col-xs-1.text-center
+
+                    %p.item Excluded
+
+                  .col-xs-2.col-xs-offset-5.text-center
+
+                    %p.item N/A
+
+          %section
+            %p.strong Form(s) and Endorsement(s) made part of this policy at the time of issue:
+
+            .box.forms
+
+              %p.item= @policy.locations.first.buildings.first.limt_bldgto_forms
+
+            .box
+
+            %p These Declarations and the Common Policy Declarations, if applicable, |
+
+              together with the Common Policy Conditions, Coverage Form(s) and Endorsements, |
+
+              if any, issued to form a part thereof, complete the above numbered policy. |
+
+
+
+
+          = render partial: 'pdf_footer.html', locals: {page: 5, name: "CA"}

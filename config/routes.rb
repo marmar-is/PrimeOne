@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :policies do
+    member do
+      get 'pdf'
+    end
+    
     collection do
       get 'find'
     end

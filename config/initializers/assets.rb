@@ -29,14 +29,12 @@ waves/waves.min.js
 3d-bold-navigation/js/main.js
 modern.min.js
 jquery-ui/jquery-ui.min.js
-policies.css
 bootstrap/css/bootstrap.min.css)
 
 # Index Page Assets (broker & policies) (css & js)
 Rails.application.config.assets.precompile += %w(
 datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
-moment/moment.js
 datatables/js/jquery.datatables.min.js
 pages/table-data.js )
 
@@ -48,6 +46,7 @@ x-editable/inputs-ext/address/address.css
 select2/css/select2.min.css
 dropzone/dropzone.min.css
 
+moment/moment.js
 x-editable/bootstrap3-editable/js/bootstrap-editable.js
 x-editable/inputs-ext/typeaheadjs/lib/typeahead.js
 x-editable/inputs-ext/typeaheadjs/typeaheadjs.js
