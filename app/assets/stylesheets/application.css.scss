@@ -12,8 +12,6 @@
  *
  *= require pace-master/themes/blue/pace-theme-flash.css
  *= require uniform/css/uniform.default.css.scss
- * require bootstrap/css/bootstrap.min.css
- * require font-awesome
  *= require waves/waves.min.css
  *= require switchery/switchery.min.css
  *= require 3d-bold-navigation/css/style.css
@@ -25,6 +23,9 @@
 
  *= require_tree .
  *= require_self
+
+ * require bootstrap/css/bootstrap.min.css
+* require font-awesome
  */
 
  @import "bootstrap-sprockets";

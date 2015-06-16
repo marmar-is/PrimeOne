@@ -60,7 +60,7 @@ group :development, :test do
 end
 
 # Integration with heroku
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 
 # Work with spreadsheets
 gem 'roo', '~> 2.0.0'
@@ -71,7 +71,7 @@ gem 'haml'
 # PDF Generation
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', group: :development
-gem 'wkhtmltopdf-heroku', group: :production
+#gem 'wkhtmltopdf-heroku', group: :production
 
 # a Better Server
 gem 'puma'
