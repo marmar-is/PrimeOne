@@ -3,7 +3,7 @@
     <tr>
       <td style="width: 35%;">POLICY NUMBER</td>
       <td style="width: 65%;">
-        <%= link_to @policy.number, "#", id:'policy_number',
+        <%= link_to @policy.number, "#", id:'number',
         class: "editable editable-click", style: "display: inline;",
           data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
           title: "Enter Policy Number", type: "text" } %>
@@ -12,7 +12,9 @@
     <tr>
       <td>CLIENT CODE</td>
       <td>
-        <%= link_to @policy.code, "#", id:'client_code', class: "editable editable-click", data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}", title: "Enter Client Code", type: "text" } %>
+        <%= link_to @policy.code, "#", id:'code', class: "editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Client Code", type: "text" } %>
       </td>
     </tr>
     <tr>
@@ -37,7 +39,7 @@
         <%= link_to @policy.effective.strftime("%_m/%d/%Y"), "#", id:'effective',
         class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
-        value: "#{@policy.B}" } %></td>
+        value: "#{@policy.effective}" } %></td>
     </tr>
     <tr>
       <td>EXPIRATION DATE</td>
@@ -45,7 +47,7 @@
         <%= link_to @policy.expiry.strftime("%_m/%d/%Y"), "#", id:'expiry',
         class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
-        value: "#{@policy.C}" } %>
+        value: "#{@policy.expiry}" } %>
       </td>
     </tr>
     <tr>
@@ -104,6 +106,7 @@
         title: "Enter INSURED ZIP", type: "text" } %>
       </td>
     </tr>
+    <%- if false %>
     <tr>
       <td>LOCATION 1 STREET</td>
       <td>
@@ -1134,12 +1137,13 @@
         title: "Enter TOTAL AUTO PREMIUM", type: "text" } %>
       </td>
     </tr>
+    <% end -%>
     <tr>
       <td>TOTAL PACKAGE PREMIUM</td>
       <td>
-        <%= link_to @policy.EO, "#", id:"EO", class:"editable editable-click",
+        <%= link_to @policy.total_premium, "#", id:"total_premium", class:"editable editable-click",
         data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter TOTAL PACKAGE PREMIUM", type: "text" } %>
+        title: "Enter total package premium", type: "text" } %>
       </td>
     </tr>
   </tbody>

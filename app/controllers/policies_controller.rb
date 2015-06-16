@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf, :generate, :update_forms, :populate]
 
   # GET /policies
   # GET /policies.json
@@ -64,7 +64,7 @@ class PoliciesController < ApplicationController
   end
 
   def find
-    @policy = Policy.find_by_number(params[:number])
+    @policy = Policy.find_by_number(params[:number].upcase)
 
     if @policy != nil
       redirect_to policy_path(@policy)

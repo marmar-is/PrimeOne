@@ -1,8 +1,8 @@
 <div class="overlay"></div>
 
-<form class="search-form" action="/policies/find" method="POST">
+<form class="search-form" action="/policies/find" method="GET">
   <div class="input-group">
-    <input type="text" name="policy_number" class="form-control search-input" placeholder="Search for a Policy Number...">
+    <input type="text" name="number" class="form-control search-input" placeholder="Search for a Policy Number...">
     <span class="input-group-btn">
       <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
     </span>
@@ -33,9 +33,9 @@
             <li>
               <!--<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>-->
             </li>
+            <%# data-toggle="tooltip" data-placement="bottom" data-title="Search" %>
             <li>
-              <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom"
-              data-title="Search" class="waves-effect waves-button waves-classic show-search">
+              <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search">
                 <i class="fa fa-search"></i>
                 </a>
             </li>

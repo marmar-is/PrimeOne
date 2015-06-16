@@ -4,7 +4,7 @@
   <%= stylesheet_link_tag 'x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'x-editable/inputs-ext/address/address.css', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'select2/css/select2.min.css', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', 'data-turbolinks-track' => true %>
+  <%#= stylesheet_link_tag 'bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'dropzone/dropzone.min.css', 'data-turbolinks-track' => true %>
   <style>
     .buttons {
@@ -65,14 +65,14 @@
           <div class="panel-body">
             <h2 class="no-m m-b-lg">Policy Information</h2>
             <hr>
-            <h2 class="client_code_display"><%= @policy.codecode %></h2>
+            <h2 class="client_code_display"><%= @policy.code %></h2>
 
             <div role="tabpanel">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">FIELDS</a></li>
-                <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">ENDORSEMENTS</a></li>
-                <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">REVIEW</a></li>
+                <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">Fields</a></li>
+                <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">Endorsements</a></li>
+                <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">Review</a></li>
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
@@ -116,7 +116,7 @@
     <%= javascript_include_tag 'x-editable/inputs-ext/typeaheadjs/typeaheadjs.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'x-editable/inputs-ext/address/address.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'select2/js/select2.full.min.js', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', 'data-turbolinks-track' => true %>
+    <%#= javascript_include_tag 'bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'pages/form-x-editable.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'dropzone/dropzone.min.js', 'data-turbolinks-track' => true %>
 
