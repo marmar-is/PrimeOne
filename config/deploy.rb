@@ -4,7 +4,7 @@ server '104.197.7.249', port: 22, roles: [:web, :app, :db], primary: true
 #set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
 set :repo_url,        'https://github.com/marmar-is/PrimeOne.git'
 set :application,     'PrimeOne'
-set :user,            'deploya'
+set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
