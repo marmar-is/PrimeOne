@@ -1,9 +1,10 @@
 # Change these
-server '104.197.7.249', port: 80, roles: [:web, :app, :db], primary: true
+server '104.197.7.249', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
+#set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
+set :repo_url,        'https://github.com/marmar-is/PrimeOne.git'
 set :application,     'PrimeOne'
-set :user,            'deploy'
+set :user,            'deploya'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
