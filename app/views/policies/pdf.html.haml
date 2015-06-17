@@ -535,9 +535,9 @@
                 .col-xs-1.text-center
                   %p.item 8, 9
                 .col-xs-5.text-center
-                  %p.item= @policy.gl.limit_occurence
+                  %p.item= number_to_currency(@policy.gl.limit_occurence, precision:0, format:'%n')
                 .col-xs-2.text-center
-                  %p.item= Included
+                  %p.item Included
               - a = [["Personal Injury Protection (PIP) (or equivalent No-Fault Coverage)", "Separately Stated in each PIP Endorsement(s) minus $"],
                 ["Added PIP (or equivalent No-Fault Coverage)", "Separately in each added PIP Endorsement(s)"],
                 ["Property Protection Insurance (PPI) (Michigan Only)", "Separately Stated in each PPI Endorsement minus Deductible for each Accident"],
