@@ -20,13 +20,6 @@ CSV.foreach('private/data/brokers.csv') do |r|
   )
 end
 
-# Preload Policy Container
-#CSV.foreach('private/data/container.csv') do |r|
-#  Policy.create!(number:r[0], code:r[1], name:r[2],
-#  effective: Date.strptime(r[3], '%m/%d/%Y')
-#  )
-#end
-
 # Load Policy Information
 CSV.foreach('private/data/policy.csv') do |r|
   Policy.create!(number:r[0], code:r[1], effective: Date.strptime(r[2], '%m/%d/%y'),
@@ -39,29 +32,23 @@ end
 
 # Load Auto Information into Policy
 CSV.foreach('private/data/auto.csv', { headers: true }) do |r|
-  if (r[1] != nil)
-    Policy.find_by_number(r[0]).create_auto(total: r[1])
-  end
+  Policy.find_by_number(r[0]).create_auto(total: r[1])
 end
 
 # Load Crime Information into Policy
 CSV.foreach('private/data/crime.csv', { headers: true }) do |r|
-  if (r[2] != nil)
-    Policy.find_by_number(r[0]).create_crime(total:r[1], ded:r[2],
-    limit_theft:r[3], limit_forgery:r[4], limit_money:r[5],
-    limit_outside_robbery:r[6], limit_safe_burglary:r[7], limit_premises_burglary:r[8]
-    )
-  end
+  Policy.find_by_number(r[0]).create_crime(total:r[1], ded:r[2],
+  limit_theft:r[3], limit_forgery:r[4], limit_money:r[5],
+  limit_outside_robbery:r[6], limit_safe_burglary:r[7], limit_premises_burglary:r[8]
+  )
 end
 
 # Load GL Information into Policy
 CSV.foreach('private/data/gl.csv', { headers: true }) do |r|
-  if (r[1] != nil)
-    Policy.find_by_number(r[0]).create_gl(total:r[1],
-    limit_genagg:r[2], limit_products:r[3], limit_occurence:r[4],
-    limit_injury:r[5], limit_fire:r[6], limit_medical:r[7]
-    )
-  end
+  Policy.find_by_number(r[0]).create_gl(total:r[1],
+  limit_genagg:r[2], limit_products:r[3], limit_occurence:r[4],
+  limit_injury:r[5], limit_fire:r[6], limit_medical:r[7]
+  )
 end
 
 # Load Location Information into Policy
@@ -84,7 +71,5 @@ end
 
 # Load Property Information into Policy
 CSV.foreach('private/data/property.csv', { headers: true }) do |r|
-  if (r[1] != nil)
-    Policy.find_by_number(r[0]).create_property(total:r[1])
-  end
+  Policy.find_by_number(r[0]).create_property(total:r[1])
 end
