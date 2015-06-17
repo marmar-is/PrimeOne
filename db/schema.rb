@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 20150616170301) do
     t.decimal  "limit_sign",     default: 0.0
     t.decimal  "limit_pumps",    default: 0.0
     t.decimal  "limit_canopies", default: 0.0
-    t.decimal  "indemnity",      default: 0.0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "location_id"
+    t.string   "indemnity"
   end
 
   add_index "buildings", ["location_id"], name: "index_buildings_on_location_id", using: :btree
