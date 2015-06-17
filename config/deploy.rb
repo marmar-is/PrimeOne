@@ -1,5 +1,5 @@
 # Change these
-server '104.197.7.249', port: your_port_num, roles: [:web, :app, :db], primary: true
+server '104.197.7.249', port: 80, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
 set :application,     'PrimeOne'
