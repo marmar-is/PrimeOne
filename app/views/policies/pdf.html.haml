@@ -141,9 +141,9 @@
                   %td.text-right -
                   %td.text-center -
               %tr
-                - if checkValid(@policy.locations.first.buildings.first.limt_bpp)
+                - if checkValid(@policy.locations.first.buildings.first.limit_bpp)
                   %td.text-left BPP
-                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limt_bpp, precision:0, format:'%n')
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_bpp, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
