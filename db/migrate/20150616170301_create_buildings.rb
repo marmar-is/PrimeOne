@@ -21,7 +21,7 @@ class CreateBuildings < ActiveRecord::Migration
       t.decimal :limit_sign, default: 0
       t.decimal :limit_pumps, default: 0
       t.decimal :limit_canopies, default: 0
-      t.decimal :indemnity, default: 0
+      t.string :indemnity, default: ""
 
       t.timestamps null: false
     end
