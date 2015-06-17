@@ -23,7 +23,7 @@
   .container
     .pull-left
       %p= "PO-#{name}-DEC (06/12)"
-    - if request.format == 'pdf'
+    - if true#request.format == 'pdf'
       .pull-right
         %p= "Page #{page}"
     -else

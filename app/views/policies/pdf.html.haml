@@ -124,12 +124,12 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limt_bldg)
                   %td.text-left Building
-                  %td.text-right= @policy.locations.first.buildings.first.limt_bldg
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limt_bldg, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins. to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= @policy.locations.first.buildings.first.ded
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -143,12 +143,12 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limt_bldg)
                   %td.text-left BPP
-                  %td.text-right= @policy.locations.first.buildings.first.limt_bldg
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limt_bldg, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= @policy.locations.first.buildings.first.ded
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -162,7 +162,7 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limit_earnings)
                   %td.text-left Earning
-                  %td.text-right= @policy.locations.first.buildings.first.limit_earnings
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_earnings, precision:0, format:'%n')
                   %td.text-center -
                   %td.text-center -
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
@@ -181,12 +181,12 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limit_sign)
                   %td.text-left Sign
-                  %td.text-right= @policy.locations.first.buildings.first.limit_sign
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_sign, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= @policy.locations.first.buildings.first.ded
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -200,12 +200,12 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limit_pumps)
                   %td.text-left Pumps
-                  %td.text-right= @policy.locations.first.buildings.first.limit_pumps
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_pumps, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= @policy.locations.first.buildings.first.ded
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -219,12 +219,12 @@
               %tr
                 - if checkValid(@policy.locations.first.buildings.first.limit_canopies)
                   %td.text-left Canopies
-                  %td.text-right= @policy.locations.first.buildings.first.limit_canopies
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_canopies, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.buildings.first.valuation
                   %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= @policy.locations.first.buildings.first.ded
+                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -237,7 +237,7 @@
                   %td.text-center -
             .container
               %p.pull-left MONTHLY LIMIT OF INDEMNITY
-              %p.pull-left.col-xs-offset-1= @policy.locations.first.buildings.first.indemnity
+              %p.pull-left.col-xs-offset-1= @policy.locations.first.buildings.first.indemnity.to_i
               %p.pull-right *Applies to Business Income Only * Ext. Period of Indemnity
           %section.section-small.descript
             .box
@@ -391,9 +391,9 @@
                   .col-xs-5
                     %p.item Employee Theft
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_theft
+                    %p.item= number_to_currency(@policy.crime.limit_theft, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -410,9 +410,9 @@
                   .col-xs-5
                     %p.item Forgery or Alteration
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_forgery
+                    %p.item= number_to_currency(@policy.crime.limit_forgery, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -429,9 +429,9 @@
                   .col-xs-5
                     %p.item Inside the Premises - Theft of Money and Securities
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_money
+                    %p.item= number_to_currency(@policy.crime.limit_money, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -448,9 +448,9 @@
                   .col-xs-5
                     %p.item Outside the Premises - Robbery
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_outside_robbery
+                    %p.item= number_to_currency(@policy.crime.limit_outside_robbery, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -467,9 +467,9 @@
                   .col-xs-5
                     %p.item Inside the Premises - Safe Burglary
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_safe_burglary
+                    %p.item= number_to_currency(@policy.crime.limit_safe_burglary, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
@@ -486,9 +486,9 @@
                   .col-xs-5
                     %p.item Premises Burglary
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.limit_premises_burglary
+                    %p.item= number_to_currency(@policy.crime.limit_premises_burglary, precision:0, format:'%n')
                   .col-xs-2.text-center
-                    %p.item= @policy.crime.ded
+                    %p.item= number_to_currency(@policy.crime.ded, precision:0, format:'%n')
                   .col-xs-2.col-xs-offset-1.text-center
                     %p.item Included
                 -else
