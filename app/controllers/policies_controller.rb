@@ -74,17 +74,18 @@ class PoliciesController < ApplicationController
   end
 
   def pdf
-    if user_signed_in? || params[:tok] == "WICKED_PDF"
-      @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
-      render :pdf, layout: 'pdf.html.erb'
-    else
-      redirect_to new_user_session_path
-    end
+    #if user_signed_in? || params[:tok] == "WICKED_PDF"
+    @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    render :pdf, layout: 'pdf.html.erb'
+    #else
+    #  redirect_to new_user_session_path
+    #end
   end
 
   # Determine which forms should be downloaded
   # GET /policies/1/generate
   def generate
+    @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
     pdf = WickedPdf.new.pdf_from_string(html)
 
