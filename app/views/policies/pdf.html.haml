@@ -201,11 +201,11 @@
                 - if checkValid(@policy.locations.first.buildings.first.limit_pumps)
                   %td.text-left Pumps
                   %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_pumps, precision:0, format:'%n')
-                  %td.text-center= @policy.locations.first.buildings.first.valuation
-                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+                  %td.text-center= "-"#@policy.locations.first.buildings.first.valuation
+                  %td.text-center= "-"#number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
+                  %td.text-right= "-"#number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
@@ -220,11 +220,11 @@
                 - if checkValid(@policy.locations.first.buildings.first.limit_canopies)
                   %td.text-left Canopies
                   %td.text-right= number_to_currency(@policy.locations.first.buildings.first.limit_canopies, precision:0, format:'%n')
-                  %td.text-center= @policy.locations.first.buildings.first.valuation
-                  %td.text-center= number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
+                  %td.text-center= "-"# @policy.locations.first.buildings.first.valuation
+                  %td.text-center= "-"# number_to_percentage((@policy.locations.first.buildings.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.buildings.first.loss_coverage
                   %td.text-left= @policy.locations.first.buildings.first.theft
-                  %td.text-right= number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
+                  %td.text-right= "-"# number_to_currency(@policy.locations.first.buildings.first.ded, precision:0, format:'%n')
                   %td.text-center Included
                 -else
                   %td.text-left -
