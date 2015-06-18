@@ -57,7 +57,7 @@ group :development, :test do
 end
 
 # Integration with heroku
-#gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: :production
 
 # Work with spreadsheets
 gem 'roo', '~> 2.0.0'
