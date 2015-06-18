@@ -25,7 +25,7 @@ CSV.foreach('private/data/policy.csv') do |r|
   Policy.create!(number:r[0], code:r[1], effective: Date.strptime(r[2], '%m/%d/%y'),
   expiry:Date.strptime(r[3], '%m/%d/%y'), name:r[5], org:r[6], dba:r[7],
   biztype:r[8], street:r[9], city:r[10], state:r[11], zip:r[12],
-  total_premium:(r[13] || 0),
+  total_premium:r[13],
   broker_id: Broker.find_by_code(r[4]).try(:id)
   )
 end
@@ -37,7 +37,7 @@ end
 
 # Load Crime Information into Policy
 CSV.foreach('private/data/crime.csv', { headers: true }) do |r|
-  Policy.find_by_number(r[0]).create_crime(total:(r[1] || 0), ded:r[2],
+  Policy.find_by_number(r[0]).create_crime(total:r[1], ded:r[2],
   limit_theft:r[3], limit_forgery:r[4], limit_money:r[5],
   limit_outside_robbery:r[6], limit_safe_burglary:r[7], limit_premises_burglary:r[8]
   )
@@ -45,7 +45,7 @@ end
 
 # Load GL Information into Policy
 CSV.foreach('private/data/gl.csv', { headers: true }) do |r|
-  Policy.find_by_number(r[0]).create_gl(total:(r[1] || 0),
+  Policy.find_by_number(r[0]).create_gl(total:r[1],
   limit_genagg:r[2], limit_products:r[3], limit_occurence:r[4],
   limit_injury:r[5], limit_fire:r[6], limit_medical:r[7]
   )
@@ -61,7 +61,7 @@ end
 # Load Location's Building Information into Policy
 CSV.foreach('private/data/building.csv', { headers: true }) do |r|
   Policy.find_by_number(r[0]).locations.first.buildings.create(number:r[1],
-  class_type:r[2], code:r[3], basis:r[4], basis_type:r[5], total:(r[6] || 0),
+  class_type:r[2], code:r[3], basis:r[4], basis_type:r[5], total:r[6],
   loss_coverage:r[7], enhancement:r[8], mechanical:r[9], theft:r[10],
   spoilage:r[11], coins:r[12], valuation:r[13], ded:r[14], limt_bldg:r[15],
   limit_bpp:r[16], limit_earnings:r[17], limit_sign:r[18], limit_pumps:r[19],
@@ -71,5 +71,5 @@ end
 
 # Load Property Information into Policy
 CSV.foreach('private/data/property.csv', { headers: true }) do |r|
-  Policy.find_by_number(r[0]).create_property(total:(r[1] || 0))
+  Policy.find_by_number(r[0]).create_property(total:r[1])
 end
