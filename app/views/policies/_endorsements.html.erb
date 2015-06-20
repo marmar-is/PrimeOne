@@ -42,7 +42,7 @@
       </td>
       <!-- General Liability -->
       <td width="20%" valign="top">
-        <% temp = 'CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12) ' %>
+        <% temp = 'CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12) ' %>
         <%= link_to update_forms_policy_path(@policy, group: 'gl_forms',
         forms: temp), method: :put, remote: true do %>
           <button type="button" class="btn btn-default <%= (@policy.gl_forms.include?(temp) ? 'active' : '') %>">
@@ -51,7 +51,7 @@
         <% end %>
         <p></p>
         <% temp = [  "CG1218(6/95)", "CG2011(1/96) ", "CG2018(11/85) ",
-          "CG2026(7/04) ", "CG2027(11/85) ", "CG2028(7/04) ", #"CG2144(7/98) ",
+          "CG2026(7/04) ", "CG2027(11/85) ", "CG2028(7/04) ", #"CG2144(7/98) ", "CG2231(7/98)",
           "PO-GL-7(5/12) ", "PO_GL_WIG(12/13) " ] %>
 
         <% temp.each do |f| %>

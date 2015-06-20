@@ -332,7 +332,7 @@
             .exposures-base
               .row
                 .col-xs-1
-                  %p.item.text-center= @policy.locations.first.number
+                  %p.item.text-center= @policy.locations.first.buildings.first.number
                 .col-xs-3
                   %p.item= @policy.locations.first.buildings.first.class_type
                 .col-xs-2
