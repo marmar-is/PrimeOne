@@ -54,18 +54,18 @@ end
 # Load Location Information into Policy
 CSV.foreach('private/data/location.csv', { headers: true }) do |r|
   Policy.find_by_number(r[0]).locations.create(number:r[1],
-  street:r[2], city:r[3], state:r[4], zip:r[5]
+  street:r[2], city:r[3], state:r[4], zip:r[5], total:r[6],
+  loss_coverage:r[7], enhancement:r[8], mechanical:r[9], theft:r[10],
+  spoilage:r[11], coins:r[12], valuation:r[13], ded:r[14], limt_bldg:r[15],
+  limit_bpp:r[16], limit_earnings:r[17], limit_sign:r[18], limit_pumps:r[19],
+  limit_canopies:r[20], indemnity:r[21]
   )
 end
 
 # Load Location's Building Information into Policy
 CSV.foreach('private/data/building.csv', { headers: true }) do |r|
   Policy.find_by_number(r[0]).locations.first.buildings.create(number:r[1],
-  class_type:r[2], code:r[3], basis:r[4], basis_type:r[5], total:r[6],
-  loss_coverage:r[7], enhancement:r[8], mechanical:r[9], theft:r[10],
-  spoilage:r[11], coins:r[12], valuation:r[13], ded:r[14], limt_bldg:r[15],
-  limit_bpp:r[16], limit_earnings:r[17], limit_sign:r[18], limit_pumps:r[19],
-  limit_canopies:r[20], indemnity:r[21]
+  class_type:r[2], code:r[3], basis:r[4], basis_type:r[5]
   )
 end
 
