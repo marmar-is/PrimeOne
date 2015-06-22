@@ -100,12 +100,12 @@
                 %th LOC
                 %th BLDG
                 %th Occupancy and Location
-              - @policy.locations.each do |loc|
-                - loc.buildings.each do |b|
-                  %tr
-                    %td= loc.number
-                    %td= b.number
-                    %td= loc.street + " " + loc.city + " " + loc.state + loc.zip + " occupied as " + b.class_type
+              - loc = @policy.locations.first #@policy.locations.each do |loc|
+              - b = loc.buildings.first #loc.buildings.each do |b|
+              %tr
+                %td= loc.number
+                %td= b.number
+                %td= loc.street + " " + loc.city + " " + loc.state + loc.zip + " occupied as " + b.class_type
           %section.section-small
             %table#exposures.table-striped
               %tr
