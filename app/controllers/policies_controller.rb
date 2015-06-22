@@ -104,8 +104,8 @@ class PoliciesController < ApplicationController
           f = f.gsub("/", "-")
           begin
             open('private/temp_pdf/temp.pdf', 'wb') do |file|
-              #file << open("http://storage.googleapis.com/endorsements/#{f}.pdf").read
-              file << open("private/forms/#{f}.pdf").read
+              file << open("http://storage.googleapis.com/endorsements/Static/#{f}.pdf").read
+              #file << open("private/forms/#{f}.pdf").read
             end
             @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
           rescue
