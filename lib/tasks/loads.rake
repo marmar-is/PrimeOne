@@ -30,7 +30,7 @@ namespace :load do
         p.property_forms +=  "CP1030(6/07) "
       end
 
-      if p.locations.first.limits_sign.to_i != 0 && !p.property_forms.include?("CP1440(6/07) ")
+      if p.locations.first.limit_sign.to_i != 0 && !p.property_forms.include?("CP1440(6/07) ")
         p.property_forms +=  "CP1440(6/07) "
       end
 
