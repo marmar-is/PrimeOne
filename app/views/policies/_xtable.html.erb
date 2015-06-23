@@ -82,14 +82,7 @@
         title: "Enter Insured Business Type", type: "text" } %>
       </td>
     </tr>
-    <tr>
-      <td>Insured Address</td>
-      <td>
-        <%= link_to @policy.street, "#", id:"street", class:"editable editable-click",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter Field", type: "text" } %>
-      </td>
-    </tr>
+
     <tr>
       <td>Insured City</td>
       <td>
@@ -116,6 +109,14 @@
     </tr>
 
     <%- if false %>
+    <tr>
+      <td>Insured Address</td>
+      <td>
+        <%= link_to @policy.street, "#", id:"street", class:"editable editable-click",
+        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        title: "Enter Field", type: "text" } %>
+      </td>
+    </tr>
     <tr>
       <td>LOCATION 1 STREET</td>
       <td>
