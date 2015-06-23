@@ -15,7 +15,7 @@
         %p.tag NAMED INSURED AND MAILING ADDRESS:
         .name-div
           %p.item= @policy.name
-          %p.item= (@policy.dba != @policy.name && checkValid(@policy.dba)) ? @policy.dba : ''
+          %p.item= (@policy.dba != @policy.name) ? @policy.dba : ''
         %p.item= @policy.street
         %p.item= @policy.city + ", " + @policy.state + " " + @policy.zip
 
