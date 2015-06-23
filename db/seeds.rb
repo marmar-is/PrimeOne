@@ -47,7 +47,7 @@ end
 CSV.foreach('private/data/gl.csv', { headers: true }) do |r|
   Policy.find_by_number(r[0]).create_gl(total:r[1],
   limit_genagg:r[2], limit_products:r[3], limit_occurence:r[4],
-  limit_injury:r[5], limit_fire:r[6], limit_medical:r[7]
+  limit_injury:r[5], limit_fire:r[6], limit_medical:r[7], water_gas_tank:r[8]
   )
 end
 
