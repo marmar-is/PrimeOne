@@ -42,29 +42,13 @@ ActiveRecord::Schema.define(version: 20150616170301) do
   add_index "brokers", ["code"], name: "index_brokers_on_code", unique: true, using: :btree
 
   create_table "buildings", force: :cascade do |t|
-    t.integer  "number",         default: 0
-    t.string   "class_type",     default: ""
-    t.string   "code",           default: ""
-    t.decimal  "basis",          default: 0.0
-    t.string   "basis_type",     default: ""
-    t.decimal  "total",          default: 0.0
-    t.string   "loss_coverage",  default: ""
-    t.string   "enhancement",    default: ""
-    t.string   "mechanical",     default: ""
-    t.string   "theft",          default: ""
-    t.string   "spoilage",       default: ""
-    t.decimal  "coins",          default: 0.0
-    t.string   "valuation",      default: ""
-    t.decimal  "ded",            default: 0.0
-    t.decimal  "limt_bldg",      default: 0.0
-    t.decimal  "limit_bpp",      default: 0.0
-    t.decimal  "limit_earnings", default: 0.0
-    t.decimal  "limit_sign",     default: 0.0
-    t.decimal  "limit_pumps",    default: 0.0
-    t.decimal  "limit_canopies", default: 0.0
-    t.string   "indemnity",      default: ""
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "number",      default: 0
+    t.string   "class_type",  default: ""
+    t.string   "code",        default: ""
+    t.decimal  "basis",       default: 0.0
+    t.string   "basis_type",  default: ""
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "location_id"
   end
 
@@ -94,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150616170301) do
     t.decimal  "limit_injury",    default: 0.0
     t.decimal  "limit_fire",      default: 0.0
     t.decimal  "limit_medical",   default: 0.0
+    t.string   "water_gas_tank",  default: ""
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "policy_id"
@@ -102,13 +87,29 @@ ActiveRecord::Schema.define(version: 20150616170301) do
   add_index "gls", ["policy_id"], name: "index_gls_on_policy_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "number",     default: 0
-    t.string   "street",     default: ""
-    t.string   "city",       default: ""
-    t.string   "state",      default: ""
-    t.string   "zip",        default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "number",         default: 0
+    t.string   "street",         default: ""
+    t.string   "city",           default: ""
+    t.string   "state",          default: ""
+    t.string   "zip",            default: ""
+    t.decimal  "total",          default: 0.0
+    t.string   "loss_coverage",  default: ""
+    t.string   "enhancement",    default: ""
+    t.string   "mechanical",     default: ""
+    t.string   "theft",          default: ""
+    t.string   "spoilage",       default: ""
+    t.decimal  "coins",          default: 0.0
+    t.string   "valuation",      default: ""
+    t.decimal  "ded",            default: 0.0
+    t.decimal  "limt_bldg",      default: 0.0
+    t.decimal  "limit_bpp",      default: 0.0
+    t.decimal  "limit_earnings", default: 0.0
+    t.decimal  "limit_sign",     default: 0.0
+    t.decimal  "limit_pumps",    default: 0.0
+    t.decimal  "limit_canopies", default: 0.0
+    t.string   "indemnity",      default: ""
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "policy_id"
   end
 
