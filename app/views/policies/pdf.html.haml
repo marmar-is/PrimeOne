@@ -300,7 +300,7 @@
                 .col-xs-6
                   %p.tag Address of all Premises you Own, Rent, or Occupy
             .limits-base
-              - @policy.property.locations.each do |loc|
+              - @policy.locations.each do |loc|
                 .row
                   .col-xs-1
                     %p.item.text-center= loc.number
