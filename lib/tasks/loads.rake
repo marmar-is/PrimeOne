@@ -22,13 +22,11 @@ namespace :load do
         p.property_forms +=  "CP0440(6/95) "
       end
 
-      if p.locations.first.loss_coverage == nil
-        # do nothing
-      elsif p.locations.first.loss_coverage.downcase == "basic" && !p.property_forms.include?("CP1010(6/07) ")
+      if p.locations.first.loss_coverage.try(:downcase) == "basic" && !p.property_forms.include?("CP1010(6/07) ")
         p.property_forms +=  "CP1010(6/07) "
-      elsif p.locations.first.loss_coverage.downcase == "broad" && !p.property_forms.include?("CP1020(6/07) ")
+      elsif p.locations.first.loss_coverage.try(:downcase) == "broad" && !p.property_forms.include?("CP1020(6/07) ")
         p.property_forms +=  "CP1020(6/07) "
-      elsif p.locations.first.loss_coverage.downcase == "special" && !p.property_forms.include?("CP1030(6/07) ")
+      elsif p.locations.first.loss_coverage.try(:downcase) == "special" && !p.property_forms.include?("CP1030(6/07) ")
         p.property_forms +=  "CP1030(6/07) "
       end
 
@@ -78,7 +76,7 @@ namespace :load do
         p.gl_forms +=  "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) "
       end
 
-      if p.gl.water_gas_tank.downcase == "yes" && !p.gl_forms.include?("PL-GL-WIG(12/13) ")
+      if p.gl.water_gas_tank.try(:downcase) == "yes" && !p.gl_forms.include?("PL-GL-WIG(12/13) ")
         p.gl_forms +=  "PL-GL-WIG(12/13) "
       end
 
