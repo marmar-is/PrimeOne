@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150616170301) do
     t.decimal  "limit_injury",    default: 0.0
     t.decimal  "limit_fire",      default: 0.0
     t.decimal  "limit_medical",   default: 0.0
+    t.string   "water_gas_tank",  default: ""
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "policy_id"
