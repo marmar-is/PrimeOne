@@ -76,10 +76,9 @@ namespace :load do
         @policy.gl_forms +=  "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-PRP-GL-1(8/13) PO-GL-5(5/12) PO-GL-6(5/12) "
       end
 
-      #if @policy.EA != "$-" && @policy.EA != "-" && @policy.EA != "0" && @policy.EA != "$0.00" && !@policy.EA.blank? &&
-      #  !@policy.gl_forms.include?("PL-GL-WIG(12/13) ")
-      #  @policy.gl_forms +=  "PL-GL-WIG(12/13) "
-      #end
+      if @policy.gl.water_gas_tank.downcase == "yes" && !@policy.gl_forms.include?("PL-GL-WIG(12/13) ")
+        @policy.gl_forms +=  "PL-GL-WIG(12/13) "
+      end
 
       # auto
       if @policy.auto.total != 0 && !@policy.auto_forms.include?("CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) ")
