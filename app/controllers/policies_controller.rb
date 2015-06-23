@@ -98,9 +98,9 @@ class PoliciesController < ApplicationController
 
     form_groups = [:forms, :property_forms, :gl_forms, :crime_forms, :auto_forms]
 
-    all_fills = [ "CG1218(6-95).pdf ", "CG2011(1-96).pdf ", "CG2018(11-85).pdf ",
-      "CG2026(7-04).pdf ", "CG2028(7-04).pdf ", "CG2144(7-98).pdf ",
-      "CP0440(6-95).pdf ", "IL0415(4-98).pdf " ]
+    all_fills = [ "CG1218(6-95).pdf", "CG2011(1-96).pdf", "CG2018(11-85).pdf",
+      "CG2026(7-04).pdf", "CG2028(7-04).pdf", "CG2144(7-98).pdf",
+      "CP0440(6-95).pdf", "IL0415(4-98).pdf" ]
 
     active_fills = []
 
@@ -128,7 +128,7 @@ class PoliciesController < ApplicationController
     active_fills.each do |f|
       begin
         open('private/temp_pdf/temp.pdf', 'wb') do |file|
-          file << open("http://storage.googleapis.com/endorsements/Static/#{f}.pdf").read
+          file << open("http://storage.googleapis.com/endorsements/Static/#{f}").read
           #file << open("private/forms/#{f}.pdf").read
         end
         @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
