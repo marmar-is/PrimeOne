@@ -22,7 +22,9 @@ namespace :load do
         p.property_forms +=  "CP0440(6/95) "
       end
 
-      if p.locations.first.loss_coverage.downcase == "basic" && !p.property_forms.include?("CP1010(6/07) ")
+      if p.locations.first.loss_coverage == nil
+        # do nothing
+      elsif p.locations.first.loss_coverage.downcase == "basic" && !p.property_forms.include?("CP1010(6/07) ")
         p.property_forms +=  "CP1010(6/07) "
       elsif p.locations.first.loss_coverage.downcase == "broad" && !p.property_forms.include?("CP1020(6/07) ")
         p.property_forms +=  "CP1020(6/07) "
