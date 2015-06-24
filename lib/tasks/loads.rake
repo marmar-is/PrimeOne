@@ -5,6 +5,13 @@ namespace :load do
   desc 'Add mandatory forms retroactively'
   task :forms => :environment do
     Policy.all.each do |p|
+      # reset forms
+      p.forms = ""
+      p.property_forms = ""
+      p.gl_forms = ""
+      p.auto_forms = ""
+      p.crime_forms = ""
+
       if !p.forms.include?('IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) ')
         p.forms += 'IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) '
       end
