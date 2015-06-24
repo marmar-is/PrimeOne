@@ -31,8 +31,8 @@
         <% end %>
         <p></p>
         <% temp = [ "CP0030(6/07) ", "CP1010(6/07) ", "CP1020(6/07) ",
-          "CP1030(6/07) ", "CP1218(6/95) ", "IL0415(4/98) ",
-          "PO-PRP-3(12/13) ", "EB0020(8/08) ", "EB0108(9/07) ", "CP1218(6/95)	", "CP0440(6/95) " ] %>
+          "CP1030(6/07) ", "CP1218(6/95) ", "IL0415(4/98) ", #"CP1440(6/07) ",
+          "PO-PRP-3(12/13) ", "EB0020(8/08) ", "EB0108(9/07) ", "CP0440(6/95) " ] %>
         <% temp.each do |f| %>
           <%= link_to update_forms_policy_path(@policy, group: 'property_forms',
           forms: f), method: :put, remote: true do %>

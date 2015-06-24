@@ -98,7 +98,7 @@ class PoliciesController < ApplicationController
 
     form_groups = [:forms, :property_forms, :gl_forms, :crime_forms, :auto_forms]
 
-    all_fills = [ "CG1218(6-95).pdf", "CG2011(1-96).pdf", "CG2018(11-85).pdf",
+    all_fills = [ "CP1218(6-95).pdf", "CG2011(1-96).pdf", "CG2018(11-85).pdf",
       "CG2026(7-04).pdf", "CG2028(7-04).pdf", "CG2144(7-98).pdf",
       "CP0440(6-95).pdf", "IL0415(4-98).pdf" ]
 
@@ -136,7 +136,7 @@ class PoliciesController < ApplicationController
       end
     end
 
-    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}.pdf", disposition: 'inline', format: 'pdf'
+    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
   def update_forms
@@ -244,8 +244,8 @@ class PoliciesController < ApplicationController
         p.gl_forms +=  "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) "
       end
 
-      if p.gl.water_gas_tank.try(:downcase) == "yes" && !p.gl_forms.include?("PL-GL-WIG(12/13) ")
-        p.gl_forms +=  "PL-GL-WIG(12/13) "
+      if p.gl.water_gas_tank.try(:downcase) == "yes" && !p.gl_forms.include?("PO-GL-WIG(12/13) ")
+        p.gl_forms +=  "PO-GL-WIG(12/13) "
       end
 
       # auto
