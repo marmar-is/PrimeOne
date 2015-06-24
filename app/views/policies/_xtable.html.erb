@@ -87,7 +87,7 @@
       <td>
         <%= link_to "#{@policy.street} <br /> #{@policy.city}, #{@policy.state}. #{@policy.zip}".html_safe(),
         '#', id:'address', class:'editable editable-click',
-        data: { url:'policies/#{@policy.id}', pk:@policy.id, title: "Enter Address",
+        data: { url:"/policies/#{@policy.id}", pk:"#{@policy.id}", title: "Enter Address",
         type:'address', value:{ street:@policy.street, city:@policy.city,
           state:@policy.state, zip:@policy.zip } } %>
       </td>
@@ -95,14 +95,6 @@
 
 
     <%- if false %>
-    <tr>
-      <td>Insured Address</td>
-      <td>
-        <%= link_to @policy.street, "#", id:"street", class:"editable editable-click",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter Field", type: "text" } %>
-      </td>
-    </tr>
     <tr>
       <td>LOCATION 1 STREET</td>
       <td>

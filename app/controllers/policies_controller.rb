@@ -133,7 +133,12 @@ class PoliciesController < ApplicationController
       end
     end
 
-    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
+    open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
+      file << @pdfForms.to_pdf
+    end
+    
+    redirect_to @policy
+    #send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
   def update_forms
