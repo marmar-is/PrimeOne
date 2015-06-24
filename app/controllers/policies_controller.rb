@@ -11,7 +11,6 @@ class PoliciesController < ApplicationController
   # GET /policies/1.json
   def show
     @title = @policy.number
-
   end
 
   # GET /policies/new
@@ -44,7 +43,8 @@ class PoliciesController < ApplicationController
   def update
     respond_to do |format|
       if @policy.update(policy_params)
-        format.html { redirect_to @policy, notice: 'Policy was successfully updated.' }
+        #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully updated.' }
+        format.html { render :show, notice: 'Policy was successfully updated.' }
         format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
@@ -63,6 +63,7 @@ class PoliciesController < ApplicationController
     end
   end
 
+  # go to the designated policy
   def find
     @policy = Policy.find_by_number(params[:number].upcase)
 
@@ -74,12 +75,8 @@ class PoliciesController < ApplicationController
   end
 
   def pdf
-    #if user_signed_in? || params[:tok] == "WICKED_PDF"
     @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     render :pdf, layout: 'pdf.html.erb'
-    #else
-    #  redirect_to new_user_session_path
-    #end
   end
 
   # Determine which forms should be downloaded

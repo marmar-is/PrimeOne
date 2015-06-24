@@ -37,7 +37,7 @@
       <td>Effective Date</td>
       <td>
         <%= link_to @policy.effective.strftime("%_m/%d/%Y"), "#", id:'effective',
-        class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+        class: "edate editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Effective Date", type: "combodate",
         value: "#{@policy.effective}" } %></td>
     </tr>
@@ -45,7 +45,7 @@
       <td>Expiration Date</td>
       <td>
         <%= link_to @policy.expiry.strftime("%_m/%d/%Y"), "#", id:'expiry',
-        class: "editable editable-click", data: { url: "/policies/#{@policy.id}",
+        class: "edate editable editable-click", data: { url: "/policies/#{@policy.id}",
         pk: "#{@policy.id}", title: "Select Expiration Date", type: "combodate",
         value: "#{@policy.expiry}" } %>
       </td>
@@ -83,29 +83,16 @@
       </td>
     </tr>
     <tr>
-      <td>Insured City</td>
+      <td>Insured Address</td>
       <td>
-        <%= link_to @policy.city, "#", id:"city", class:"editable editable-click",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter Field", type: "text" } %>
+        <%= link_to "#{@policy.street} <br /> #{@policy.city}, #{@policy.state}. #{@policy.zip}".html_safe(),
+        '#', id:'address', class:'editable editable-click',
+        data: { url:'policies/#{@policy.id}', pk:@policy.id, title: "Enter Address",
+        type:'address', value:{ street:@policy.street, city:@policy.city,
+          state:@policy.state, zip:@policy.zip } } %>
       </td>
     </tr>
-    <tr>
-      <td>Insured State</td>
-      <td>
-        <%= link_to @policy.state, "#", id:"state", class:"editable editable-click",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter Field", type: "text" } %>
-      </td>
-    </tr>
-    <tr>
-      <td>Insured Zip</td>
-      <td>
-        <%= link_to @policy.zip, "#", id:"zip", class:"editable editable-click",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
-        title: "Enter Field", type: "text" } %>
-      </td>
-    </tr>
+
 
     <%- if false %>
     <tr>

@@ -2,7 +2,7 @@ $(function(){
   //defaults
   $.fn.editable.defaults.url = '/policy';
   $.fn.editable.defaults.mode = 'inline';
-  $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
   //editables
   $('#policy_number').editable({
@@ -54,7 +54,7 @@ $(function(){
     ],
   });
 
-  $('#C').editable({
+  $('.edate').editable({
     params: function(params) {
       var data = {};
       data['policy'] = {};
@@ -64,26 +64,7 @@ $(function(){
       return data;
     },
 
-    viewformat: 'MM/DD/YYYY',
-    template: 'MMM / D / YYYY',
-    combodate: {
-      minYear: 1950,
-      maxYear: 2050,
-      minuteStep: 1
-    }
-  });
-
-  $('#B').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy'][params.name] = params.value
-      data['id'] = params.pk;
-
-      return data;
-    },
-
-    viewformat: 'MM/DD/YYYY',
+    viewformat: 'M/DD/YYYY',
     template: 'MMM / D / YYYY',
     combodate: {
       minYear: 1950,
@@ -123,8 +104,6 @@ $(function(){
   "<% Broker.select([:id, :name]).each do |b| %>"
     brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
   "<% end %>"
-
-  //var brokers = [ {id: 1, text: "Action GroupInc dba AG Ins Agy"}, {id: 2, text: "Al Bourdeau Insurance Svcs,Inc"}, {id: 3, text: "American Insurance Agency Grp"}, {id: 4, text: "Anchor Insurance Group Inc."}, {id: 5, text: "Ann Arbor Insurance Assoc.,Inc"}, {id: 6, text: "ATB Insurance Agency"}, {id: 7, text: "Bencivenga Insurance"}, {id: 8, text: "Brown-Pixley Insurance Agency,"}, {id: 9, text: "Cantor Insurance Group, LLC"}, {id: 10, text: "Creative Insurance Solutions"}, {id: 11, text: "Custom Insurance Agency"}, {id: 12, text: "DDI Insurance Agency, LLC"}, {id: 13, text: "Fawaz Insurance Agency Inc."}, {id: 14, text: "Frank Haddad Insurance Agency"}, {id: 15, text: "Great Lakes Ins Agency Assoc."}, {id: 16, text: "HAD Insurance Associates"}, {id: 17, text: "Hallmark Agency, Inc."}, {id: 18, text: "Hallmark Associates Insurance"}, {id: 19, text: "Harbor Country Insurance Agy"}, {id: 20, text: "Independent Insurance Services"}, {id: 21, text: "Insurance Advisors Inc."}, {id: 22, text: "Insurance Providers of Michign"}, {id: 23, text: "JPS Insurance Agency LLC"}, {id: 24, text: "Kaplani Insurance Agency, Inc"}, {id: 25, text: "Kejbou Insurance Agency Inc."}, {id: 26, text: "Lakepointe Ins. Agency, Inc."}, {id: 27, text: "Lind and Lind Insurance Agency"}, {id: 28, text: "Macomb-Gerlach Agency, Inc."}, {id: 29, text: "Metro Financial Services LLC"}, {id: 30, text: "Michigan Insurance Group"}, {id: 31, text: "Millennium Insurance & Invest"}, {id: 32, text: "Morris Insurance Group Inc"}, {id: 33, text: "Mourer Foster Inc."}, {id: 34, text: "OakPointe Insurance Agency Inc"}, {id: 35, text: "Potter & Roose Ins. Flint"}, {id: 36, text: "Primary Insurance Agency"}, {id: 37, text: "Rye Agency, Inc."}, {id: 38, text: "Shears II Insurance Agcy, Inc."}, {id: 39, text: "Shoemaker Group Inc"}, {id: 40, text: "Signature Insurance"}, {id: 41, text: "Stu Garthe Agency, LLC"}, {id: 42, text: "T.A. Conrad Agency, Inc."}, {id: 43, text: "Tabak Insurance Agency PLLC"}, {id: 44, text: "Tait Insurance Agency, Inc."}, {id: 45, text: "Upper Penisula Ins. Agency Inc"}, {id: 46, text: "Viking Insurance Agency"}, {id: 47, text: "Walker Group"}];
 
   $('#broker_id').editable({
     params: function(params) {
@@ -383,7 +362,7 @@ $(function(){
       data['policy'][params.name] = params.value
       data['id'] = params.pk;
 
-      console.log(data);
+      //console.log(data);
 
       return data;
     },
