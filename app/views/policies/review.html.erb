@@ -48,7 +48,7 @@
                     <th>Effective Date</th>
                     <th>Status</th>
                     <th>Review</th>
-                    <th>Generate</th>
+                    <th>View Policy</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -71,7 +71,7 @@
                       </td>
                       <td>
                         <div class="review-button">
-                          <%= link_to generate_policy_path(policy), 'data-no-turbolink' => true  do %>
+                          <%= link_to viewPDF_policy_path(policy), 'data-no-turbolink' => true  do %>
                             <button class="btn btn-default">
                               Generate
                             </button>

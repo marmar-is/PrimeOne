@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf, :generate, :update_forms, :populate]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf, :generate, :update_forms, :populate, :fillForm, :viewPDF]
 
   # GET /policies
   # GET /policies.json
@@ -146,13 +146,17 @@ class PoliciesController < ApplicationController
     active_fills.each do |f|
       fields = {}
       pdftk.get_field_names("private/fillable/#{f}").each do |n|
-        fields[n] = params[n]
+        if n == "POLICYNUMBER"
+          fields[n] = @policy.number
+        else
+          fields[n] = params[n]
+        end
       end
-      puts fields
+      #puts fields
 
-      #pdftk.fill_form "private/fillable/#{f}", 'private/temp_pdf/output.pdf', fields, flatten: true
+      pdftk.fill_form "private/fillable/#{f}", 'private/temp_pdf/output.pdf', fields, flatten: true
 
-      #@pdfForms << CombinePDF.load("private/temp_pdf/output.pdf")
+      @pdfForms << CombinePDF.load("private/temp_pdf/output.pdf")
       #begin
       #  open('private/temp_pdf/temp.pdf', 'wb') do |file|
       #    file << open("http://storage.googleapis.com/endorsements/Static/#{f}").read
@@ -163,17 +167,20 @@ class PoliciesController < ApplicationController
       #end
     end
 
-    #open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
-      #f << @pdfForms.to_pdf
-    #end
+    open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
+      f << @pdfForms.to_pdf
+    end
 
     #redirect_to @policy
     #send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
 
+    @policy.update(status: 'GENERATED') # policy needs review
 
+    redirect_to @policy
+  end
 
-
-    redirect_to policy_path(Policy.find(4))
+  def viewPDF
+    send_file "generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
   def fillFormBAD
