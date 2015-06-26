@@ -2,6 +2,7 @@
 <%= content_for :head do %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables.css', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'x-editable/bootstrap3-editable/css/bootstrap-editable.css', 'data-turbolinks-track' => true %>
 <% end %>
 
 <div class="page-inner" style="min-height:50px !important">
@@ -61,8 +62,7 @@
                           <%= link_to (policy.comment == "" ? "No Comments" : policy.comment), "#",
                           id:"comment", class:"editable editable-click",
                           data: { url: "/policies/#{policy.id}", pk: "#{policy.id}",
-                          title: "Enter comment", type: "text" } %>
-
+                          title: "Enter comment", type: "textarea" } %>
 
                           <!--<input type="text" class="form-control" aria-label="SDFSDFS">-->
                           <div class="input-group-btn">
@@ -92,7 +92,8 @@
 <!-- Javascripts -->
 <%= content_for :js_includes do %>
   <%#= javascript_include_tag 'moment/moment.js', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'pages/form-x-editable.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'x-editable/bootstrap3-editable/js/bootstrap-editable.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'pages/form-x-editable.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'pages/table-data.js', 'data-turbolinks-track' => true %>
 <% end %>

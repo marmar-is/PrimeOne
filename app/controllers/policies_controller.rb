@@ -196,7 +196,8 @@ class PoliciesController < ApplicationController
     def policy_params
       params.require(:policy).permit(:number, :status, :code, :name, :effective,
       :broker_id, :forms, :property_forms, :gl_forms, :crime_forms, :auto_forms,
-      :expiry, :org, :dba, :biztype, :street, :city, :state, :zip, :total_premium
+      :expiry, :org, :dba, :biztype, :street, :city, :state, :zip, :total_premium,
+      :comment
       )
     end
 
