@@ -15,12 +15,14 @@ Rails.application.routes.draw do
     member do
       get 'pdf'
       get 'generate'
+      get 'fillForm'
       put 'update_forms'
       put 'populate'
     end
 
     collection do
       get 'find'
+      get 'review'
     end
   end
 

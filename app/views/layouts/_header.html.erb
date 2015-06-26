@@ -63,6 +63,12 @@
             <p>Policies</p>
           <% end %>
         </li>
+        <li class="<%= 'active' if (controller_name == 'policies' && action_name == 'review')%>">
+          <%= link_to review_policies_path do %>
+            <span class="menu-icon fa fa-check-square"></span>
+            <p>Review</p>
+          <% end %>
+        </li>
         <li class="<%= 'active' if controller_name == 'quotes'%>">
           <%= link_to "#" do %>
             <span class="menu-icon fa fa-briefcase"></span>

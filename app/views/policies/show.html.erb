@@ -98,6 +98,13 @@
                         </button>
                       <% end %>
                     </div>
+                    <div class="review-button">
+                      <%= link_to fillForm_policy_path(@policy), 'data-no-turbolink' => true  do %>
+                        <button id='fill' class="btn btn-prime-gold" style="width:134px;">
+                          Generate
+                        </button>
+                      <% end %>
+                    </div>
                   </div>
                 </div><!-- tabpanel tab3 -->
               </div>
@@ -123,6 +130,29 @@
     <script>
       $('button.btn').click(function(){
         $(this).toggleClass('active');
+      });
+
+      $('#fill').click(function(){
+        /*var request = new XMLHttpRequest();
+        //request.onload = callback;
+        request.open("post", "https://www.pdfprocess.datalogics.com/api/actions/render/pages", true);
+        //console.log(request);
+
+        var formData = new FormData();
+        formData.append("application", "{\"id\":\"50b3c3f6\", \"key\":\"0c6061fd77d7c26c640ca99331f44897\"}");
+
+        formData.append("input", "@hello_world.pdf");
+
+        formData.append("output", "flatten.pdf");
+
+        formData.append("options", "{\"outputFormat\": \"jpg\", \"printPreview\": true}");
+
+        request.send(formData);*/
+        //requestContent.add(new Windows.Web.Http.HttpStringContent(
+        //"{\"id\":\"" + appID + "\", \"key\":\"" + appKey + "\"}"), "application");
+        //var formData = new FormData();
+        //formData.append('my_data', 'back to basics')
+        //request.send(formData);
       });
     </script>
   <% end %>

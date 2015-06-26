@@ -1,0 +1,91 @@
+<%# Policies Review Index %>
+<%= content_for :head do %>
+  <%= stylesheet_link_tag 'datatables/css/jquery.datatables.css', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'datatables/css/jquery.datatables_themeroller.css', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="page-inner" style="min-height:50px !important">
+  <div class="page-breadcrumb">
+    <ol class="breadcrumb container">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Policies", policies_path %></li>
+      <li><%= link_to "Review", review_policies_path, class:'active' %></li>
+    </ol>
+  </div>
+  <div class="page-title">
+    <div class="container">
+      <h3>Review</h3>
+    </div>
+  </div>
+
+  <div id="main-wrapper" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading clearfix">
+            <h4 class="panel-title">Review Policy Database</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
+                <thead>
+                  <tr>
+                    <th>Policy Number</th>
+                    <th>Client Code</th>
+                    <th>Insured Name</th>
+                    <th>Effective Date</th>
+                    <th>Status</th>
+                    <th>Review</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Policy Number</th>
+                    <th>Client Code</th>
+                    <th>Insured Name</th>
+                    <th>Effective Date</th>
+                    <th>Status</th>
+                    <th>Review</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <% @policies.each do |policy| %>
+                    <tr>
+                      <td><%= link_to policy.number, policy_path(policy) %></td>
+                      <td><%= policy.code %></td>
+                      <td><%= policy.name %></td>
+                      <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
+                      <td><%= policy.status %></td>
+                      <td>
+                        <div class="input-group">
+                          <input type="text" class="form-control" aria-label="SDFSDFS">
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              CONDITION
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                              <li><a href="#">PERFECT</a></li>
+                              <li><a href="#">IMPERFECT</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">ISSUE POLICY</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- Row -->
+    </div><!-- Main Wrapper -->
+
+<!-- Javascripts -->
+<%= content_for :js_includes do %>
+  <%#= javascript_include_tag 'moment/moment.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'pages/table-data.js', 'data-turbolinks-track' => true %>
+<% end %>
