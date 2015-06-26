@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
   def set_tasks
     if user_signed_in?
-      @tasks = Tasks.first(5)
+      @tasks = Task.first(5)
     end
   end
 end

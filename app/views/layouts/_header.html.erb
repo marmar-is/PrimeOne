@@ -42,34 +42,9 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                   <i class="fa fa-bell"></i>
-                  <span class="badge badge-success pull-right"><%= @tasks.count != 0 ? @tasks.count : '' %></span>
+                  <span class="badge badge-success pull-right"><%#= @tasks.count != 0 ? @tasks.count : '' %></span>
                 </a>
-                <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
-                  <% if @tasks.count == 0 -%>
-                    <li>
-                      <p class="drop-title">You have no unseen tasks !</p>
-                    </li>
-                  <% else %>
-                    <li>
-                      <p class="drop-title">You have <%= @tasks.count %> unseen tasks !</p>
-                    </li>
-                    <li class="dropdown-menu-list slimscroll tasks">
-                        <ul class="list-unstyled">
-                          <% @tasks.each do |task| %>
-                            <li>
-                              <%= link_to policy_path(Policy.find_by_number(task.name)) do %>
-                                <div class="task-icon badge badge-success">
-                                  <i class="fa fa-archive"></i>
-                                </div>
-                                <span class="badge badge-roundless badge-default pull-right"><%= time_ago_in_words(task.created_at) %></span>
-                                <p class="task-details"><%= "#{task.name} is now #{task.status}" %></p>
-                              <% end %>
-                            </li>
-                          <% end %>
-                        </ul>
-                    </li>
-                  <% end %>
-                </ul>
+                <%= render partial: 'layouts/tasks' %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete,

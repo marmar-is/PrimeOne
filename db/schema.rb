@@ -158,10 +158,7 @@ ActiveRecord::Schema.define(version: 20150626012304) do
     t.boolean  "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
   end
-
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -194,5 +191,4 @@ ActiveRecord::Schema.define(version: 20150626012304) do
   add_foreign_key "locations", "policies"
   add_foreign_key "policies", "brokers"
   add_foreign_key "properties", "policies"
-  add_foreign_key "tasks", "users"
 end
