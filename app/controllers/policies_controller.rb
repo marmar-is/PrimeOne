@@ -94,11 +94,10 @@ class PoliciesController < ApplicationController
   end
 
   def fillFormBAD
-    #json = "[{
-    #  \"LOSS PAYABLE\":\"ppk0001000\"
-    #}]"
-    json = "A\nPPK"
-    open('private/fillable/input.csv', 'wb') do |f|
+    json = "[{
+      \"LOSS PAYABLE\":\"ppk0001000\"
+    }]"
+    open('private/fillable/input.json', 'wb') do |f|
       f << json
     end
     #{}`curl https://pdfprocess.datalogics.com/api/actions/fill/form --insecure --form 'application={"id": "50b3c3f6", "key": "0c6061fd77d7c26c640ca99331f44897"}' --form input=@private/fillable/CG1218_6-95.pdf --form filename=@input.json --output flattened.pdf`
