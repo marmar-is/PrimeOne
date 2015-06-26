@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-#require 'pdf_ravager'
+#require 'pdf_forms'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

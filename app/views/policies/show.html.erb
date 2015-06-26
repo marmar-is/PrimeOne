@@ -83,6 +83,8 @@
                   <%= render partial: 'endorsements' %>
                 </div><!-- tabpanel tab2 -->
                 <div role="tabpanel" class="tab-pane fade in" id="tab3">
+                  <%= render partial: 'wizard' %>
+                  <%- if false %>
                   <div class="text-center">
                     <div class="review-button">
                       <%= link_to pdf_policy_path(@policy) do %>
@@ -98,14 +100,15 @@
                         </button>
                       <% end %>
                     </div>
-                    <!--<div class="review-button">
-                      <%#= link_to fillForm_policy_path(@policy), 'data-no-turbolink' => true  do %>
+                    <div class="review-button">
+                      <%= link_to fillForm_policy_path(@policy), 'data-no-turbolink' => true  do %>
                         <button id='fill' class="btn btn-prime-gold" style="width:134px;">
                           Generate
                         </button>
-                      <%# end %>
-                    </div>-->
+                      <% end %>
+                    </div>
                   </div>
+                  <% end -%>
                 </div><!-- tabpanel tab3 -->
               </div>
             </div>
@@ -127,6 +130,12 @@
     <%= javascript_include_tag 'pages/form-x-editable.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'dropzone/dropzone.min.js', 'data-turbolinks-track' => true %>
 
+    <%= javascript_include_tag 'dropzone/dropzone.min.js', 'data-turbolinks-track' => true %>
+
+    <%= javascript_include_tag 'twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'jquery-validation/jquery.validate.min.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'pages/form-wizard.js', 'data-turbolinks-track' => true %>
+    
     <script>
       $('button.btn').click(function(){
         $(this).toggleClass('active');

@@ -55,6 +55,10 @@ select2/js/select2.full.min.js
 
 pages/form-x-editable.js
 dropzone/dropzone.min.js
+
+twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js
+jquery-validation/jquery.validate.min.js
+pages/form-wizard.js
 )
 #bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css
 #bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
