@@ -141,7 +141,8 @@ class PoliciesController < ApplicationController
       end
     end
 
-    pdftk = PdfForms.new('/usr/local/bin/pdftk')
+    pdftk = PdfForms.new('/usr/local/bin/pdftk') if Rails.env.development?
+    pdftk = PdfForms.new('/app/vendor/pdftk/bin/pdftk') if Rails.env.production?
 
     active_fills.each do |f|
       fields = {}
