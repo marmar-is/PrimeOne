@@ -8,6 +8,6 @@ class CreateTasks < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_reference :tasks, :policy, index: true, foreign_key: true
+    #add_reference :tasks, :user, index: true, foreign_key: true
   end
 end

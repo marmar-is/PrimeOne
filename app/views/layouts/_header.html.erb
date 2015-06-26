@@ -57,7 +57,7 @@
                         <ul class="list-unstyled">
                           <% @tasks.each do |task| %>
                             <li>
-                              <%= link_to seen_task_path(policy: Policy.find_by_number(task.name)) do %>
+                              <%= link_to policy_path(Policy.find_by_number(task.name)) do %>
                                 <div class="task-icon badge badge-success">
                                   <i class="fa fa-archive"></i>
                                 </div>

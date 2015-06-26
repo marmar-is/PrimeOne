@@ -23,8 +23,8 @@ class Policy < ActiveRecord::Base
 
   private
     def notify_status
-      if self.status_changed? && current_user
-        Task.create(name: self.number, status: self.status, user: current_user.id)
+      if self.status_changed?
+        Task.create(name: self.number, status: self.status)
       end
     end
 end
