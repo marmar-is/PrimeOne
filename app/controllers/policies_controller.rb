@@ -84,6 +84,16 @@ class PoliciesController < ApplicationController
   end
 
   def fillForm
+    data = { 'POLICY NUMBER': 'PPK0001000' }
+
+    template = PDFRavager::Template.new do |p|
+      p.text      'POLICY NUMBER', data['POLICY NUMBER']
+    end
+
+    template.ravage '/private/fillable/CG1218_6-95.pdf', out_file: '/private/fillable/output.pdf'
+  end
+
+  def fillFormBAD
     #json = "[{
     #  \"LOSS PAYABLE\":\"ppk0001000\"
     #}]"
