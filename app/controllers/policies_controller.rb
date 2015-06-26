@@ -281,7 +281,7 @@ class PoliciesController < ApplicationController
       @policy.save
 
       format.html { render :show }
-      format.js { render :show }
+      format.js
     end
   end
 
