@@ -2,7 +2,7 @@
   <ul class="nav nav-tabs" role="tablist">
 
     <%- if @policy.property_forms.include?("CP0440(6/95)") %>
-    <li role="presentation" class="active">
+    <li role="presentation">
       <a href="#taba" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>CP0440</a>
     </li>
     <% end -%>
@@ -50,7 +50,7 @@
     </li>
     <% end -%>
 
-    <li role="presentation">
+    <li role="presentation" class="active">
       <a href="#tabj" data-toggle="tab"><i class="fa fa-check-circle m-r-xs"></i>Generate</a>
     </li>
 
@@ -60,7 +60,7 @@
   </div>
   <%= form_tag fillForm_policy_path(@policy), id:'wizardForm', method: :put do %><!--<form id="wizardForm">-->
     <div class="tab-content">
-      <div class="tab-pane active fade in" id="taba">
+      <div class="tab-pane fade" id="taba">
         <!-- Form Name -->
         <legend>CP0440</legend>
 
@@ -474,7 +474,7 @@
         </div>
       </div>
 
-      <div class="tab-pane fade" id="tabj">
+      <div class="tab-pane active fade in" id="tabj">
         <div class="text-center">
           <%= submit_tag "Generate for Review", class:"btn btn-prime-gold" %>
         </div>
