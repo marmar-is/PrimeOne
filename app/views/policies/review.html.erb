@@ -37,6 +37,7 @@
                     <th>Effective Date</th>
                     <th>Status</th>
                     <th>Review</th>
+                    <th>Generate</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -47,6 +48,7 @@
                     <th>Effective Date</th>
                     <th>Status</th>
                     <th>Review</th>
+                    <th>Generate</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -56,27 +58,24 @@
                       <td><%= policy.code %></td>
                       <td><%= policy.name %></td>
                       <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
-                      <td><%= policy.status %></td>
+                      <td><%= link_to policy.status, "#", id:'status', class: "editable editable-clickable",
+                      data: { url: "/policies/#{policy.id}", pk: "#{policy.id}",
+                      title: "Select Status", type: "select", value: policy.status } %></td>
                       <td>
                         <div class="input-group">
                           <%= link_to (policy.comment == "" ? "No Comments" : policy.comment), "#",
                           id:"comment", class:"editable editable-click",
                           data: { url: "/policies/#{policy.id}", pk: "#{policy.id}",
                           title: "Enter comment", type: "textarea" } %>
-
-                          <!--<input type="text" class="form-control" aria-label="SDFSDFS">-->
-                          <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              CONDITION
-                              <span class="caret"></span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="review-button">
+                          <%= link_to generate_policy_path(policy), 'data-no-turbolink' => true  do %>
+                            <button class="btn btn-default">
+                              Generate
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                              <li><a href="#">PERFECT</a></li>
-                              <li><a href="#">IMPERFECT</a></li>
-                              <li class="divider"></li>
-                              <li><a href="#">ISSUE POLICY</a></li>
-                            </ul>
-                          </div>
+                          <% end %>
                         </div>
                       </td>
                     </tr>

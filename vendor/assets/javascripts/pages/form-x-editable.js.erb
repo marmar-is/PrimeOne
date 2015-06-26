@@ -52,6 +52,10 @@ $(function(){
       {value: 'CORRECTED', text: 'CORRECTED'},
       {value: 'ISSUED', text: 'ISSUED'}
     ],
+
+    success: function(response, newValue) {
+      $('.status_display').text(newValue);
+    }
   });
 
   $('.edate').editable({
@@ -63,7 +67,6 @@ $(function(){
 
       return data;
     },
-
     viewformat: 'M/DD/YYYY',
     template: 'MMM / D / YYYY',
     combodate: {
@@ -121,136 +124,6 @@ $(function(){
       placeholder: 'Select a Broker',
       allowClear: true
     }
-  });
-
-  $('#forms').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy']['forms'] = params.value.join(" ");
-      data['id'] = params.pk;
-
-      return data;
-    },
-    source: [
-      { value: "IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06)", text: "MANDATORY PACKAGE" }
-    ]
-
-  });
-
-  $('#property_forms').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy']['property_forms'] = params.value.join(" ");
-      data['id'] = params.pk;
-
-      return data;
-    },
-    source: [
-      { value: "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96)", text: "MANDATORY PROPERTY" },
-      { value: "CP0020(6/07)", text: "CP0020(6/07)   BUILDERS RISK COVERAGE " },
-      { value: "CP0030(6/07)", text: "CP0030(6/07)   BUSINESS INCOME & EXTRA EXPENSE" },
-      { value: "CP0032(6/07)", text: "CP0032(6/07)   BUSINESS INCOME W/O EXTRA EXPENSE" },
-      { value: "CP0050(6/07)", text: "CP0050(6/07)   EXTRA EXPENSE COVERAGE " },
-      { value: "CP0320(10/92)", text: "CP0320(10/92)   MULTIPLE DEDUCTIBLE  (FIXED DOLLAR)" },
-      { value: "CP0321(6/07)", text: "CP0321(6/07)   WINDSTORM OR HAIL PERCENTAGE DEDUCTIBLE" },
-      { value: "CP0438(6/07)", text: "CP0438(6/07)   FUNCTIONAL BUILDING VALUATION" },
-      { value: "CP0439(10/90)", text: "CP0439(10/90)   FUNCTIONAL PERSONAL PROP. VALUATION" },
-      { value: "CP0440(6/95)", text: "CP0440(6/95)   SPOILAGE COVERAGE " },
-      { value: "CP0450(7/88)", text: "CP0450(7/88)   VACANT PERMIT" },
-      { value: "CP1010(6/07)", text: "CP1010(6/07)   BASIC  - CAUSE OF LOSS" },
-      { value: "CP1020(6/07)", text: "CP1020(6/07)   BROAD  - CAUSE OF LOSS" },
-      { value: "CP1030(6/07)", text: "CP1030(6/07)   SPECIAL  - CAUSE OF LOSS" },
-      { value: "CP1033(6/95)", text: "CP1033(6/95)   THEFT EXCLUSION" },
-      { value: "CP1054(6/07)", text: "CP1054(6/07)   WINDSTORM OR HAIL EXCLUSION" },
-      { value: "CP1055(6/07)", text: "CP1055(6/07)   VANDALISM EXCLUSION" },
-      { value: "CP1056(6/07)", text: "CP1056(6/07)   SPRINKLER LEAKAGE EXCLUSION" },
-      { value: "CP1120(6/07)", text: "CP1120(6/07)   BUILDERS RISK - COLLAPSE DURING CONSTRUCTION" },
-      { value: "CP1121(6/95)", text: "CP1121(6/95)   BUILDERS RISK -THEFT OF BLDG. MATERIALS, ETC" },
-      { value: "CP1199(6/07)", text: "CP1199(6/07)   BUILDERS RISK CHANGES-STANDARD PROP POLICY" },
-      { value: "CP1211(10/00)", text: "CP1211(10/00)   BURGLARY & ROBBERY PROTECTIVE SAFEGUARDS" },
-      { value: "CP1218(6/95)", text: "CP1218(6/95)   LOSS PAYABLE PROVISIONS" },
-      { value: "CP1430(10/00)", text: "CP1430(10/00)   OUTDOOR TREES, SHRUBS AND PLANTS" },
-      { value: "CP1440(6/07)", text: "CP1440(6/07)   OUTDOOR SIGN" },
-      { value: "IL0415(04/98)", text: "IL0415(04/98)   PROTECTIVE SAFEGUARDS" },
-      { value: "PO-PRP-1(2/10)", text: "PO-PRP-1(2/10)   EXTENDED POLICY ENDORSEMENT (2YR POLICIES ONLY)" },
-      { value: "PO-PRP-2(12/13)", text: "PO-PRP-2(12/13)   SELECT PROPERTY ENHANCEMENT" },
-      { value: "PO-PRP-3(12/13)", text: "PO-PRP-3(12/13)   ELITE PROPERTY ENHANCEMENT" },
-      { value: "EB0020(8/08)", text: "EB0020(8/08)   EQUIPMENT BREAKDOWN PROTECTION COVERAGE" }
-    ]
-  });
-
-  $('#gl_forms').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy']['gl_forms'] = params.value.join(" ");
-      data['id'] = params.pk;
-
-      return data;
-    },
-    source: [
-      { value: "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2231(7/98) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) PO-GL-6(5/12)", text: "MANDATORY GENERAL LIABILITY" },
-      { value: "CG0300(1/96)", text: "CG0300(1/96)   DEDUCTIBLE LIABILITY" },
-      { value: "CG2002(11/85)", text: "CG2002(11/85)   ADD'L INSURED - CLUB MEMBERS" },
-      { value: "CG2011(1/96)", text: "CG2011(1/96)   ADD'L INSURED MANAGERS/LESSORS" },
-      { value: "CG2018(11/85)", text: "CG2018(11/85)   ADD'L INSURED MORTGAGEE, ETC." },
-      { value: "CG2026(7/04)", text: "CG2026(7/04)   ADD'L INSURED DESIGNATED PERSON" },
-      { value: "CG2027(11/85)", text: "CG2027(11/85)   ADD'L INSURED CO-OWNER" },
-      { value: "CG2028(7/04)", text: "CG2028(7/04)   ADD'L INSURED LESSOR OF LEASED EQUIPMENT" },
-      { value: "CG2104(11/85)", text: "CG2104(11/85)   EXCLUSION PRODUCTS-COMPLETED OPERATION" },
-      { value: "CG2116(7/98)", text: "CG2116(7/98)   EXCLUSION DESIGNATED PROFESSIONAL SER." },
-      { value: "CG2135(10/01)", text: "CG2135(10/01)   EXCLUSION MEDICAL PAYMENTS" },
-      { value: "CG2138(11/85)", text: "CG2138(11/85)   EXCLUSION PERSONAL INJURY" },
-      { value: "CG2145(7/98)", text: "CG2145(7/98)   EXCLUSION DAMAGE TO PREMISES RENTED" },
-      { value: "CG2166(12/04)", text: "CG2166(12/04)   EXCLUSION VOLUNTEER WORKERS" },
-      { value: "CG2408(10/93)", text: "CG2408(10/93)   LIQUOR LIABILITYLIQUOR LIABILITY" },
-      { value: "PO-GL-2(1/10)", text: "PO-GL-2(1/10)   EXTENDED POLICY ENDORSEMENT" },
-      { value: "PO-GL-3", text: "PO-GL-3   USE OF PHYSICAL FORCE ENDORSEMENT" },
-      { value: "PO-GL-4(11/09)", text: "PO-GL-4(11/09)   REPLACEMENT COVERAGE ENDORSEMENT" },
-      { value: "PO-GL-7(5/12)", text: "PO-GL-7(5/12)   EXCLUSON - ASSAULT & BATTERY" },
-      { value: "PO-GL-9(03/14)", text: "PO-GL-9(03/14)   MULTI-UNIT HABITATIONAL CONVERSION EXCLUSION" },
-      { value: "PO-GL-10(03/14)", text: "PO-GL-10(03/14)   EXCLUSON - VERMIN" },
-      { value: "PO_GL_WIG(12/13)", text: "PO_GL_WIG(12/13)   WATER IN THE GAS TANK" }
-    ]
-  });
-
-  $('#auto_forms').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy']['auto_forms'] = params.value.join(" ");
-      data['id'] = params.pk;
-
-      return data;
-    },
-    source: [
-      { value: "CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12)", text: "MANDATORY AUTO" }
-    ]
-  });
-
-  $('#crime_forms').editable({
-    params: function(params) {
-      var data = {};
-      data['policy'] = {};
-      data['policy']['crime_forms'] = params.value.join(" ");
-      data['id'] = params.pk;
-
-      return data;
-    },
-    source: [
-      { value: "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08)", text: "MANDATORY CRIME"},
-      { value: "CR0029(5/06)", text: "CR0029(5/06)   EMPLOYEE THEFT AND FORGERY POLICY" },
-      { value: "CR0405(8/07)", text: "CR0405(8/07)   INSIDE THE PREMISES-THEFT OF OTHER PROPERTY" },
-      { value: "CR0407(8/07)", text: "CR0407(8/07)   INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES" },
-      { value: "CR3510(8/07)", text: "CR3510(8/07)   FORCIBLE ENTRY INTO PREMISES REQUIREMENT" },
-      { value: "CR3531(8/07)", text: "CR3531(8/07)   PROVIDE SUBLIMITS FOR MONEY, SECURITES OR CHECKS" },
-      { value: "CR3532(8/07)", text: "CR3532(8/07)   LIMIT COVERAGE FOR MONEY AND SECURITIES OUTSIDE THE PREMISES TO ROBBERY ONLY" },
-      { value: "CR0407(8/07)", text: "CR0407(8/07)   INSIDE THE PREMISES – ROBBERY OF A CUSTODIAN OR SAFE BURGLARY OF MONEY & SECURITIES" },
-      { value: "PO-CR-1(10/10)", text: "PO-CR-1(10/10)   BURGLARY" }
-    ]
-
   });
 
   $('.prop.locs.editable.address').editable({
