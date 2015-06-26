@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :set_tasks
 
   protected
   def devise_parameter_sanitizer
@@ -11,6 +12,13 @@ class ApplicationController < ActionController::Base
       UserParams.new(User, :user, params)
     else
       super # Use the default one
+    end
+  end
+
+  private
+  def set_tasks
+    if user_signed_in?
+      @tasks = current_user.tasks.where(seen: false)
     end
   end
 end
