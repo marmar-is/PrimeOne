@@ -27,7 +27,7 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
+              <table id="policy" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                 <thead>
                   <tr>
                     <th>Policy Number</th>
@@ -58,7 +58,13 @@
                       <td><%= policy.status %></td>
                       <td>
                         <div class="input-group">
-                          <input type="text" class="form-control" aria-label="SDFSDFS">
+                          <%= link_to (policy.comment == "" ? "No Comments" : policy.comment), "#",
+                          id:"comment", class:"editable editable-click",
+                          data: { url: "/policies/#{policy.id}", pk: "#{policy.id}",
+                          title: "Enter comment", type: "text" } %>
+
+
+                          <!--<input type="text" class="form-control" aria-label="SDFSDFS">-->
                           <div class="input-group-btn">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                               CONDITION
@@ -86,6 +92,7 @@
 <!-- Javascripts -->
 <%= content_for :js_includes do %>
   <%#= javascript_include_tag 'moment/moment.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'pages/form-x-editable.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'datatables/js/jquery.datatables.min.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'pages/table-data.js', 'data-turbolinks-track' => true %>
 <% end %>

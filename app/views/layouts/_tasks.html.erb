@@ -15,8 +15,8 @@
                 <!--<div class="task-icon badge badge-success">
                   <i class="fa fa-archive"></i>
                 </div>-->
-                <span style="font-size:10px;" class="badge badge-roundless badge-default pull-right"><%= time_ago_in_words(task.created_at) %></span>
-                <p style="font-size:10px;" class="task-details"><%= "#{task.name} is now #{task.status}" %></p>
+                <!--<span style="font-size:10px;" class="badge badge-roundless badge-default pull-right"><%#= time_ago_in_words(task.created_at) %></span>-->
+                <p style="fontsize:10px; color:#6A6A6A" class="taskdetails"><%= "#{task.name} is now #{task.status}" %></p>
               <% end %>
             </li>
           <% end %>

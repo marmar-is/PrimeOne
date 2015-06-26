@@ -64,13 +64,13 @@
     <div class="page-sidebar-inner">
       <ul class="menu accordion-menu">
         <!-- <li class="nav-heading"><span>Navigation</span></li> -->
-        <li class="<%= 'active' if controller_name == 'policies'%>">
+        <li class="<%= 'active' if (controller_name == 'policies' && action_name != 'review')%>">
           <%= link_to policies_path do %>
             <span class="menu-icon fa fa-archive"></span>
             <p>Policies</p>
           <% end %>
         </li>
-        <li class="<%= 'active' if (controller_name == 'policies' && action_name == 'review')%>">
+          <li class="<%= 'active' if (controller_name == 'policies' && action_name == 'review')%>">
           <%= link_to review_policies_path do %>
             <span class="menu-icon fa fa-check-square"></span>
             <p>Review</p>

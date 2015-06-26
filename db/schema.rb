@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626012304) do
+ActiveRecord::Schema.define(version: 20150626023403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20150626012304) do
     t.string   "state",          default: ""
     t.string   "zip",            default: ""
     t.decimal  "total_premium",  default: 0.0
+    t.text     "comment",        default: ""
   end
 
   add_index "policies", ["broker_id"], name: "index_policies_on_broker_id", using: :btree
