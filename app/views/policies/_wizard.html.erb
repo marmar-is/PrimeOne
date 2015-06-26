@@ -34,372 +34,294 @@
   <form id="wizardForm">
     <div class="tab-content">
       <div class="tab-pane active fade in" id="taba">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CP0440</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
-              </div>
-            </div>
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_LOCATION">LOCATION</label>
-              <div class="col-md-4">
-                <select id="CP0440_LOCATION" name="CP0440_LOCATION" class="form-control">
-                  <option value="1">LOCATION 1</option>
-                  <option value="2">LOCATION 2</option>
-                  <option value="3">LOCATION 3</option>
-                  <option value="4">LOCATION 4</option>
-                </select>
-              </div>
-            </div>
+        <!-- Form Name -->
+        <legend>CP0440</legend>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_BUILDING">BUILDING</label>
-              <div class="col-md-4">
-                <select id="CP0440_BUILDING" name="CP0440_BUILDING" class="form-control">
-                  <option value="1">BUILDING 1</option>
-                  <option value="2">BUILDING 2</option>
-                  <option value="3">BUILDING 3</option>
-                  <option value="4">BUILDING 4</option>
-                </select>
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_LIMIT">LIMIT</label>
-              <div class="col-md-4">
-                <input id="CP0440_LIMIT" name="CP0440_LIMIT" type="text" placeholder="" class="form-control input-md" required="">
+            <!-- CP0440 Location -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_LOCATION">LOCATION</label>
+              <select id="CP0440_LOCATION" name="CP0440_LOCATION" class="form-control">
+                <option value="1">LOCATION 1</option>
+                <option value="2">LOCATION 2</option>
+                <option value="3">LOCATION 3</option>
+                <option value="4">LOCATION 4</option>
+              </select>
+            </div>
+            <!-- Ded -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_DEDUCTIBLE">DEDUCTIBLE</label>
+              <input id="CP0440_DEDUCTIBLE" name="CP0440_DEDUCTIBLE" placeholder="Deductible" class="form-control input-md">
+            </div>
+            <!-- Refigeration -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_REFIGERATION">REFIGERATION</label>
+              <div class="checkbox">
+                <label for="CP0440_REFIGERATION-0">
+                  <input type="checkbox" name="CP0440_REFIGERATION" id="CP0440_REFIGERATION-0" value="X">
+                  AGREEMENT
+                </label>
               </div>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_DEDUCTIBLE">DEDUCTIBLE</label>
-              <div class="col-md-4">
-                <input id="CP0440_DEDUCTIBLE" name="CP0440_DEDUCTIBLE" type="text" placeholder="" class="form-control input-md">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Limit -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_LIMIT">LIMIT</label>
+              <input id="CP0440_LIMIT" name="CP0440_LIMIT" placeholder="Limit" class="form-control input-md" required>
+            </div>
+            <!-- CP0440 Building -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_BUILDING">BUILDING</label>
+              <select id="CP0440_BUILDING" name="CP0440_BUILDING" class="form-control">
+                <option value="1">BUILDING 1</option>
+                <option value="2">BUILDING 2</option>
+                <option value="3">BUILDING 3</option>
+                <option value="4">BUILDING 4</option>
+              </select>
+            </div>
+            <!-- Description-->
+            <div class="form-group col-md-12">
+              <label for="CP0440_DESCRIPTION">DESCRIPTION</label>
+              <input id="CP0440_DESCRIPTION" name="CP0440_DESCRIPTION" placeholder="Description" class="form-control input-md">
+            </div>
+            <!-- Cause of Loss -->
+            <div class="form-group col-md-12">
+              <label for="CP0440_CAUSE_OF_LOSSS">CAUSE OF LOSS</label>
+              <div class="checkbox">
+                <label for="CP0440_CAUSE_OF_LOSSS-0">
+                  <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-0" value="X">
+                  BREAKDOWN/CONTAMINATION
+                </label>
+              </div>
+              <div class="checkbox">
+                <label for="CP0440_CAUSE_OF_LOSSS-1">
+                  <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-1" value="X">
+                  POWER OUTAGE
+                </label>
+              </div>
+              <div class="checkbox">
+                <label for="CP0440_CAUSE_OF_LOSSS-2">
+                  <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-2" value="X">
+                  SELLING PRICE
+                </label>
               </div>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_DESCRIPTION">DESCRIPTION</label>
-              <div class="col-md-4">
-                <input id="CP0440_DESCRIPTION" name="CP0440_DESCRIPTION" type="text" placeholder="" class="form-control input-md">
-              </div>
-            </div>
-
-            <!-- Multiple Checkboxes -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_CAUSE_OF_LOSSS">CAUSE OF LOSS</label>
-              <div class="col-md-4">
-                <div class="checkbox">
-                  <label for="CP0440_CAUSE_OF_LOSSS-0">
-                    <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-0" value="X">
-                    BREAKDOWN/CONTAMINATION
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label for="CP0440_CAUSE_OF_LOSSS-1">
-                    <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-1" value="X">
-                    POWER OUTAGE
-                  </label>
-                </div>
-                <div class="checkbox">
-                  <label for="CP0440_CAUSE_OF_LOSSS-2">
-                    <input type="checkbox" name="CP0440_CAUSE_OF_LOSSS" id="CP0440_CAUSE_OF_LOSSS-2" value="X">
-                    SELLING PRICE
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Multiple Checkboxes -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_REFIGERATION">REFIGERATION</label>
-              <div class="col-md-4">
-                <div class="checkbox">
-                  <label for="CP0440_REFIGERATION-0">
-                    <input type="checkbox" name="CP0440_REFIGERATION" id="CP0440_REFIGERATION-0" value="X">
-                    AGREEMENT
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
+
       <div class="tab-pane fade" id="tabb">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CP1440</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
+        <!-- Form Name -->
+        <legend>CP1440</legend>
+
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_LOCATION">LOCATION</label>
-              <div class="col-md-4">
-                <select id="CP1440_LOCATION" name="CP1440_LOCATION" class="form-control">
-                  <option value="1">LOCATION 1</option>
-                  <option value="2">LOCATION 2</option>
-                  <option value="3">LOCATION 3</option>
-                  <option value="4">LOCATION 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_LOCATION">LOCATION</label>
+              <select id="CP1440_LOCATION" name="CP1440_LOCATION" class="form-control">
+                <option value="1">LOCATION 1</option>
+                <option value="2">LOCATION 2</option>
+                <option value="3">LOCATION 3</option>
+                <option value="4">LOCATION 4</option>
+              </select>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_BUILDING">BUILDING</label>
-              <div class="col-md-4">
-                <select id="CP1440_BUILDING" name="CP1440_BUILDING" class="form-control">
-                  <option value="1">BUILDING 1</option>
-                  <option value="2">BUILDING 2</option>
-                  <option value="3">BUILDING 3</option>
-                  <option value="4">BUILDING 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_COINS">COINS</label>
+              <input id="CP1440_COINS" name="CP1440_COINS" type="text" placeholder="COINSURANCE" class="form-control input-md" required>
             </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_LIMIT">LIMIT</label>
-              <div class="col-md-4">
-                <input id="CP1440_LIMIT" name="CP1440_LIMIT" type="text" placeholder="" class="form-control input-md" required="">
+            <div class="form-group col-md-12">
+              <label for="CP1440_ADDTL_PREMIUM">ADDTL PREMIUM</label>
+              <div class="input-group">
+                <input id="CP1440_ADDTL_PREMIUM" name="CP1440_ADDTL_PREMIUM" class="form-control" placeholder="PREMIUM" type="text">
+                <!--<div class="input-group-btn"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> CLUSION <span class="caret"></span> </button> <ul id="dropdown" class="dropdown-menu pull-right"> <li><a href="#">EXCLUDED</a></li> <li><a href="#">INCLUDED</a></li> </ul> </div>-->
               </div>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_COINS">COINS</label>
-              <div class="col-md-4">
-                <input id="CP1440_COINS" name="CP1440_COINS" type="text" placeholder="COINSURANCE" class="form-control input-md" required="">
-
-              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="CP1440_LIMIT">LIMIT</label>
+              <input id="CP1440_LIMIT" name="CP1440_LIMIT" placeholder="" class="form-control input-md" required>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_CONSTRUCTION">CONSTRUCTION</label>
-              <div class="col-md-4">
-                <select id="CP1440_CONSTRUCTION" name="CP1440_CONSTRUCTION" class="form-control">
-                  <option value="X">METAL</option>
-                  <option value="X">OTHER</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_BUILDING">BUILDING</label>
+              <select id="CP1440_BUILDING" name="CP1440_BUILDING" class="form-control">
+                <option value="1">BUILDING 1</option>
+                <option value="2">BUILDING 2</option>
+                <option value="3">BUILDING 3</option>
+                <option value="4">BUILDING 4</option>
+              </select>
             </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_DESCRIPTION">DESCRIPTION</label>
-              <div class="col-md-4">
-                <input id="CP1440_DESCRIPTION" name="CP1440_DESCRIPTION" type="text" placeholder="OF SIGN" class="form-control input-md">
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_DESCRIPTION">DESCRIPTION</label>
+              <input id="CP1440_DESCRIPTION" name="CP1440_DESCRIPTION" type="text" placeholder="OF SIGN" class="form-control input-md">
             </div>
 
-            <!-- Button Drop Down -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP1440_ADDTL_PREMIUM">ADDTL PREMIUM</label>
-              <div class="col-md-5">
-                <div class="input-group">
-                  <input id="CP1440_ADDTL_PREMIUM" name="CP1440_ADDTL_PREMIUM" class="form-control" placeholder="PREMIUM" type="text">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      CLUSION
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                      <li><a href="#">EXCLUDED</a></li>
-                      <li><a href="#">INCLUDED</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_CONSTRUCTION">CONSTRUCTION</label>
+              <select id="CP1440_CONSTRUCTION" name="CP1440_CONSTRUCTION" class="form-control">
+                <option value="X">METAL</option>
+                <option value="X">OTHER</option>
+              </select>
             </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane fade" id="tabd">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>IL0415</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
+        <!-- Form Name -->
+        <legend>IL0415</legend>
 
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="IL0415_LOCATION">LOCATION</label>
-              <div class="col-md-4">
-                <select id="IL0415_LOCATION" name="IL0415_LOCATION" class="form-control">
-                  <option value="1">LOCATION 1</option>
-                  <option value="2">LOCATION 2</option>
-                  <option value="3">LOCATION 3</option>
-                  <option value="4">LOCATION 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="IL0415_LOCATION">LOCATION</label>
+              <select id="IL0415_LOCATION" name="IL0415_LOCATION" class="form-control">
+                <option value="1">LOCATION 1</option>
+                <option value="2">LOCATION 2</option>
+                <option value="3">LOCATION 3</option>
+                <option value="4">LOCATION 4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="IL0415_BUILDING">BUILDING</label>
+              <select id="IL0415_BUILDING" name="IL0415_BUILDING" class="form-control">
+                <option value="1">BUILDING 1</option>
+                <option value="2">BUILDING 2</option>
+                <option value="3">BUILDING 3</option>
+                <option value="4">BUILDING 4</option>
+              </select>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="IL0415_BUILDING">BUILDING</label>
-              <div class="col-md-4">
-                <select id="IL0415_BUILDING" name="IL0415_BUILDING" class="form-control">
-                  <option value="1">BUILDING 1</option>
-                  <option value="2">BUILDING 2</option>
-                  <option value="3">BUILDING 3</option>
-                  <option value="4">BUILDING 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="IL0415_DESCRIPTION">DESCRIPTION</label>
+              <input id="IL0415_DESCRIPTION" name="IL0415_DESCRIPTION" type="text" placeholder="OF SIGN" class="form-control input-md">
             </div>
-
-            <!-- Select Multiple -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="IL0415_SYMBOL">SYMBOL</label>
-              <div class="col-md-4">
-                <select id="IL0415_SYMBOL" name="IL0415_SYMBOL" class="form-control" multiple="multiple">
-                  <option value="P-1">P-1</option>
-                  <option value="P-2">P-2</option>
-                  <option value="P-3">P-3</option>
-                  <option value="P-4">P-4</option>
-                  <option value="P-9">P-9</option>
-                </select>
-              </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="IL0415_SYMBOL">SYMBOL</label>
+              <select id="IL0415_SYMBOL" name="IL0415_SYMBOL" class="form-control" multiple="multiple">
+                <option value="P-1">P-1</option>
+                <option value="P-2">P-2</option>
+                <option value="P-3">P-3</option>
+                <option value="P-4">P-4</option>
+                <option value="P-9">P-9</option>
+              </select>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CP0440_DESCRIPTION">DESCRIPTION</label>
-              <div class="col-md-4">
-                <input id="CP0440_DESCRIPTION" name="CP0440_DESCRIPTION" type="text" placeholder="OF SYMBOL" class="form-control input-md">
-              </div>
-            </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
+
       <div class="tab-pane fade" id="tabe">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CG2011</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
+        <!-- Form Name -->
+        <legend>CG2011</legend>
 
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_LOCATION">LOCATION</label>
-              <div class="col-md-4">
-                <select id="CG2144_LOCATION" name="CG2144_LOCATION" class="form-control">
-                  <option value="1">LOCATION 1</option>
-                  <option value="2">LOCATION 2</option>
-                  <option value="3">LOCATION 3</option>
-                  <option value="4">LOCATION 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CG2011_LOCATION">LOCATION</label>
+              <select id="CG2011_LOCATION" name="CG2011_LOCATION" class="form-control">
+                <option value="1">LOCATION 1</option>
+                <option value="2">LOCATION 2</option>
+                <option value="3">LOCATION 3</option>
+                <option value="4">LOCATION 4</option>
+              </select>
             </div>
 
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_BUILDING">BUILDING</label>
-              <div class="col-md-4">
-                <select id="CG2144_BUILDING" name="CG2144_BUILDING" class="form-control">
-                  <option value="1">BUILDING 1</option>
-                  <option value="2">BUILDING 2</option>
-                  <option value="3">BUILDING 3</option>
-                  <option value="4">BUILDING 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CG2011_ADDTL_INSURED">ADDTL INSURED</label>
+              <input id="CG2011_ADDTL_INSURED" name="CG2011_ADDTL_INSURED" type="text" placeholder="COINSURANCE" class="form-control input-md" required>
             </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_PREMISES">PREMISES</label>
-              <div class="col-md-4">
-                <input id="CG2011_PREMISES" name="CG2011_PREMISES" type="text" placeholder="PART LEASED TO YOU" class="form-control input-md">
-
-              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="CG2011_PREMISES">PREMISES</label>
+              <input id="CG2011_PREMISES" name="CG2011_PREMISES" placeholder="" class="form-control input-md" required>
             </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_ADDTL_INSURED">ADDTL INSURED</label>
-              <div class="col-md-4">
-                <input id="CG2011_ADDTL_INSURED" name="CG2011_ADDTL_INSURED" type="text" placeholder="NAME OR ORGANIZATION" class="form-control input-md" required="">
-
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CG2011_BUILDING">BUILDING</label>
+              <select id="CG2011_BUILDING" name="CG2011_BUILDING" class="form-control">
+                <option value="1">BUILDING 1</option>
+                <option value="2">BUILDING 2</option>
+                <option value="3">BUILDING 3</option>
+                <option value="4">BUILDING 4</option>
+              </select>
             </div>
 
-            <!-- Button Drop Down -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_ADDTL_PREMIUM">ADDTL PREMIUM</label>
-              <div class="col-md-5">
-                <div class="input-group">
-                  <input id="CG2011_ADDTL_PREMIUM" name="CG2011_ADDTL_PREMIUM" class="form-control" placeholder="PREMIUM" type="text" required="">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      CLUSION
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                      <li><a href="#">INCLUDED</a></li>
-                      <li><a href="#">EXCLUDED</a></li>
-                    </ul>
-                  </div>
-                </div>
+            <div class="form-group col-md-12">
+              <label for="CP1440_ADDTL_PREMIUM">ADDTL PREMIUM</label>
+              <div class="input-group">
+                <input id="CP1440_ADDTL_PREMIUM" name="CP1440_ADDTL_PREMIUM" class="form-control" placeholder="PREMIUM" type="text">
               </div>
+              <!--<div class="input-group-btn"> <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> CLUSION <span class="caret"></span> </button> <ul class="dropdown-menu pull-right"> <li><a href="#">INCLUDED</a></li> <li><a href="#">EXCLUDED</a></li> </ul> </div>-->
             </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane fade" id="tab5">
         <form class="form-horizontal">
           <fieldset>
-
             <!-- Form Name -->
             <legend>CG2011</legend>
-
             <!-- Prepended text-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
               <div class="col-md-4">
                 <div class="input-group">
                   <span class="input-group-addon">PPK000</span>
@@ -411,7 +333,7 @@
 
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_LOCATION">LOCATION</label>
+              <label for="CG2144_LOCATION">LOCATION</label>
               <div class="col-md-4">
                 <select id="CG2144_LOCATION" name="CG2144_LOCATION" class="form-control">
                   <option value="1">LOCATION 1</option>
@@ -424,7 +346,7 @@
 
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_BUILDING">BUILDING</label>
+              <label for="CG2144_BUILDING">BUILDING</label>
               <div class="col-md-4">
                 <select id="CG2144_BUILDING" name="CG2144_BUILDING" class="form-control">
                   <option value="1">BUILDING 1</option>
@@ -437,7 +359,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_PREMISES">PREMISES</label>
+              <label for="CG2011_PREMISES">PREMISES</label>
               <div class="col-md-4">
                 <input id="CG2011_PREMISES" name="CG2011_PREMISES" type="text" placeholder="PART LEASED TO YOU" class="form-control input-md">
               </div>
@@ -445,7 +367,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_ADDTL_INSURED">ADDTL INSURED</label>
+              <label for="CG2011_ADDTL_INSURED">ADDTL INSURED</label>
               <div class="col-md-4">
                 <input id="CG2011_ADDTL_INSURED" name="CG2011_ADDTL_INSURED" type="text" placeholder="NAME OR ORGANIZATION" class="form-control input-md" required="">
               </div>
@@ -453,7 +375,7 @@
 
             <!-- Button Drop Down -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2011_ADDTL_PREMIUM">ADDTL PREMIUM</label>
+              <label for="CG2011_ADDTL_PREMIUM">ADDTL PREMIUM</label>
               <div class="col-md-5">
                 <div class="input-group">
                   <input id="CG2011_ADDTL_PREMIUM" name="CG2011_ADDTL_PREMIUM" class="form-control" placeholder="PREMIUM" type="text" required="">
@@ -475,154 +397,134 @@
       </div>
 
       <div class="tab-pane fade" id="tabf">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CG2018</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
+        <!-- Form Name -->
+        <legend>CG2018</legend>
 
+        <div class="col-md-12">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2018_PREMISES">ADDTL_INSURED</label>
-              <div class="col-md-4">
-                <input id="CG2018_PREMISES" name="CG2018_PREMISES" type="text" placeholder="NAME OR ORGANIZATION" class="form-control input-md" required="">
-
-              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="CG2018_ADDTL_INSURED">ADDTL_INSURED</label>
+              <input id="CG2018_ADDTL_INSURED" name="CG2018_ADDTL_INSURED" type="text" placeholder="OF SIGN" class="form-control input-md">
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2018_PREMISES">PREMISES</label>
-              <div class="col-md-4">
-                <input id="CG2018_PREMISES" name="CG2018_PREMISES" type="text" placeholder="DESIGNATION" class="form-control input-md">
-              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="CG2018_PREMISES">PREMISES</label>
+              <input id="CG2018_PREMISES" name="CG2018_PREMISES" type="text" placeholder="OF SIGN" class="form-control input-md">
             </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane fade" id="tabg">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CG2026</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
-              </div>
-            </div>
+        <!-- Form Name -->
+        <legend>CG2026</legend>
 
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2026_ADDTL_INSURED">ADDTL_INSURED</label>
-              <div class="col-md-4">
-                <input id="CG2026_ADDTL_INSURED" name="CG2026_ADDTL_INSURED" type="text" placeholder="NAME OR ORGANIZATION" class="form-control input-md" required="">
-              </div>
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <label for="POLICYNUMBER">POLICY NUMBER</label>
+            <div class="input-group">
+              <span class="input-group-addon">PPK000</span>
+              <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
             </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group col-md-12">
+            <label for="CG2026_ADDTL_INSURED">ADDTL_INSURED</label>
+            <input id="CG2026_ADDTL_INSURED" name="CG2026_ADDTL_INSURED" type="text" placeholder="OF SIGN" class="form-control input-md">
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane fade" id="tabh">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CG2028</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
-              </div>
+        <!-- Form Name -->
+        <legend>CG2028</legend>
+
+
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Policy Number -->
+            <label for="POLICYNUMBER">POLICY NUMBER</label>
+            <div class="input-group">
+              <span class="input-group-addon">PPK000</span>
+              <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
             </div>
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2028_ADDTL_INSURED">ADDTL_INSURED</label>
-              <div class="col-md-4">
-                <input id="CG2028_ADDTL_INSURED" name="CG2028_ADDTL_INSURED" type="text" placeholder="NAME OR ORGANIZATION" class="form-control input-md" required="">
-              </div>
-            </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group col-md-12">
+            <label for="CG2028_ADDTL_INSURED">ADDTL_INSURED</label>
+            <input id="CG2028_ADDTL_INSURED" name="CG2028_ADDTL_INSURED" type="text" placeholder="OF SIGN" class="form-control input-md">
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane fade" id="tabi">
-        <form class="form-horizontal">
-          <fieldset>
-            <!-- Form Name -->
-            <legend>CG2144</legend>
-            <!-- Prepended text-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="POLICYNUMBER">POLICY NUMBER</label>
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon">PPK000</span>
-                  <input id="POLICYNUMBER" name="POLICYNUMBER" class="form-control" placeholder="" type="text" required="">
-                </div>
+        <!-- Form Name -->
+        <legend>CG2144</legend>
 
+        <div class="col-md-12">
+          <div class="row">
+            <!-- Policy Number -->
+            <div class="form-group col-md-12">
+              <label for="POLICYNUMBER">POLICY NUMBER</label>
+              <div class="input-group">
+                <span class="input-group-addon">PPK000</span>
+                <input type="text" class="form-control" name="POLICYNUMBER" id="POLICYNUMBER" placeholder="Policy Number" required>
               </div>
             </div>
-
-            <!-- Select Basic -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="CG2144_LOCATION">LOCATION</label>
+              <select id="CG2144_LOCATION" name="CG2144_LOCATION" class="form-control">
+                <option value="1">LOCATION 1</option>
+                <option value="2">LOCATION 2</option>
+                <option value="3">LOCATION 3</option>
+                <option value="4">LOCATION 4</option>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="CG2144_PROJECT">PROJECT</label>
+              <input id="CG2144_PROJECT" name="CG2144_PROJECT" type="text" placeholder="OF SIGN" class="form-control input-md">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
             <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_LOCATION">LOCATION</label>
-              <div class="col-md-4">
-                <select id="CG2144_LOCATION" name="CG2144_LOCATION" class="form-control">
-                  <option value="1">LOCATION 1</option>
-                  <option value="2">LOCATION 2</option>
-                  <option value="3">LOCATION 3</option>
-                  <option value="4">LOCATION 4</option>
-                </select>
-              </div>
+              <label for="CG2144_BUILDING">BUILDING</label>
+              <select id="CG2144_BUILDING" name="CG2144_BUILDING" class="form-control">
+                <option value="1">BUILDING 1</option>
+                <option value="2">BUILDING 2</option>
+                <option value="3">BUILDING 3</option>
+                <option value="4">BUILDING 4</option>
+              </select>
             </div>
-
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_BUILDING">BUILDING</label>
-              <div class="col-md-4">
-                <select id="CG2144_BUILDING" name="CG2144_BUILDING" class="form-control">
-                  <option value="1">BUILDING 1</option>
-                  <option value="2">BUILDING 2</option>
-                  <option value="3">BUILDING 3</option>
-                  <option value="4">BUILDING 4</option>
-                </select>
-              </div>
+            <div class="form-group col-md-12">
+              <label for="CG2144_PREMISES">PREMISES</label>
+              <input id="CG2144_PREMISES" name="CG2144_PREMISES" type="text" placeholder="OF SIGN" class="form-control input-md">
             </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_PREMISES">PREMISES</label>
-              <div class="col-md-4">
-                <input id="CG2144_PREMISES" name="CG2144_PREMISES" type="text" placeholder="DESCRIPTION" class="form-control input-md">
-              </div>
-            </div>
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="CG2144_PROJECT">PROJECT</label>
-              <div class="col-md-4">
-                <input id="CG2144_PROJECT" name="CG2144_PROJECT" type="text" placeholder="DESCRIPTION" class="form-control input-md">
-              </div>
-            </div>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </div>
 
       <ul class="pager wizard">

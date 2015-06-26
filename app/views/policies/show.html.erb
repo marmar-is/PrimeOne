@@ -70,19 +70,19 @@
             <div role="tabpanel">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">Fields</a></li>
+                <li role="presentation" class="activee"><a href="#tab1" role="tab" data-toggle="tab">Fields</a></li>
                 <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">Endorsements</a></li>
-                <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">Review</a></li>
+                <li role="presentation" class="active"><a href="#tab3" role="tab" data-toggle="tab">Review</a></li>
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active fade in" id="tab1">
+                <div role="tabpanel" class="tab-pane activee fade in" id="tab1">
                   <%= render partial: 'xtable' %>
                 </div><!-- tabpanel tab1 -->
                 <div role="tabpanel" class="tab-pane fade in" id="tab2">
                   <%= render partial: 'endorsements' %>
                 </div><!-- tabpanel tab2 -->
-                <div role="tabpanel" class="tab-pane fade in" id="tab3">
+                <div role="tabpanel" class="tab-pane active fade in" id="tab3">
                   <%= render partial: 'wizard' %>
                   <%- if false %>
                   <div class="text-center">
@@ -135,7 +135,7 @@
     <%= javascript_include_tag 'twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'jquery-validation/jquery.validate.min.js', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'pages/form-wizard.js', 'data-turbolinks-track' => true %>
-    
+
     <script>
       $('button.btn').click(function(){
         $(this).toggleClass('active');
