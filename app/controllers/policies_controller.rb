@@ -176,7 +176,7 @@ class PoliciesController < ApplicationController
 
     @policy.update(status: 'GENERATED') # policy needs review
 
-    redirect_to @policy
+    redirect_to review_policies_path
   end
 
   def viewPDF
