@@ -80,7 +80,7 @@ class PoliciesController < ApplicationController
   end
 
   def review
-    @policies = Policy.where("status=? OR status=?", "REVIEWED 1", "REVIEWED 2")
+    @policies = Policy.where("status=? OR status=?", "GENERATED", "ERRING")
   end
 
   def fillForm

@@ -3,7 +3,7 @@ class CreatePolicies < ActiveRecord::Migration
     create_table :policies do |t|
       # container fields
       t.string :number, default: ""
-      t.string :status, default: "GENERATED"
+      t.string :status, default: "POPULATED"
       t.string :code, default: ""
       t.string :name, default: ""
       t.date :effective, default: "1995-11-08"
