@@ -73,6 +73,9 @@ gem 'wkhtmltopdf-heroku', group: :production
 # PDF Combination
 gem 'combine_pdf'
 
+# PDF Filling
+gem 'pdf-forms'
+
 # randomize date (and other things)
 gem 'ish', '~> 0.0.1'
 
