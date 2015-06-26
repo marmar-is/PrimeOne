@@ -84,9 +84,85 @@ class PoliciesController < ApplicationController
   end
 
   def fillForm
+
     pdftk = PdfForms.new('/usr/local/bin/pdftk')
 
-    f = "CG1218_6-95.pdf"
+    f = "CG1218(6-95).pdf"
+
+    pdftk.get_field_names "private/fillable/#{f}"
+
+    fields = { "POLICY NUMBER":"001000", "LOSS PAYABLE":"X" }
+
+    pdftk.fill_form "private/fillable/#{f}", 'private/fillable/output.pdf', fields, flatten: true
+
+    redirect_to policy_path(Policy.find(4))
+  end
+
+
+  #PUT /policies/1/fillForm
+  def fillForma
+    @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
+    pdf = WickedPdf.new.pdf_from_string(html)
+
+    File.open("private/temp_pdf/dec_temp.pdf", 'wb') do |f|
+      f << pdf
+    end
+
+    @pdfForms = CombinePDF.new
+    @pdfForms << CombinePDF.load("private/temp_pdf/dec_temp.pdf")
+
+    form_groups = [:forms, :property_forms, :gl_forms, :crime_forms, :auto_forms]
+
+    all_fills = [ "CP1218(6-95).pdf", "CG2011(1-96).pdf", "CG2018(11-85).pdf",
+      "CG2026(7-04).pdf", "CG2028(7-04).pdf", "CG2144(7-98).pdf",
+      "CP0440(6-95).pdf", "IL0415(4-98).pdf" ]
+
+    active_fills = []
+
+    form_groups.each do |fg|
+      if !@policy[fg].empty?
+        @policy[fg].split(" ").each do |f|
+          f = f.gsub("/", "-")
+
+          if !all_fills.include?("#{f}.pdf")
+            begin
+              open('private/temp_pdf/temp.pdf', 'wb') do |file|
+                file << open("http://storage.googleapis.com/endorsements/Static/#{f}.pdf").read
+                #file << open("private/forms/#{f}.pdf").read
+              end
+              @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
+            rescue
+            end
+          else
+            active_fills << "#{f}.pdf"
+          end
+        end
+      end
+    end
+
+    pdftk = PdfForms.new('/usr/local/bin/pdftk')
+
+    active_fills.each do |f|
+      begin
+        open('private/temp_pdf/temp.pdf', 'wb') do |file|
+          file << open("http://storage.googleapis.com/endorsements/Static/#{f}").read
+          #file << open("private/forms/#{f}.pdf").read
+        end
+        @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
+      rescue
+      end
+    end
+
+    open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
+      f << @pdfForms.to_pdf
+    end
+
+    #redirect_to @policy
+    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
+
+
+
 
     pdftk.get_field_names "private/fillable/#{f}"
 

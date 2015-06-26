@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     member do
       get 'pdf'
       get 'generate'
-      get 'fillForm'
+      put 'fillForm'
       put 'update_forms'
       put 'populate'
     end
