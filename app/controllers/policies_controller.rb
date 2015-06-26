@@ -83,7 +83,7 @@ class PoliciesController < ApplicationController
     @policies = Policy.where("status=? OR status=?", "GENERATED", "ERRING")
   end
 
-  def fillForm
+  def fillFormTestingPurposes
 
     pdftk = PdfForms.new('/usr/local/bin/pdftk')
 
@@ -91,7 +91,7 @@ class PoliciesController < ApplicationController
 
     pdftk.get_field_names "private/fillable/#{f}"
 
-    fields = { "POLICY NUMBER":"001000", "LOSS PAYABLE":"X" }
+    fields = { "POLICY NUMBER":"Money", "LOSS PAYABLE":"Yes" }
 
     pdftk.fill_form "private/fillable/#{f}", 'private/fillable/output.pdf', fields, flatten: true
 
@@ -100,7 +100,7 @@ class PoliciesController < ApplicationController
 
 
   #PUT /policies/1/fillForm
-  def fillForma
+  def fillForm
     @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
     pdf = WickedPdf.new.pdf_from_string(html)
@@ -144,40 +144,36 @@ class PoliciesController < ApplicationController
     pdftk = PdfForms.new('/usr/local/bin/pdftk')
 
     active_fills.each do |f|
-      begin
-        open('private/temp_pdf/temp.pdf', 'wb') do |file|
-          file << open("http://storage.googleapis.com/endorsements/Static/#{f}").read
-          #file << open("private/forms/#{f}.pdf").read
-        end
-        @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
-      rescue
+      fields = {}
+      pdftk.get_field_names("private/fillable/#{f}").each do |n|
+        fields[n] = params[n]
       end
+      puts fields
+
+      #pdftk.fill_form "private/fillable/#{f}", 'private/temp_pdf/output.pdf', fields, flatten: true
+
+      #@pdfForms << CombinePDF.load("private/temp_pdf/output.pdf")
+      #begin
+      #  open('private/temp_pdf/temp.pdf', 'wb') do |file|
+      #    file << open("http://storage.googleapis.com/endorsements/Static/#{f}").read
+      #    #file << open("private/forms/#{f}.pdf").read
+      #  end
+      #  @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
+      #rescue
+      #end
     end
 
-    open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
-      f << @pdfForms.to_pdf
-    end
-
-    #redirect_to @policy
-    send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
-
-
-
-
-    pdftk.get_field_names "private/fillable/#{f}"
-
-    name = 'POLICY NUMBER'
-
-    pdftk.fill_form "private/fillable/#{f}", 'private/fillable/output.pdf', name => '0001000', flatten: true
-
-    redirect_to policy_path(Policy.find(4))
-    #data = { 'POLICY NUMBER': 'PPK0001000' }
-
-    #template = PDFRavager::Template.new do |p|
-    #  p.text      'POLICY NUMBER', data['POLICY NUMBER']
+    #open("generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", 'wb') do |f|
+      #f << @pdfForms.to_pdf
     #end
 
-    #template.ravage '/private/fillable/CG1218_6-95.pdf', out_file: '/private/fillable/output.pdf'
+    #redirect_to @policy
+    #send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
+
+
+
+
+    redirect_to policy_path(Policy.find(4))
   end
 
   def fillFormBAD
