@@ -1,5 +1,5 @@
 .text-center
-  -if action_name == 'generate' || action_name == 'fillForm'
+  -if action_name == 'generate'
     = wicked_pdf_image_tag "prime_logo_color_small.png", width: 200, height: 40
   -else
     = image_tag "prime_logo_color_small.png", width: 200, height: 40

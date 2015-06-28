@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   resources :policies do
     member do
       get 'pdf'
-      get 'generate'
       get 'viewPDF'
-      put 'fillForm'
+      put 'generate'
+      #put 'fillForm'
       put 'update_forms'
       put 'populate'
     end

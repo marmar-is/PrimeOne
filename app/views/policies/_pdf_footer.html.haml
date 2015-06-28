@@ -8,7 +8,7 @@
       .col-xs-1.signature
         %p.strong BY:
       .col-xs-5.signature
-        -if action_name == 'generate' || action_name == 'fillForm'
+        -if action_name == 'generate'
           = wicked_pdf_image_tag "signature.jpg", width:"200", height:"100"
         -else
           = image_tag "signature.jpg", width:"200", height:"100"
