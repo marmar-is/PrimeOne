@@ -5,4 +5,6 @@ class Notif < ActiveRecord::Base
   def seen_by?(u)
     return self.users.include?(u)
   end
+
+  
 end

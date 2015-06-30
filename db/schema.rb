@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626023403) do
+ActiveRecord::Schema.define(version: 20150630025607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,14 @@ ActiveRecord::Schema.define(version: 20150626023403) do
   end
 
   add_index "locations", ["policy_id"], name: "index_locations_on_policy_id", using: :btree
+
+  create_table "notifs", force: :cascade do |t|
+    t.string   "number"
+    t.string   "message"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "policies", force: :cascade do |t|
     t.string   "number",         default: ""

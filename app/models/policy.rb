@@ -24,8 +24,8 @@ class Policy < ActiveRecord::Base
   private
     def notify_status
       if self.status_changed?
-        Task.where(name: self.number).destroy_all
-        Task.create(name: self.number, status: self.status)
+        #Task.where(name: self.number).destroy_all
+        #Task.create(name: self.number, status: self.status)
       end
     end
 end
