@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150630025607) do
     t.string   "number"
     t.string   "message"
     t.string   "status"
+    t.integer  "policy_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

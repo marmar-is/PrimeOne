@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
          :confirmable
 
   # Associations
-  has_many :notifs
+  #has_many :notifs
 
   def get_notifs
-    return self.notifs
+    #return self.notifs
   end
 end

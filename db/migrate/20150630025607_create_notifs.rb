@@ -4,6 +4,7 @@ class CreateNotifs < ActiveRecord::Migration
       t.string :number
       t.string :message
       t.string :status
+      #t.belongs_to :policy
 
       t.timestamps null: false
     end

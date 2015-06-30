@@ -7,6 +7,7 @@ class Policy < ActiveRecord::Base
 
   # Associations
   belongs_to :broker
+  #has_one :notif
 
   has_one :property, dependent: :destroy
   has_one :gl, dependent: :destroy
