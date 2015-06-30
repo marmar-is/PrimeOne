@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get 'pdf'
       get 'viewPDF'
       put 'generate'
-      #put 'fillForm'
+      #get 'datalogic'
       put 'update_forms'
       put 'populate'
     end

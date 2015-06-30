@@ -164,6 +164,20 @@ class PoliciesController < ApplicationController
     redirect_to review_policies_path
   end
 
+  def datalogic
+    #json = "[{
+    #  \"POLICYNUMBER\":\"ppk00044a\"
+    #}]"
+    #open('private/fillable/input.json', 'wb') do |f|
+    #  f << json
+    #end
+
+    #f = "CP1218(6-95).pdf"
+    #{}%x[ curl https://pdfprocess.datalogics.com/api/actions/fill/form --insecure --form 'application={"id": "50b3c3f6", "key": "0c6061fd77d7c26c640ca99331f44897"}' --form input=@"private/fillable/#{f}" --form formsData=@private/fillable/input.json --form flatten=true --output private/fillable/out.zip ]
+
+    #redirect_to Policy.find(4)
+  end
+
   def viewPDF
     send_file "generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end

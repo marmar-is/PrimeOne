@@ -6,5 +6,4 @@ class User < ActiveRecord::Base
          :confirmable
 
   # Associations
-  #has_many :tasks, dependent: :destroy
 end
