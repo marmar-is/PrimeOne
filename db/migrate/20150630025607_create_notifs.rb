@@ -5,6 +5,7 @@ class CreateNotifs < ActiveRecord::Migration
       t.belongs_to :user
 
       t.string :message, default: false
+      t.string :message_type, default: ''
       t.boolean :seen, default: false
       #t.string :number
       #t.string :status

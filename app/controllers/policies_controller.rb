@@ -43,7 +43,11 @@ class PoliciesController < ApplicationController
   # PATCH/PUT /policies/1.json
   def update
     if policy_params.has_key?("status")
-      Notif.create!(policy:@policy, user: current_user, message:"NUMBER is now STATUS")
+      User.all.each do |u|
+        if !Notif.where(user: u, message_type: 'new_status').any?
+          Notif.create!(policy:@policy, user: u, message_type: 'new_status')
+        end
+      end
     end
 
     respond_to do |format|

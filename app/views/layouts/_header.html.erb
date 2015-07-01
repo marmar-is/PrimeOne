@@ -42,9 +42,9 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
                   <i class="fa fa-bell"></i>
-                  <!--<span class="badge badge-success pull-right"><%#= @tasks.count != 0 ? @tasks.count : '' %></span>-->
+                  <span class="badge badge-success pull-right"><%= @notifs.count != 0 ? @notifs.count : '' %></span>
                 </a>
-                <%= render partial: 'layouts/notifs' %>
+                <%= render partial: 'notifs/notifs' %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete,

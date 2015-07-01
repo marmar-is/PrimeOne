@@ -9,14 +9,14 @@
     </li>
     <li class="dropdown-menu-list slimscroll tasks">
         <ul class="list-unstyled">
-          <% @tasks.each do |task| %>
+          <% @notifs.each do |notif| %>
             <li>
-              <%= link_to policy_path(Policy.find_by_number(task.name)) do %>
-              <div class="task-icon badge badge-success">
+              <%= link_to notif_seen_path(notif), method: :put, remote: true do %>
+                <div class="task-icon badge badge-success">
                   <i class="fa fa-archive"></i>
                 </div>
                 <!--<span style="font-size:10px;" class="badge badge-roundless badge-default pull-right"><%#= time_ago_in_words(notif.created_at) %></span>-->
-                <p style="fontsize:10px; color:#6A6A6A" class="taskdetails"><%= "#{notif.name} is now #{notif.status}" %></p>
+                <p style="fontsize:10px; color:#6A6A6A" class="taskdetails"><%= translate_message(notif.message_type, notif.policy) %></p>
               <% end %>
             </li>
           <% end %>

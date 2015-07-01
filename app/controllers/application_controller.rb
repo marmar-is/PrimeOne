@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   def set_tasks
     if user_signed_in?
       @notifs = current_user.notifs.where(seen: false)
-      #current_user.get_notifs
     end
   end
 end
