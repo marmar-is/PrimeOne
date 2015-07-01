@@ -13,7 +13,7 @@
     </li>
     <li class="dropdown-menu-list slimscroll tasks">
         <ul class="list-unstyled">
-          <% @notifs.each do |notif| %>
+          <% @notifs.first(5).each do |notif| %>
             <li>
               <%= link_to notif_seen_path(notif), method: :put do %>
                 <div class="task-icon badge badge-success">
