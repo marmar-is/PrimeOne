@@ -1,10 +1,6 @@
 class Notif < ActiveRecord::Base
   # Associations
-  #belongs_to :policy
-  #has_many :users
-
-  def seen_by?(u)
-    #return self.users.include?(u)
-  end
+  has_many :user_notifs
+  has_many :users, through: :user_notifs
 
 end
