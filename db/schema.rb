@@ -116,10 +116,8 @@ ActiveRecord::Schema.define(version: 20150630025607) do
   add_index "locations", ["policy_id"], name: "index_locations_on_policy_id", using: :btree
 
   create_table "notifs", force: :cascade do |t|
-    t.string   "number"
-    t.string   "message"
-    t.string   "status"
     t.integer  "policy_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

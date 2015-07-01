@@ -1,13 +1,16 @@
 class Policy < ActiveRecord::Base
   # Callbacks
-  after_save :notify_status
+  #after_save :notify_status
+
   # Validations
   validates :number, presence: true, uniqueness: true
   validates :code, presence: true, uniqueness: true
 
   # Associations
   belongs_to :broker
-  #has_one :notif
+
+  has_many :notifs
+  has_many :users, through: :notifs
 
   has_one :property, dependent: :destroy
   has_one :gl, dependent: :destroy
@@ -20,7 +23,6 @@ class Policy < ActiveRecord::Base
   accepts_nested_attributes_for :gl
   accepts_nested_attributes_for :auto
   accepts_nested_attributes_for :locations
-
 
   private
     def notify_status
