@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626023403) do
+ActiveRecord::Schema.define(version: 20150630025607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20150626023403) do
 
   add_index "locations", ["policy_id"], name: "index_locations_on_policy_id", using: :btree
 
+  create_table "notifs", force: :cascade do |t|
+    t.integer  "policy_id"
+    t.integer  "user_id"
+    t.string   "message",      default: "f"
+    t.string   "message_type", default: ""
+    t.boolean  "seen",         default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
   create_table "policies", force: :cascade do |t|
     t.string   "number",         default: ""
     t.string   "status",         default: "POPULATED"
@@ -152,14 +162,6 @@ ActiveRecord::Schema.define(version: 20150626023403) do
   end
 
   add_index "properties", ["policy_id"], name: "index_properties_on_policy_id", using: :btree
-
-  create_table "tasks", force: :cascade do |t|
-    t.string   "name"
-    t.string   "status"
-    t.boolean  "seen"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

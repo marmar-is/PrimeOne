@@ -28,7 +28,7 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive">
-              <table id="policy" class="display table dataTable" style="width: 100%; cellspacing: 0;">
+              <table id="example" class="display table dataTable" style="width: 100%; cellspacing: 0;">
                 <thead>
                   <tr>
                     <th>Policy Number</th>
@@ -53,13 +53,13 @@
                 </tfoot>
                 <tbody>
                   <% @policies.each do |policy| %>
-                    <tr>
+                    <tr id="##{policy.code}">
                       <td><%= link_to policy.number, policy_path(policy) %></td>
                       <td><%= policy.code %></td>
                       <td><%= policy.name %></td>
                       <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
                       <td><%= link_to policy.status, "#", id:'status', class: "editable editable-clickable",
-                      data: { url: "/policies/#{policy.id}", pk: "#{policy.id}",
+                      data: { url: "/policies/#{policy.id}/update_status", pk: "#{policy.id}",
                       title: "Select Status", type: "select", value: policy.status } %></td>
                       <td>
                         <div class="input-group">

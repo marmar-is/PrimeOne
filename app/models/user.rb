@@ -6,5 +6,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   # Associations
-  #has_many :tasks, dependent: :destroy
+  has_many :notifs
+  has_many :policies, through: :notifs
+
 end

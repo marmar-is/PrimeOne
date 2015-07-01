@@ -14,11 +14,12 @@ Rails.application.routes.draw do
   resources :policies do
     member do
       get 'pdf'
-      get 'generate'
       get 'viewPDF'
-      put 'fillForm'
+      put 'generate'
+      #get 'datalogic'
       put 'update_forms'
       put 'populate'
+      patch 'update_status'
     end
 
     collection do
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
   end
 
   resources :brokers, only: [ :index ]
+
+  put 'seen/:id', to: 'notifs#seen', as: 'notif_seen'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
