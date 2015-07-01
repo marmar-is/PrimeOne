@@ -118,8 +118,10 @@ ActiveRecord::Schema.define(version: 20150630025607) do
   create_table "notifs", force: :cascade do |t|
     t.integer  "policy_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "message",    default: "f"
+    t.boolean  "seen",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "policies", force: :cascade do |t|

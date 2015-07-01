@@ -1,6 +1,5 @@
 class Policy < ActiveRecord::Base
   # Callbacks
-  #after_save :notify_status
 
   # Validations
   validates :number, presence: true, uniqueness: true
@@ -24,11 +23,4 @@ class Policy < ActiveRecord::Base
   accepts_nested_attributes_for :auto
   accepts_nested_attributes_for :locations
 
-  private
-    def notify_status
-      if self.status_changed?
-        #Task.where(name: self.number).destroy_all
-        #Task.create(name: self.number, status: self.status)
-      end
-    end
 end

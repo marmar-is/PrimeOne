@@ -1,6 +1,7 @@
 class PoliciesController < ApplicationController
   before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf, :generate, :update_forms, :populate, :fillForm, :viewPDF]
 
+
   # GET /policies
   # GET /policies.json
   def index
@@ -41,6 +42,10 @@ class PoliciesController < ApplicationController
   # PATCH/PUT /policies/1
   # PATCH/PUT /policies/1.json
   def update
+    if policy_params.has_key?("status")
+      Notif.create!(policy:@policy, user: current_user, message:"NUMBER is now STATUS")
+    end
+
     respond_to do |format|
       if @policy.update(policy_params)
         #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully updated.' }
