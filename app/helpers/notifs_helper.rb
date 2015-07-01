@@ -1,7 +1,7 @@
 module NotifsHelper
   # translate a given message
-  # NUMBER --> policy's number
-  # STATUS --> policy's status
+  # new_status --> NUMBER is now STATUS
+  # unrecognized --> Have a Good Day, Sir!
   def translate_message(t, p)
     case t
     when "new_status"

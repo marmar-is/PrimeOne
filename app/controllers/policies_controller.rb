@@ -45,7 +45,6 @@ class PoliciesController < ApplicationController
   def update
     respond_to do |format|
       if @policy.update(policy_params)
-        #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully updated.' }
         format.html { render :show, notice: 'Policy was successfully updated.' }
         format.json { render :show, status: :ok, location: @policy }
       else
@@ -55,23 +54,14 @@ class PoliciesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /policies/1/update_status
+  # Essentially the same as update, but only called when status is updated
   def update_status
-    User.where.not(id: current_user).each do |u|
-      n = Notif.where(user: u, message_type: 'new_status')
-      if n.count == 0
-        Notif.create!(policy:@policy, user: u, message_type: 'new_status')
-      elsif n.count == 1
-        n.first.update(seen: false)
-      else
-        puts "There's been an error!"
-      end
-    end
+    create_notif('new_status')
 
     respond_to do |format|
       if @policy.update(policy_params)
         format.js
-        #format.html { render :show, notice: 'Policy was successfully updated.' }
-        #format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
@@ -112,7 +102,6 @@ class PoliciesController < ApplicationController
 
   #PUT /policies/1/generate
   def generate
-    #@countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
     pdf = WickedPdf.new.pdf_from_string(html)
 
@@ -186,22 +175,9 @@ class PoliciesController < ApplicationController
 
     @policy.update(status: 'GENERATED') # policy needs review
 
-    #redirect_to @policy
+    create_notif('new_status')
+
     redirect_to review_policies_path
-  end
-
-  def datalogic
-    #json = "[{
-    #  \"POLICYNUMBER\":\"ppk00044a\"
-    #}]"
-    #open('private/fillable/input.json', 'wb') do |f|
-    #  f << json
-    #end
-
-    #f = "CP1218(6-95).pdf"
-    #{}%x[ curl https://pdfprocess.datalogics.com/api/actions/fill/form --insecure --form 'application={"id": "50b3c3f6", "key": "0c6061fd77d7c26c640ca99331f44897"}' --form input=@"private/fillable/#{f}" --form formsData=@private/fillable/input.json --form flatten=true --output private/fillable/out.zip ]
-
-    #redirect_to Policy.find(4)
   end
 
   def viewPDF
@@ -239,6 +215,19 @@ class PoliciesController < ApplicationController
       :expiry, :org, :dba, :biztype, :street, :city, :state, :zip, :total_premium,
       :comment
       )
+    end
+
+    def create_notif(t)
+      User.where.not(id: current_user).each do |u|
+        n = Notif.where(user: u, message_type: t)
+        if n.count == 0
+          Notif.create!(policy:@policy, user: u, message_type: t)
+        elsif n.count == 1
+          n.first.update(seen: false)
+        else
+          puts "There's been an error!"
+        end
+      end
     end
 
     # Find the forms necessary for this policy
@@ -324,5 +313,19 @@ class PoliciesController < ApplicationController
       end
 
       p.save
+    end
+
+    def datalogic
+      #json = "[{
+      #  \"POLICYNUMBER\":\"ppk00044a\"
+      #}]"
+      #open('private/fillable/input.json', 'wb') do |f|
+      #  f << json
+      #end
+
+      #f = "CP1218(6-95).pdf"
+      #{}%x[ curl https://pdfprocess.datalogics.com/api/actions/fill/form --insecure --form 'application={"id": "50b3c3f6", "key": "0c6061fd77d7c26c640ca99331f44897"}' --form input=@"private/fillable/#{f}" --form formsData=@private/fillable/input.json --form flatten=true --output private/fillable/out.zip ]
+
+      #redirect_to Policy.find(4)
     end
 end
