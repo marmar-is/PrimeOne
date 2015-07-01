@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       #get 'datalogic'
       put 'update_forms'
       put 'populate'
+      patch 'update_status'
     end
 
     collection do

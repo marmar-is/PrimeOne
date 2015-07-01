@@ -21,7 +21,7 @@
       <td>Status</td>
       <td>
         <%= link_to @policy.status, "#", id:'status', class: "editable editable-clickable",
-        data: { url: "/policies/#{@policy.id}", pk: "#{@policy.id}",
+        data: { url: "/policies/#{@policy.id}/update_status", pk: "#{@policy.id}",
         title: "Select Status", type: "select", value: @policy.status } %>
       </td>
     </tr>

@@ -1,5 +1,6 @@
 class PoliciesController < ApplicationController
-  before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf, :generate, :update_forms, :populate, :fillForm, :viewPDF]
+  before_action :set_policy, only: [:show, :edit, :update, :destroy, :pdf,
+    :generate, :update_forms, :populate, :fillForm, :viewPDF, :update_status]
 
 
   # GET /policies
@@ -42,19 +43,35 @@ class PoliciesController < ApplicationController
   # PATCH/PUT /policies/1
   # PATCH/PUT /policies/1.json
   def update
-    if policy_params.has_key?("status")
-      User.all.each do |u|
-        if !Notif.where(user: u, message_type: 'new_status').any?
-          Notif.create!(policy:@policy, user: u, message_type: 'new_status')
-        end
-      end
-    end
-
     respond_to do |format|
       if @policy.update(policy_params)
         #format.html { redirect_to policy_path(@policy), notice: 'Policy was successfully updated.' }
         format.html { render :show, notice: 'Policy was successfully updated.' }
         format.json { render :show, status: :ok, location: @policy }
+      else
+        format.html { render :edit }
+        format.json { render json: @policy.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_status
+    User.where.not(id: current_user).each do |u|
+      n = Notif.where(user: u, message_type: 'new_status')
+      if n.count == 0
+        Notif.create!(policy:@policy, user: u, message_type: 'new_status')
+      elsif n.count == 1
+        n.first.update(seen: false)
+      else
+        puts "There's been an error!"
+      end
+    end
+
+    respond_to do |format|
+      if @policy.update(policy_params)
+        format.js
+        #format.html { render :show, notice: 'Policy was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @policy }
       else
         format.html { render :edit }
         format.json { render json: @policy.errors, status: :unprocessable_entity }
