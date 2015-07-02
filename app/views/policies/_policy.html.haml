@@ -1,0 +1,7 @@
+%tr
+  %td= link_to policy.number, policy_path(policy)
+  %td= policy.code
+  %td{width:'35%'}= policy.name
+  %td= policy.try(:effective).strftime('%m/%d/%Y')
+  %td= policy.broker.try(:name) || "None"
+  %td= policy.status

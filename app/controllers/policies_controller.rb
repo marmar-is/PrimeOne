@@ -8,7 +8,7 @@ class PoliciesController < ApplicationController
   def index
     @policies = Policy.all
 
-    @policy = Policy.new
+    @broker_options = Broker.select([:id, :name]).collect{ |b| [b.name, b.id] }
   end
 
   # GET /policies/1

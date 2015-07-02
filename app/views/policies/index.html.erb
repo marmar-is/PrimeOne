@@ -55,13 +55,8 @@
                         <input type="text" id="effective-input" class="form-control date-picker" placeholder="Effective Date" required>
                       </div>
 
-                      <!--"<% Broker.select([:id, :name]).each do |b| %>"
-                        brokers.push({ id: "<%= b.id %>", text: "<%= b.name %>"})
-                      "<% end %>"-->
-
                       <div class="form-group">
-                        <%= select_tag 'broker_id-input', options_for_select(Broker.select([:id, :name]).collect{ |b| [b.name, b.id] }), class:'form-control' %>
-                        <!--<input type="text" id="effective-input" class="form-control date-picker" placeholder="Effective Date" required>-->
+                        <%= select_tag 'broker_id-input', options_for_select(@broker_options), class:'form-control' %>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -96,16 +91,16 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <% @policies.each do |policy| %>
-                  <tr>
-                    <td><%= link_to policy.number, policy_path(policy) %></td>
-                    <td><%= policy.code %></td>
-                    <td width="35%"><%= policy.name %></td>
-                    <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
-                    <td><%= policy.broker.try(:name) || "None" %></td>
-                    <td><%= policy.status %></td>
-                  </tr>
-                  <% end %>
+                  <%- @policies.each do |policy| %>
+                    <tr>
+                      <td><%= link_to policy.number, policy_path(policy) %></td>
+                      <td><%= policy.code %></td>
+                      <td width="35%"><%= policy.name %></td>
+                      <td><%= policy.try(:effective).strftime('%m/%d/%Y') %></td>
+                      <td><%= policy.broker.try(:name) || "None" %></td>
+                      <td><%= policy.status %></td>
+                    </tr>
+                  <% end -%>
                 </tbody>
               </table>
             </div>
