@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore the generated files
-/generated
+/generated/*
 
 # Ignore these files
 /not
