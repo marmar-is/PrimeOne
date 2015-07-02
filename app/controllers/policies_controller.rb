@@ -7,6 +7,8 @@ class PoliciesController < ApplicationController
   # GET /policies.json
   def index
     @policies = Policy.all
+
+    @policy = Policy.new
   end
 
   # GET /policies/1

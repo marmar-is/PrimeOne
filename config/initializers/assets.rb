@@ -36,7 +36,10 @@ Rails.application.config.assets.precompile += %w(
 datatables/css/jquery.datatables.css
 datatables/css/jquery.datatables_themeroller.css
 datatables/js/jquery.datatables.min.js
-pages/table-data.js )
+pages/table-data.js
+bootstrap-datepicker/css/datepicker3.css
+bootstrap-datepicker/js/bootstrap-datepicker.js
+)
 
 # Show Page Assets (policies) (css & js)
 Rails.application.config.assets.precompile += %w(

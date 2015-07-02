@@ -1,8 +1,13 @@
 $(document).ready(function() {
 
-  // Datatables
-  $('#example').DataTable();
+  $.fn.isValid = function(){
+      return this[0].checkValidity()
+  }
 
+  // Datatables
+  var t = $('#example').DataTable();
+
+  /*
   var table = $('#example2').DataTable({
     "columnDefs": [
       { "visible": false, "targets": 2 }
@@ -25,39 +30,64 @@ $(document).ready(function() {
       } );
     }
   });
+  */
+
+  $('#add-row').on( 'click', function () {
+    if($("#add-row-form").isValid()) {
+      /*var number_ = $('#number-input').val(),
+      code_ = $('#code-input').val(),
+      name_ = $('#name-input').val(),
+      effective_ = $('#effective-input').val(),
+      broker_id_ = $('#broker_id-input').val(),
+      status_ = 'EMPTY';*/
+
+      console.log($('#effective-input').val());
+
+      $.ajax({
+        type: "POST",
+        url: "/policies",
+        dataType: "json",
+        data:{
+          policy: {
+            number: $('#number-input').val(),
+            code: $('#code-input').val(),
+            name: $('#name-input').val(),
+            effective: $('#effective-input').val(),
+            broker_id: $('#broker_id-input').val(),
+            status: 'EMPTY'
+          }
+        },
+        success: function(data){
+          console.log(data);
+          /*t.row.add([
+            number,
+            code,
+            name,
+            effective,
+            broker,
+            status
+          ]);*/
+          //$("#posts").append('<tr><td>data.title</td>
+          //<td>data.body</td>
+          //<td>data.author</td></tr>');
+          $('.modal').modal('hide');
+        },
+        error: function(data){
+          console.log('error');
+        }
+      });
+
+      return false;
+    }
+  });
+
+  $('.date-picker').datepicker({
+    format: "yyyy-mm-dd",
+    orientation: "top auto",
+    autoclose: true
+  });
 });
 
 /*
-$.fn.isValid = function(){
-    return this[0].checkValidity()
-}
-
 var t = $('#example3').DataTable();
-
-
-$('#add-row').on( 'click', function () {
-    if($("#add-row-form").isValid()) {
-        var name = $('#name-input').val(),
-            position = $('#position-input').val(),
-            age = $('#age-input').val(),
-            date = $('#date-input').val(),
-            salary = $('#salary-input').val();
-        t.row.add( [
-            name,
-            position,
-            age,
-            date,
-            '$' + salary
-        ] ).draw();
-
-        $('.modal').modal('hide');
-
-        return false;
-    }
-});
-
-$('.date-picker').datepicker({
-    orientation: "top auto",
-    autoclose: true
-});
 */
