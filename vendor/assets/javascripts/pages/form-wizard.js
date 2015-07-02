@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var $validator = $("#wizardForm").validate({
+    /*var $validator = $("#wizardForm").validate({
         rules: {
             exampleInputName: {
                 required: true
@@ -47,8 +47,8 @@ $(document).ready(function() {
                 number: true
             }
         }
-    });
- 
+    });*/
+
     $('#rootwizard').bootstrapWizard({
         'tabClass': 'nav nav-tabs',
         onTabShow: function(tab, navigation, index) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
             }
         },
     });
-    
+
     $('.date-picker').datepicker({
         orientation: "top auto",
         autoclose: true

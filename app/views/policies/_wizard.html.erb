@@ -54,9 +54,9 @@
     </li>
 
   </ul>
-  <!--<div class="progress progress-sm m-t-sm">
+  <div class="progress progress-sm m-t-sm">
     <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-  </div>-->
+  </div>
   <%= form_tag generate_policy_path(@policy), id:'wizardForm', method: :put do %><!--<form id="wizardForm">-->
     <div class="tab-content">
       <div class="tab-pane fade" id="taba">
@@ -104,3 +104,7 @@
     </div>
   <% end -%><!--</form>-->
 </div> <!-- Root Wizard -->
+
+<%= content_for :js_includes do %>
+
+<% end %>
