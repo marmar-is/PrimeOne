@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150630025607) do
 
   create_table "policies", force: :cascade do |t|
     t.string   "number",         default: ""
-    t.string   "status",         default: "POPULATED"
+    t.string   "status",         default: "EMPTY"
     t.string   "code",           default: ""
     t.string   "name",           default: ""
     t.date     "effective",      default: '1995-11-08'
