@@ -25,7 +25,7 @@ CSV.foreach('private/data/policy.csv', { headers: true }) do |r|
   Policy.create!(number:r[0], code:r[1], effective: Date.strptime(r[2], '%m/%d/%y'),
   expiry:Date.strptime(r[3], '%m/%d/%y'), name:r[5], org:r[6], dba:r[7],
   biztype:r[8], street:r[9], city:r[10], state:r[11], zip:r[12],
-  total_premium:r[13],
+  total_premium:r[13], status: "POPULATED"
   broker_id: Broker.find_by_code(r[4]).try(:id)
   )
 end
