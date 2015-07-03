@@ -119,7 +119,7 @@ class PoliciesController < ApplicationController
 
     all_fills = [ "CP1218(6-95).pdf", "CG2011(1-96).pdf", "CG2018(11-85).pdf",
       "CG2026(7-04).pdf", "CG2028(7-04).pdf", "CG2144(7-98).pdf",
-      "CP0440(6-95).pdf", "IL0415(4-98).pdf" ]
+      "CP0440(6-95).pdf", "IL0415(4-98).pdf", "CR3510(8-07).pdf" ]
 
     active_fills = []
 

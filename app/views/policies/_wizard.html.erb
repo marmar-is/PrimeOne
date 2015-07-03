@@ -49,8 +49,14 @@
     </li>
     <% end -%>
 
+    <%- if @policy.crime_forms.include?("CR3510(8/07)") %>
+    <li role="presentation">
+      <a href="#tabj" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>CR3510</a>
+    </li>
+    <% end -%>
+
     <li role="presentation" class="active">
-      <a href="#tabj" data-toggle="tab"><i class="fa fa-check-circle m-r-xs"></i>Generate</a>
+      <a href="#tabk" data-toggle="tab"><i class="fa fa-check-circle m-r-xs"></i>Generate</a>
     </li>
 
   </ul>
@@ -91,7 +97,11 @@
         <%= render partial: 'policies/fillables/cg2144' %>
       </div>
 
-      <div class="tab-pane active fade in" id="tabj">
+      <div class="tab-pane fade" id="tabj">
+        <%= render partial: 'policies/fillables/cr3510' %>
+      </div>
+
+      <div class="tab-pane active fade in" id="tabk">
         <div class="text-center">
           <%= submit_tag "Generate for Review", class:"btn btn-prime-gold" %>
         </div>
@@ -104,7 +114,3 @@
     </div>
   <% end -%><!--</form>-->
 </div> <!-- Root Wizard -->
-
-<%= content_for :js_includes do %>
-
-<% end %>
