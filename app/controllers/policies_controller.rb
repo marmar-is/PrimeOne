@@ -187,6 +187,25 @@ class PoliciesController < ApplicationController
     send_file "generated/Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
+  # Upload / Populate
+  def populate
+    if (params[:file] != nil)
+      readWorkbook()
+    end
+
+    findForms()
+
+    respond_to do |format|
+      if @policy.save
+        format.html { render :show, notice: 'Policy was successfully populated' }
+        format.json { render :show, status: :ok, location: @policy }
+      else
+        format.html { render :edit }
+        format.json { render json: @policy.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def update_forms
     @policy = Policy.find(params[:id])
 
@@ -230,6 +249,44 @@ class PoliciesController < ApplicationController
         else
           puts "There's been an error!"
         end
+      end
+    end
+
+    # Read the workbook to fill out the policy
+    def readWorkbook
+      # open the speadsheet
+      workbook = Roo::Spreadsheet.open(params[:file], extension: :xlsx)
+
+      workbook.default_sheet = 'Rating'
+
+      @policy.effective= (workbook.cell('F',7) || "1995-11-08")
+      @policy.expiry = @policy.effective + 1.year
+
+      @policy.name= workbook.cell('C',3)
+      if @policy.name.downcase.include?('llc') || @policy.name.downcase.include?('limited')
+        @policy.org= "LLC"
+      elsif @policy.name.downcase.include?('corp') || @policy.name.downcase.include?('inc')
+        @policy.org= "Corporation"
+      end
+
+      @policy.dba= workbook.cell('B',4)
+      @policy.street= workbook.cell('C',5)
+      @policy.city= workbook.cell('B',6)
+      @policy.state= workbook.cell('G',6)
+      @policy.zip= workbook.cell('K',6)
+
+      @policy.locations.first.street= workbook.cell('C',10)
+      @policy.locations.first.city= workbook.cell('B',11)
+      @policy.locations.first.state= workbook.cell('G',11)
+      @policy.locations.first.zip= workbook.cell('K',11)
+
+
+      if workbook.cell('N',111).to_i > 0
+        @policy.total_premium= workbook.cell('N',111)
+
+      else
+        @policy.total_premium= workbook.cell('N',109)
+
       end
     end
 
