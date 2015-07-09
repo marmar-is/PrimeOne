@@ -22,7 +22,7 @@ $(document).ready(function() {
         dataType: "json",
         data:{
           policy: {
-            number: num,
+            number: num.toUpperCase(),
             code: c,
             name: n,
             effective: e,
@@ -32,10 +32,12 @@ $(document).ready(function() {
         },
         success: function(data){
           console.log('success');
+          console.log(data);
           var broker_names = ["Action GroupInc dba AG Ins Agy", "Al Bourdeau Insurance Svcs,Inc",
           "American Insurance Agency Grp", "Anchor Insurance Group Inc.", "Ann Arbor Insurance Assoc.,Inc", "ATB Insurance Agency", "Bencivenga Insurance", "Brown-Pixley Insurance Agency,", "Cantor Insurance Group, LLC", "Creative Insurance Solutions", "Custom Insurance Agency", "DDI Insurance Agency, LLC", "Fawaz Insurance Agency Inc.", "Frank Haddad Insurance Agency", "Great Lakes Ins Agency Assoc.", "HAD Insurance Associates", "Hallmark Agency, Inc.", "Hallmark Associates Insurance", "Harbor Country Insurance Agy", "Independent Insurance Services", "Insurance Advisors Inc.", "Insurance Providers of Michign", "JPS Insurance Agency LLC", "Kaplani Insurance Agency, Inc", "Kejbou Insurance Agency Inc.", "Lakepointe Ins. Agency, Inc.", "Lind and Lind Insurance Agency", "Macomb-Gerlach Agency, Inc.", "Metro Financial Services LLC", "Michigan Insurance Group", "Millennium Insurance & Invest", "Morris Insurance Group Inc", "Mourer Foster Inc.", "OakPointe Insurance Agency Inc", "Potter & Roose Ins. Flint", "Primary Insurance Agency", "Rye Agency, Inc.", "Shears II Insurance Agcy, Inc.", "Shoemaker Group Inc", "Signature Insurance", "Stu Garthe Agency, LLC", "T.A. Conrad Agency, Inc.", "Tabak Insurance Agency PLLC", "Tait Insurance Agency, Inc.", "Upper Penisula Ins. Agency Inc", "Viking Insurance Agency", "Walker Group"];
+          var num_link = "<a href=\"/policies/"+data.id+"\">"+num.toUpperCase()+"</a>";
           t.row.add([
-            num, c, n, e, broker_names[b-1], s
+            num_link, c, n, e, broker_names[b-1], s
           ]).draw();
 
           $('.modal').modal('hide');

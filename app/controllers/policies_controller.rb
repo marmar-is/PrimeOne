@@ -31,6 +31,13 @@ class PoliciesController < ApplicationController
   def create
     @policy = Policy.new(policy_params)
 
+    # create empty field models for the policy
+    # note: don't need location because I create when reading form workbook
+    @policy.build_property()
+    @policy.build_gl()
+    @policy.build_crime()
+    @policy.build_auto()
+
     respond_to do |format|
       if @policy.save
         format.html { redirect_to @policy, notice: 'Policy was successfully created.' }
@@ -197,6 +204,7 @@ class PoliciesController < ApplicationController
 
     respond_to do |format|
       if @policy.save
+        @policy.update(status: 'POPULATED')
         format.html { render :show, notice: 'Policy was successfully populated' }
         format.json { render :show, status: :ok, location: @policy }
       else
@@ -273,106 +281,181 @@ class PoliciesController < ApplicationController
       @policy.street= workbook.cell('C',5)
       @policy.city= workbook.cell('B',6)
       @policy.state= workbook.cell('G',6)
-      @policy.zip= workbook.cell('K',6)
+      @policy.zip= workbook.cell('K',6).to_i.to_s
 
-      @policy.locations.first.street= workbook.cell('C',10)
-      @policy.locations.first.city= workbook.cell('B',11)
-      @policy.locations.first.state= workbook.cell('G',11)
-      @policy.locations.first.zip= workbook.cell('K',11)
+      # Property
+      @policy.property.total= workbook.cell('M',41)
 
+      # GL
+      @policy.gl.limit_genagg= workbook.cell('F',67)
+      @policy.gl.limit_products= workbook.cell('F',68)
+      @policy.gl.limit_occurence= workbook.cell('F',69)
+      @policy.gl.limit_injury= workbook.cell('F',70)
+      @policy.gl.limit_fire= workbook.cell('F',71)
+      @policy.gl.limit_medical= workbook.cell('F',72)
 
+      # Crime
+      @policy.crime.total= workbook.cell('M',62)
+      @policy.crime.ded= workbook.cell('K',44)
+      @policy.crime.limit_theft= workbook.cell('F',47)
+      @policy.crime.limit_forgery= workbook.cell('F',48)
+      @policy.crime.limit_money= workbook.cell('F',49)
+      @policy.crime.limit_outside_robbery= workbook.cell('F',49)
+      @policy.crime.limit_safe_burglary= workbook.cell('F',50)
+      @policy.crime.limit_premises_burglary= workbook.cell('F',51)
+
+      # don't duplicate locations if you repopulate
+      # TODO: use finds & conditions to avoid destroy
+      @policy.locations.destroy_all
+
+      # Locations & Buildings
+      bldg_params = []
+      bldg_params << {
+        number: 1,
+        class_type: workbook.cell('C',76),
+        code: workbook.cell('H',76),
+        basis: workbook.cell('I',76),
+        basis_type: workbook.cell('K',76)
+      }
+
+      if (workbook.cell('A', 78) != nil)
+        bldg_params << {
+          number: 2,
+          class_type: workbook.cell('C',78),
+          code: workbook.cell('H',78),
+          basis: workbook.cell('I',78),
+          basis_type: workbook.cell('K',78)
+        }
+      end
+
+      loc_params = {
+        number: 1,
+        street: workbook.cell('C',10),
+        city: workbook.cell('B',11),
+        state: workbook.cell('G',11),
+        zip: workbook.cell('K',11).to_i.to_s,
+
+        total: workbook.cell('N',33),
+        loss_coverage: workbook.cell('D',12),
+        enhancement: workbook.cell('D',19),
+        mechanical: workbook.cell('D',20),
+        theft: workbook.cell('D',18),
+        spoilage: workbook.cell('F',17),
+        coins: workbook.cell('L',14),
+        valuation: workbook.cell('D',23),
+        ded: workbook.cell('B',15),
+        limt_bldg: workbook.cell('F',23),
+        limit_bpp: workbook.cell('F',24),
+        limit_earnings: workbook.cell('F',25),
+        limit_sign: workbook.cell('F',26),
+        limit_pumps: workbook.cell('F',27),
+        limit_canopies: workbook.cell('F',28),
+        indemnity: workbook.cell('D',25),
+
+        buildings_attributes: bldg_params
+      }
+      @policy.locations.create!(loc_params);
+
+      # Special Excel Versions
       if workbook.cell('N',111).to_i > 0
         @policy.total_premium= workbook.cell('N',111)
-
+        @policy.gl.total= workbook.cell('N',101)
+        @policy.auto.total= workbook.cell('N',109)
       else
         @policy.total_premium= workbook.cell('N',109)
-
+        @policy.gl.total= workbook.cell('N',99)
+        @policy.auto.total= workbook.cell('N',107)
       end
     end
 
     # Find the forms necessary for this policy
     def findForms
-      if !p.forms.include?('IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) ')
-        p.forms += 'IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) '
+      # reset forms
+      @policy.forms = ""
+      @policy.property_forms = ""
+      @policy.gl_forms = ""
+      @policy.auto_forms = ""
+      @policy.crime_forms = ""
+
+      if !@policy.forms.include?('IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) ')
+        @policy.forms += 'IL0003(9/08) IL0017(11/98) IL0286(9/08) IL0030(1/06) IL0031(1/06) '
       end
 
       # property
-      if p.property.total.to_i != 0 && !p.property_forms.include?("CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) ")
-        p.property_forms +=  "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) "
+      if @policy.property.total.to_i != 0 && !@policy.property_forms.include?("CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) ")
+        @policy.property_forms +=  "CP0010(6/07) CP0090(7/88) CP0120(1/08) CP0140(7/06) CP1032(8/08) IL0935(7/02) IL0953(1/08) CP1270(9/96) "
       end
 
-      if p.locations.first.limit_earnings.to_i != 0 && !p.property_forms.include?("CP0030(6/07) ")
-        p.property_forms +=  "CP0030(6/07) "
+      if @policy.locations.first.limit_earnings.to_i != 0 && !@policy.property_forms.include?("CP0030(6/07) ")
+        @policy.property_forms +=  "CP0030(6/07) "
       end
 
-      if p.locations.first.spoilage.to_i != 0 && !p.property_forms.include?("CP0440(6/95) ")
-        p.property_forms +=  "CP0440(6/95) "
+      if @policy.locations.first.spoilage.to_i != 0 && !@policy.property_forms.include?("CP0440(6/95) ")
+        @policy.property_forms +=  "CP0440(6/95) "
       end
 
-      if p.locations.first.loss_coverage.try(:downcase) == "basic" && !p.property_forms.include?("CP1010(6/07) ")
-        p.property_forms +=  "CP1010(6/07) "
-      elsif p.locations.first.loss_coverage.try(:downcase) == "broad" && !p.property_forms.include?("CP1020(6/07) ")
-        p.property_forms +=  "CP1020(6/07) "
-      elsif p.locations.first.loss_coverage.try(:downcase) == "special" && !p.property_forms.include?("CP1030(6/07) ")
-        p.property_forms +=  "CP1030(6/07) "
+      if @policy.locations.first.loss_coverage.try(:downcase) == "basic" && !@policy.property_forms.include?("CP1010(6/07) ")
+        @policy.property_forms +=  "CP1010(6/07) "
+      elsif @policy.locations.first.loss_coverage.try(:downcase) == "broad" && !@policy.property_forms.include?("CP1020(6/07) ")
+        @policy.property_forms +=  "CP1020(6/07) "
+      elsif @policy.locations.first.loss_coverage.try(:downcase) == "special" && !@policy.property_forms.include?("CP1030(6/07) ")
+        @policy.property_forms +=  "CP1030(6/07) "
       end
 
-      #if p.locations.first.limit_sign.to_i != 0 && !p.property_forms.include?("CP1440(6/07) ")
-      #  p.property_forms +=  "CP1440(6/07) "
+      #if @policy.locations.first.limit_sign.to_i != 0 && !@policy.property_forms.include?("CP1440(6/07) ")
+      #  @policy.property_forms +=  "CP1440(6/07) "
       #end
 
-      if p.locations.first.enhancement.to_i != 0 && !p.property_forms.include?("PO-PRP-3(12/13) ")
-        p.property_forms +=  "PO-PRP-3(12/13) "
+      if @policy.locations.first.enhancement.to_i != 0 && !@policy.property_forms.include?("PO-PRP-3(12/13) ")
+        @policy.property_forms +=  "PO-PRP-3(12/13) "
       end
 
       # crime
-      if p.crime.total.to_i != 0 && !p.crime_forms.include?("CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) ")
-        p.crime_forms +=  "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) "
+      if @policy.crime.total.to_i != 0 && !@policy.crime_forms.include?("CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) ")
+        @policy.crime_forms +=  "CR0021(5/06) CR0110(8/07) CR0246(8/07) CR0730(3/06) CR0731(3/06) IL0935(7/02) IL0953(1/08) "
       end
 
-      if p.crime.limit_theft.to_i != 0 && !p.crime_forms.include?("CR0029(5/06) ")
-        p.crime_forms +=  "CR0029(5/06) "
+      if @policy.crime.limit_theft.to_i != 0 && !@policy.crime_forms.include?("CR0029(5/06) ")
+        @policy.crime_forms +=  "CR0029(5/06) "
       end
 
-      if p.crime.limit_money.to_i != 0 && !p.crime_forms.include?("CR0405(8/07) ")
-        p.crime_forms +=  "CR0405(8/07) "
+      if @policy.crime.limit_money.to_i != 0 && !@policy.crime_forms.include?("CR0405(8/07) ")
+        @policy.crime_forms +=  "CR0405(8/07) "
       end
 
-      if p.crime.limit_safe_burglary.to_i != 0 && !p.crime_forms.include?("CR0405(8/07) ")
-        p.crime_forms +=  "CR0405(8/07) "
+      if @policy.crime.limit_safe_burglary.to_i != 0 && !@policy.crime_forms.include?("CR0405(8/07) ")
+        @policy.crime_forms +=  "CR0405(8/07) "
       end
 
-      if p.crime.limit_safe_burglary.to_i != 0 && !p.crime_forms.include?("PO-CR-1(10/10) ")
-        p.crime_forms +=  "PO-CR-1(10/10) "
+      if @policy.crime.limit_safe_burglary.to_i != 0 && !@policy.crime_forms.include?("PO-CR-1(10/10) ")
+        @policy.crime_forms +=  "PO-CR-1(10/10) "
       end
 
-      if p.crime.limit_safe_burglary.to_i != 0 && !p.crime_forms.include?("CR3510(8/07) ")
-        p.crime_forms +=  "CR3510(8/07) "
+      if @policy.crime.limit_safe_burglary.to_i != 0 && !@policy.crime_forms.include?("CR3510(8/07) ")
+        @policy.crime_forms +=  "CR3510(8/07) "
       end
 
-      if p.crime.limit_premises_burglary.to_i != 0 && !p.crime_forms.include?("CR3532(8/07) ")
-        p.crime_forms +=  "CR3532(8/07) "
+      if @policy.crime.limit_premises_burglary.to_i != 0 && !@policy.crime_forms.include?("CR3532(8/07) ")
+        @policy.crime_forms +=  "CR3532(8/07) "
       end
 
-      if p.crime.limit_premises_burglary.to_i != 0 && !p.crime_forms.include?("CR0407(8/07) ")
-        p.crime_forms +=  "CR0407(8/07) "
+      if @policy.crime.limit_premises_burglary.to_i != 0 && !@policy.crime_forms.include?("CR0407(8/07) ")
+        @policy.crime_forms +=  "CR0407(8/07) "
       end
 
       # general liability
-      if p.gl.total.to_i != 0 && !p.gl_forms.include?("CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) ")
-        p.gl_forms +=  "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) "
+      if @policy.gl.total.to_i != 0 && !@policy.gl_forms.include?("CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) ")
+        @policy.gl_forms +=  "CG0001(12/07) CG0068(5/09) CG0099(11/85) CG0168(12/4) CG2101(11/85) CG2146(7/98) CG2147(12/07) CG2149(9/99) CG2167(12/04) CG2175(6/08) CG2190(1/06) CG2258(11/85) CG2407(1/96) IL0021(9/08) PO-GL-5(5/12) "
       end
 
-      if p.gl.water_gas_tank.try(:downcase) == "yes" && !p.gl_forms.include?("PO-GL-WIG(12/13) ")
-        p.gl_forms +=  "PO-GL-WIG(12/13) "
+      if @policy.gl.water_gas_tank.try(:downcase) == "yes" && !@policy.gl_forms.include?("PO-GL-WIG(12/13) ")
+        @policy.gl_forms +=  "PO-GL-WIG(12/13) "
       end
 
       # auto
-      if p.auto.total.to_i != 0 && !p.auto_forms.include?("CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) ")
-        p.auto_forms +=  "CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) "
+      if @policy.auto.total.to_i != 0 && !@policy.auto_forms.include?("CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) ")
+        @policy.auto_forms +=  "CA0110(11/06) CA0217(3/94) CA0001(3/06) CA2384(1/06) PO-CA-1(5/12) "
       end
-
-      p.save
     end
 
     def datalogic

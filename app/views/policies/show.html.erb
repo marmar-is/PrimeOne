@@ -46,7 +46,7 @@
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
-            <%= form_tag populate_policy_path, class:'dropzone', multipart: true do %>
+            <%= form_tag populate_policy_path, class:'dropzone', multipart: true, method: :put do %>
               <div class="fallback">
                 <input name="file" type="file" />
               </div>
