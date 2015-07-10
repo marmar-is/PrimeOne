@@ -23,7 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby, group: :production
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -57,7 +57,7 @@ group :development, :test do
 end
 
 # Integration with heroku
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 
 # Work with spreadsheets
 gem 'roo', '~> 2.0.0'
