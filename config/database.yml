@@ -80,8 +80,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  #<<: *default
-  #database: PrimeOne_production
-  #username: PrimeOne
-  #password: <%= ENV['PRIMEONE_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  host: <%= ENV['THORSON_DB_HOST'] %>
+  port: <%= ENV['THORSON_DB_PORT'] %>
+  database: <%= ENV['THORSON_DB_DB'] %>
+  username: <%= ENV['THORSON_DB_USER'] %>
+  password: <%= ENV['THORSON_DB_PASS'] %>
