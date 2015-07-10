@@ -281,7 +281,7 @@ class PoliciesController < ApplicationController
       @policy.street= workbook.cell('C',5)
       @policy.city= workbook.cell('B',6)
       @policy.state= workbook.cell('G',6)
-      @policy.zip= workbook.cell('K',6).to_i.to_s
+      @policy.zip= workbook.cell('K',6).to_s.split('.')[0]
 
       # Property
       @policy.property.total= workbook.cell('M',41)
@@ -313,7 +313,7 @@ class PoliciesController < ApplicationController
       bldg_params << {
         number: 1,
         class_type: workbook.cell('C',76),
-        code: workbook.cell('H',76),
+        code: workbook.cell('H',76).to_s.split('.')[0],
         basis: workbook.cell('I',76),
         basis_type: workbook.cell('K',76)
       }
@@ -322,7 +322,7 @@ class PoliciesController < ApplicationController
         bldg_params << {
           number: 2,
           class_type: workbook.cell('C',78),
-          code: workbook.cell('H',78),
+          code: workbook.cell('H',78).to_s.split('.')[0],
           basis: workbook.cell('I',78),
           basis_type: workbook.cell('K',78)
         }
@@ -333,7 +333,7 @@ class PoliciesController < ApplicationController
         street: workbook.cell('C',10),
         city: workbook.cell('B',11),
         state: workbook.cell('G',11),
-        zip: workbook.cell('K',11).to_i.to_s,
+        zip: workbook.cell('K',11).to_s.split('.')[0],
 
         total: workbook.cell('N',33),
         loss_coverage: workbook.cell('D',12),

@@ -51,7 +51,7 @@
                 <input name="file" type="file" />
               </div>
               <div style="float: right;">
-                <%= submit_tag "Populate", class:"btn btn-prime-gold" %>
+                <%= link_to "Populate", policy_path(@policy), class:'btn btn-prime-gold', 'data-no-turbolink' => true  %>
               </div>
             <% end %>
           </div>
@@ -59,7 +59,7 @@
       </div><!-- col-md-12 -->
     </div><!-- Row -->
 
-    <div class="row">
+    <div id="show_body" class="row">
       <div class="col-md-12">
         <div class="panel panel-white">
           <div class="panel-body">
@@ -117,6 +117,7 @@
         </div>
       </div>
     </div><!-- Row -->
+
   </div><!-- Main Wrapper -->
 
   <!-- Javascripts -->
