@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: PrimeOne_production
-  username: PrimeOne
-  password: <%= ENV['PRIMEONE_DATABASE_PASSWORD'] %>
+  #database: PrimeOne_production
+  #username: PrimeOne
+  #password: <%= ENV['PRIMEONE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
