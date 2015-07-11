@@ -5,7 +5,6 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 
 require 'capistrano/rails'
-require 'capistrano/rails/console'
 require 'capistrano/rails/collection'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
