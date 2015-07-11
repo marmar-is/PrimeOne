@@ -1,7 +1,7 @@
 # Change these
 server '104.154.32.141', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@example.com:marmar-is/PrimeOne.git'
+set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
 set :application,     'PrimeOne'
 set :user,            'Matthew'
 set :puma_threads,    [4, 16]

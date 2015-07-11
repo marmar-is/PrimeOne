@@ -15,6 +15,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Default mailer url
+  config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: 'primeone.heroku.com' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
