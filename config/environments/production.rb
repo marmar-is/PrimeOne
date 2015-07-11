@@ -16,7 +16,7 @@ Rails.application.configure do
 
   # Default mailer url
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'primeone.heroku.com' }
+  config.action_mailer.default_url_options = { host: 'marmar-is.com' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
