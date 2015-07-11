@@ -81,13 +81,8 @@ test:
 #
 production:
   <<: *default
-  host: 130.211.120.64
-  port: 5432
-  database: PrimeOne_production
-  username: postgres
-  password: shark33_Mark
-  #host: <%= ENV['THORSON_DB_HOST'] %>
-  #port: <%= ENV['THORSON_DB_PORT'] %>
-  #database: <%= ENV['THORSON_DB_DB'] %>
-  #username: <%= ENV['THORSON_DB_USER'] %>
-  #password: <%= ENV['THORSON_DB_PASS'] %>
+  host: <%= ENV['THORSON_DB_HOST'] %>
+  port: <%= ENV['THORSON_DB_PORT'] %>
+  database: <%= ENV['THORSON_DB_DB'] %>
+  username: <%= ENV['THORSON_DB_USER'] %>
+  password: <%= ENV['THORSON_DB_PASS'] %>
