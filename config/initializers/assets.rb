@@ -16,6 +16,12 @@ Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "im
 #Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts")
 #Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf )
 
+# General Assets
+Rails.application.config.assets.precompile += %w(
+policies.scss
+custom.scss
+)
+
 # Template Assets (all pages) (js)
 Rails.application.config.assets.precompile += %w(
 pace-master/pace.min.js
