@@ -75,7 +75,6 @@ gem 'combine_pdf'
 
 # PDF Filling
 gem 'pdf-forms'
-#gem 'pdf_ravager', '~> 0.2.2'
 
 # randomize date (and other things)
 gem 'ish', '~> 0.0.1'

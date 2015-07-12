@@ -79,7 +79,18 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
-load 'lib/tasks/loads.rake'
+namespace :load do
+  desc 'Perform rake load:forms (Add mandatory forms retroactively)'
+  task :forms do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'load:forms'
+        end
+      end
+    end
+  end
+end
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
