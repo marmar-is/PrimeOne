@@ -82,6 +82,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   WickedPdf.config = {
-    exe_path: '/usr/bin/wkhtmltopdf'
+    exe_path: '/usr/local/bin/wkhtmltopdf.sh'
   }
 end
