@@ -67,7 +67,7 @@ gem 'haml'
 
 # PDF Generation
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', group: :development
+gem 'wkhtmltopdf-binary'
 #gem 'wkhtmltopdf-heroku', group: :production
 
 # PDF Combination
