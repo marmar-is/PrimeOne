@@ -78,7 +78,7 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
-
+=begin
 namespace :load do
   desc 'Perform rake load:forms (Add mandatory forms retroactively)'
   task :forms do
@@ -91,7 +91,7 @@ namespace :load do
     end
   end
 end
-
+=end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
