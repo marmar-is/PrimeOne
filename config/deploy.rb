@@ -83,13 +83,19 @@ namespace :rails do
   desc "Run the console on a remote server."
   task :console do
     on roles(:app) do |h|
-      execute_interactively "RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console", h.user
+      execute_interactively "RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console"
     end
   end
 
-  def execute_interactively(command, user)
-    info "Connecting with #{user}@#{host}"
-    cmd = "ssh #{user}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/current && #{command}'"
+  task :log do
+    on roles(:app) do |h|
+      execute_interactively "tail -f log/#{fetch(:rails_env)}.log"
+    end
+  end
+
+  def execute_interactively(command)
+    info "Connecting with #{fetch(:user)}@#{host}"
+    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/current && #{command}'"
     exec cmd
   end
 end
