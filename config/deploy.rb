@@ -87,6 +87,7 @@ namespace :rails do
     end
   end
 
+  desc "View the logs on a remote server"
   task :log do
     on roles(:app) do |h|
       execute_interactively "tail -f log/#{fetch(:rails_env)}.log"
