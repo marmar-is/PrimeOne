@@ -16,7 +16,7 @@ Rails.application.configure do
 
   # Default mailer url
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'marmar-is.com' }
+  config.action_mailer.default_url_options = { host: 'thorsongroup.com' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
