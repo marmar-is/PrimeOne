@@ -91,13 +91,13 @@ namespace :rails do
   desc "View the logs on a remote server"
   task :log do
     on roles(:app) do |h|
-      execute_interactively "tail -f log/#{fetch(:rails_env)}.log"
+      execute_interactively "tail -f log/#{fetch(:rails_env)}.log", "current"
     end
   end
 
-  def execute_interactively(command)
+  def execute_interactively(command, path)
     info "Connecting with #{fetch(:user)}@#{host}"
-    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/current && #{command}'"
+    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/#{path} && #{command}'"
     exec cmd
   end
 end
@@ -106,14 +106,8 @@ namespace :puma do
   desc "Fix the odd puma bug."
   task :fix do
     on roles(:app) do |h|
-      execute_interactively "rm -f PrimeOne-puma.sock"
+      execute_interactively2 "rm -f PrimeOne-puma.sock", "shared/tmp/sockets"
     end
-  end
-
-  def execute_interactively(command)
-    info "Connecting with #{fetch(:user)}@#{host}"
-    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/shared/tmp/sockets && #{command}'"
-    exec cmd
   end
 end
 
