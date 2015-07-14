@@ -6,7 +6,7 @@ set :application,     'PrimeOne'
 set :user,            'Matthew'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
-set :branch, :production
+set :branch, :production # push from production branch
 
 # Don't change these unless you know what you're doing
 set :pty,             true
@@ -101,6 +101,22 @@ namespace :rails do
     exec cmd
   end
 end
+
+namespace :puma do
+  desc "Fix the odd puma bug."
+  task :fix do
+    on roles(:app) do |h|
+      execute_interactively "rm -f PrimeOne-puma.sock"
+    end
+  end
+
+  def execute_interactively(command)
+    info "Connecting with #{fetch(:user)}@#{host}"
+    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/shared/tmp/sockets && #{command}'"
+    exec cmd
+  end
+end
+
 =begin
 namespace :load do
   desc 'Perform rake load:forms (Add mandatory forms retroactively)'
