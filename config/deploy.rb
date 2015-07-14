@@ -14,14 +14,14 @@ set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_bind,       "unix:///#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
-set :puma_worker_timeout, nil
+set :puma_worker_timeout, 60
 set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 ## Defaults:
@@ -51,8 +51,8 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse origin/production`
+        puts "WARNING: HEAD is not the same as origin/production"
         puts "Run `git push` to sync changes."
         exit
       end
@@ -91,13 +91,13 @@ namespace :rails do
   desc "View the logs on a remote server"
   task :log do
     on roles(:app) do |h|
-      execute_interactively "tail -f log/#{fetch(:rails_env)}.log"
+      execute_interactively "tail -f log/#{fetch(:rails_env)}.log", "current"
     end
   end
 
-  def execute_interactively(command)
+  def execute_interactively(command, path)
     info "Connecting with #{fetch(:user)}@#{host}"
-    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/current && #{command}'"
+    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/#{path} && #{command}'"
     exec cmd
   end
 end
@@ -106,14 +106,8 @@ namespace :puma do
   desc "Fix the odd puma bug."
   task :fix do
     on roles(:app) do |h|
-      execute_interactively "rm -f PrimeOne-puma.sock"
+      execute_interactively "rm -f PrimeOne-puma.sock", "shared/tmp/sockets"
     end
-  end
-
-  def execute_interactively(command)
-    info "Connecting with #{fetch(:user)}@#{host}"
-    cmd = "ssh #{fetch(:user)}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/shared/tmp/sockets && #{command}'"
-    exec cmd
   end
 end
 
