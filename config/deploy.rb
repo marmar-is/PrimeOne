@@ -110,14 +110,14 @@ namespace :rails do
   end
 end
 
-namespace :puma do
-  desc "Fix the odd puma bug."
-  task :fix do
-    on roles(:app) do |h|
-      execute_interactively "rm -f PrimeOne-puma.sock", "shared/tmp/sockets"
-    end
-  end
-end
+#namespace :puma do
+  #desc "Fix the odd puma bug."
+  #task :fix do
+  #  on roles(:app) do |h|
+  #    execute_interactively "rm -f PrimeOne-puma.sock", "shared/tmp/sockets"
+  #  end
+  #end
+#end
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
