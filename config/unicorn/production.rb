@@ -4,8 +4,8 @@ working_directory root
 
 pid "#{shared_path}/pids/unicorn.pid"
 
-stderr_path "#{shared_path}/logs/unicorn.access.log"
-stdout_path "#{shared_path}/logs/unicorn.error.log"
+stderr_path "#{shared_path}/logs/unicorn.error.log"
+stdout_path "#{shared_path}/logs/unicorn.access.log"
 
 worker_processes Integer(ENV['WEB_CONCURRENCY'])
 timeout 60
