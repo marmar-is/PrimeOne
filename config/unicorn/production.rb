@@ -1,4 +1,5 @@
 root = "/home/Matthew/apps/PrimeOne/current"
+shared_path= "/home/Matthew/apps/PrimeOne/shared"
 working_directory root
 
 pid "#{shared_path}/tmp/pids/unicorn.pid"
