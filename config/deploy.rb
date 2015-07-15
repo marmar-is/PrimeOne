@@ -16,7 +16,7 @@ set :conditionally_migrate, true
 
 # Don't change these unless you know what you're doing
 set :pty,             true
-set :use_sudo,        true
+set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
@@ -42,12 +42,12 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :unicorn do
-  desc 'Create Directories for Puma Pids and Socket'
+  desc 'Create Directories for Unicorn Pids and Socket'
   task :make_dirs do
     on roles(:app) do
-      #execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-      execute "mkdir #{shared_path}/log -p"
+      execute "mkdir #{shared_path}/sockets -p"
+      execute "mkdir #{shared_path}/pids -p"
+      execute "mkdir #{shared_path}/logs -p"
     end
   end
 

@@ -2,16 +2,16 @@ root = "/home/Matthew/apps/PrimeOne/current"
 shared_path= "/home/Matthew/apps/PrimeOne/shared"
 working_directory root
 
-pid "#{shared_path}/tmp/pids/unicorn.pid"
+pid "#{shared_path}/pids/unicorn.pid"
 
-stderr_path "#{shared_path}/log/unicorn.access.log"
-stdout_path "#{shared_path}/log/unicorn.error.log"
+stderr_path "#{shared_path}/logs/unicorn.access.log"
+stdout_path "#{shared_path}/logs/unicorn.error.log"
 
 worker_processes Integer(ENV['WEB_CONCURRENCY'])
 timeout 60
 preload_app true
 
-listen '/tmp/unicorn.PrimeOne.sock', backlog: 64
+listen '#{shared_path}/sockets/unicorn.PrimeOne.sock', backlog: 64
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
