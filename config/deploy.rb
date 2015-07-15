@@ -8,17 +8,15 @@ set :user,            'Matthew'
 #set :puma_workers,    0
 set :branch, :production # push from production branch
 
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
-set :linked_files, fetch(:linked_files, []).push('config/database.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('shared/log', 'shared/tmp/pids', 'shared/tmp/cache', 'shared/tmp/sockets', 'vendor/bundle', 'public/system')
+#set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+#set :linked_dirs, fetch(:linked_dirs, []).push('shared/log', 'shared/tmp/pids', 'shared/tmp/cache', 'shared/tmp/sockets', 'vendor/bundle', 'public/system')
 
 set :rails_env, :production
 set :conditionally_migrate, true
 
 # Don't change these unless you know what you're doing
 set :pty,             true
-set :use_sudo,        false
+set :use_sudo,        true
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
@@ -56,8 +54,6 @@ namespace :unicorn do
   before :start, :make_dirs
 end
 
-after 'deploy:publishing', 'deploy:restart'
-
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
@@ -70,15 +66,10 @@ namespace :deploy do
     end
   end
 
-  desc "Restart and reload unicorn?"
-  task :restart do
-    invoke 'unicorn:reload'
-  end
-
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
+      before 'deploy:restart', 'unicorn:start'
       invoke 'deploy'
     end
   end
@@ -86,7 +77,8 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
+      invoke 'unicorn:reload'
+      #invoke 'puma:restart'
     end
   end
 
