@@ -1,10 +1,10 @@
 root = "/home/Matthew/apps/PrimeOne/current"
 working_directory root
 
-pid "#{root}/shared/tmp/pids/unicorn.pid"
+pid "#{shared_path}/tmp/pids/unicorn.pid"
 
-stderr_path "#{root}/shared/log/unicorn.access.log"
-stdout_path "#{root}/shared/log/unicorn.error.log"
+stderr_path "#{shared_path}/log/unicorn.access.log"
+stdout_path "#{shared_path}/log/unicorn.error.log"
 
 worker_processes Integer(ENV['WEB_CONCURRENCY'])
 timeout 60
