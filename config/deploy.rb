@@ -4,9 +4,17 @@ server '104.154.32.141', port: 22, roles: [:web, :app, :db], primary: true
 set :repo_url,        'git@github.com:marmar-is/PrimeOne.git'
 set :application,     'PrimeOne'
 set :user,            'Matthew'
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
+#set :puma_threads,    [4, 16]
+#set :puma_workers,    0
 set :branch, :production # push from production branch
+
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+
+set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+set :linked_dirs, fetch(:linked_dirs, []).push('shared/log', 'shared/tmp/pids', 'shared/tmp/cache', 'shared/tmp/sockets', 'vendor/bundle', 'public/system')
+
+set :rails_env, :production
+set :conditionally_migrate, true
 
 # Don't change these unless you know what you're doing
 set :pty,             true
@@ -14,15 +22,15 @@ set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
-set :puma_bind,       "unix:///#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.error.log"
-set :puma_error_log,  "#{release_path}/log/puma.access.log"
+#set :puma_bind,       "unix:///#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+#set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+#set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+#set :puma_access_log, "#{release_path}/log/puma.error.log"
+#set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
-set :puma_preload_app, true
-set :puma_worker_timeout, 60
-set :puma_init_active_record, true  # Change to true if using ActiveRecord
+#set :puma_preload_app, true
+#set :puma_worker_timeout, 60
+#set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
@@ -35,17 +43,20 @@ set :puma_init_active_record, true  # Change to true if using ActiveRecord
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-namespace :puma do
+namespace :unicorn do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
     on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
+      #execute "mkdir #{shared_path}/tmp/sockets -p"
       execute "mkdir #{shared_path}/tmp/pids -p"
+      execute "mkdir #{shared_path}/log -p"
     end
   end
 
   before :start, :make_dirs
 end
+
+after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
@@ -57,6 +68,11 @@ namespace :deploy do
         exit
       end
     end
+  end
+
+  desc "Restart and reload unicorn?"
+  task :restart do
+    invoke 'unicorn:reload'
   end
 
   desc 'Initial Deploy'
@@ -111,20 +127,6 @@ namespace :puma do
   end
 end
 
-=begin
-namespace :load do
-  desc 'Perform rake load:forms (Add mandatory forms retroactively)'
-  task :forms do
-    on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'load:forms'
-        end
-      end
-    end
-  end
-end
-=end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma

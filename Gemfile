@@ -43,7 +43,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -92,8 +92,9 @@ group :development do
     gem 'capistrano-rails',   require: false
     gem 'capistrano-rails-collection', require: false
     gem 'capistrano-bundler', require: false
-    gem 'capistrano3-puma',   require: false
+    gem 'capistrano3-unicorn', require: false
+    #gem 'capistrano3-puma',   require: false
 end
 
 # a better server
-gem 'puma'
+#gem 'puma'
