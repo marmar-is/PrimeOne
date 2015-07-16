@@ -8,7 +8,7 @@ stderr_path "#{shared_path}/logs/unicorn.error.log"
 stdout_path "#{shared_path}/logs/unicorn.access.log"
 
 worker_processes Integer(ENV['WEB_CONCURRENCY'])
-timeout 60
+timeout 15
 preload_app true
 
 listen "#{shared_path}/sockets/unicorn.PrimeOne.sock", backlog: 64
