@@ -100,7 +100,11 @@ class PoliciesController < ApplicationController
   end
 
   def pdf
-    @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    if @policy.effective > (Today.date - 21.days)
+      @countersign = Today.date
+    else
+      @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    end
     render :pdf, layout: 'pdf.html.erb'
   end
 
@@ -111,7 +115,11 @@ class PoliciesController < ApplicationController
 
   #PUT /policies/1/generate
   def generate
-    @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    if @policy.effective > (Today.date - 21.days)
+      @countersign = Today.date
+    else
+      @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
+    end
     html = render_to_string(action: :pdf, layout: "layouts/pdf.html.erb")
     pdf = WickedPdf.new.pdf_from_string(html)
 
