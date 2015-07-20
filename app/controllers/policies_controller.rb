@@ -100,8 +100,8 @@ class PoliciesController < ApplicationController
   end
 
   def pdf
-    if @policy.effective > (Today.date - 21.days)
-      @countersign = Today.date
+    if @policy.effective > (Date.today - 21.days)
+      @countersign = Date.today
     else
       @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     end
@@ -115,8 +115,8 @@ class PoliciesController < ApplicationController
 
   #PUT /policies/1/generate
   def generate
-    if @policy.effective > (Today.date - 21.days)
-      @countersign = Today.date
+    if @policy.effective > (Date.today - 21.days)
+      @countersign = Date.today
     else
       @countersign = (@policy.effective+1.month).to_time.ish(offset: 10.days).to_date.strftime("%_m/%d/%Y")
     end
