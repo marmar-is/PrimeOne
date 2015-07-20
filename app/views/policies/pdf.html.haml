@@ -347,7 +347,7 @@
           = render partial: 'pdf_footer.html', locals: {page: 3, name: "GL"}
 
     -# COMMERCIAL CRIME DECLARATIONS
-    -if checkValid(@policy.crime.ded)
+    -if checkValid(@policy.crime.total)
       .crime-page.ca-page
         = render partial: 'pdf_header.html', locals: {title: "COMMERCIAL CRIME DECLARATIONS"}
         .page
