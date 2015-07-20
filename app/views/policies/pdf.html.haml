@@ -329,7 +329,7 @@
                   .col-xs-2
                     %p.item= b.code
                   .col-xs-2
-                    %p.item.text-right= number_to_currency(b.basis, precision:0)
+                    %p.item.text-right= b.basis_type.downcase == "sales" ? number_to_currency(b.basis, precision:0) : b.basis
                   .col-xs-1
                     %p.item.text-right= b.basis_type
                   .col-xs-2.col-xs-offset-1
