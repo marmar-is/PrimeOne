@@ -201,7 +201,7 @@ class PoliciesController < ApplicationController
   end
 
   def viewPDF
-    send_file "public/f/Policy_#{@policy.number}_(#{@policy.dba.gsub("/", "-") || @policy.name.gsub("/", "-")}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
+    send_file "public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
   # Upload / Populate
