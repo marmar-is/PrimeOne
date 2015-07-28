@@ -185,7 +185,9 @@ class PoliciesController < ApplicationController
       #end
     end
 
-    open("public/f/Policy_#{@policy.number}_(#{@policy.dba.gsub("/", "-") || @policy.name.gsub("/", "-")}).pdf", 'wb') do |f|
+
+
+    open("public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", 'wb') do |f|
       f << @pdfForms.to_pdf
     end
 
