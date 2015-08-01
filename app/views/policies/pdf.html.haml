@@ -2,7 +2,7 @@
   %h1.bg-danger.text-danger.text-center
     Broker Not Selected
     %br
-    Please Go Back and Select One.
+    Please Go Back and Select One Before Continuing.
     %br
 -else
   #pdf.pdf
@@ -122,7 +122,7 @@
                   %td.text-left Building
                   %td.text-right= number_to_currency(@policy.locations.first.limt_bldg, precision:0, format:'%n')
                   %td.text-center= @policy.locations.first.valuation
-                  %td.text-center= number_to_percentage((@policy.locations.first.coins. to_d*100), precision: 0)
+                  %td.text-center= number_to_percentage((@policy.locations.first.coins.to_d*100), precision: 0)
                   %td.text-center= @policy.locations.first.loss_coverage
                   %td.text-left= @policy.locations.first.theft
                   %td.text-right= number_to_currency(@policy.locations.first.ded, precision:0, format:'%n')
