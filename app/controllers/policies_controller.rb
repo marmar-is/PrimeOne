@@ -146,8 +146,8 @@ class PoliciesController < ApplicationController
           if !all_fills.include?("#{f}.pdf")
             begin
               open('private/temp_pdf/temp.pdf', 'wb') do |file|
-                file << open("http://storage.googleapis.com/endorsements/Static/#{f}.pdf").read
-                #file << open("private/forms/#{f}.pdf").read
+                #file << open("http://storage.googleapis.com/endorsements/Static/#{f}.pdf").read
+                file << open("private/forms/#{f}.pdf").read
               end
               @pdfForms << CombinePDF.load("private/temp_pdf/temp.pdf")
             rescue
@@ -185,9 +185,8 @@ class PoliciesController < ApplicationController
       #end
     end
 
-
-
-    open("tmp/output.pdf", 'wb') do |f|
+    #open("tmp/output.pdf", 'wb') do |f|
+    open("public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", 'wb') do |f|
       f << @pdfForms.to_pdf
     end
 

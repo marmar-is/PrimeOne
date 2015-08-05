@@ -323,7 +323,7 @@
               - @policy.locations.first.buildings.each do |b|
                 .row
                   .col-xs-1
-                    %p.item.text-center= b.number
+                    %p.item.text-center= b.location.number
                   .col-xs-3
                     %p.item= b.class_type
                   .col-xs-2
