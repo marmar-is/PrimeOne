@@ -23,4 +23,7 @@ class Policy < ActiveRecord::Base
   accepts_nested_attributes_for :auto
   accepts_nested_attributes_for :locations
 
+  # Carrierwave Upload QuotePdf
+  mount_uploader :policy_pdf, PolicyUploader
+
 end

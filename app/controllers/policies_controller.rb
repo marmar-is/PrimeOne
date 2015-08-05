@@ -187,9 +187,12 @@ class PoliciesController < ApplicationController
 
 
 
-    open("public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", 'wb') do |f|
+    open("tmp/output.pdf", 'wb') do |f|
       f << @pdfForms.to_pdf
     end
+
+    @policy.policy_pdf = File.open('tmp/output.pdf')
+    @policy.save!
 
     #send_data @pdfForms.to_pdf, filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
 
@@ -201,7 +204,12 @@ class PoliciesController < ApplicationController
   end
 
   def viewPDF
-    send_file "public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
+    begin
+      send_data @policy.policy_pdf.read.force_encoding('BINARY'), filename: (@policy.policy_pdf.path.split('/')[1]), disposition: 'inline', format: 'pdf', type:'application/pdf'
+    rescue
+      generate()
+    end
+    #send_file "public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
   # Upload / Populate
