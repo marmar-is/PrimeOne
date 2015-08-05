@@ -204,11 +204,7 @@ class PoliciesController < ApplicationController
   end
 
   def viewPDF
-    begin
-      send_data @policy.policy_pdf.read.force_encoding('BINARY'), filename: (@policy.policy_pdf.path.split('/')[1]), disposition: 'inline', format: 'pdf', type:'application/pdf'
-    rescue
-      generate()
-    end
+    send_data @policy.policy_pdf.read.force_encoding('BINARY'), filename: (@policy.policy_pdf.path.split('/')[1]), disposition: 'inline', format: 'pdf', type:'application/pdf'
     #send_file "public/f/Policy_#{@policy.number}_(#{(@policy.dba || @policy.name).gsub("/", "-")}).pdf", filename: "Policy_#{@policy.number}_(#{@policy.dba || @policy.name}).pdf", disposition: 'inline', format: 'pdf'
   end
 
