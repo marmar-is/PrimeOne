@@ -39,15 +39,14 @@ class PolicyUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    #%w(jpg jpeg gif png)
     %w(pdf)
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    #{}"Quote_#{model.rating.risk_profile.name.gsub(' ', '+')}_#{model.issue_date.strftime('%Y-%m-%d-%H:%M')}" if original_filename
-    "Policy_#{model.number}_(#{(model.dba || model.name).gsub("/", "-")})" if original_filename
+    "Policy_#{model.number}.pdf" if original_filename
+    #{}"Policy_#{model.number}_(#{(model.dba || model.name).gsub("/", "-")}).pdf" if original_filename
   end
 
 end
