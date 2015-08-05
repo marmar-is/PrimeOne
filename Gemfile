@@ -97,3 +97,7 @@ gem 'letter_opener', group: :development
 
 # a better server
 gem 'puma'
+
+# Upload to Google Cloud Storage
+gem 'carrierwave', git: 'https://github.com/carrierwaveuploader/carrierwave.git'
+gem 'fog-google'
